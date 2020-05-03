@@ -1,1 +1,0 @@
-tạo mới file test.txt
