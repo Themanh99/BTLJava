@@ -32,33 +32,33 @@ create table NCC(
 	diachiNCC nvarchar(40),
 )
 
-create table KHACHHANG(
-	maKH char(10) primary key,
-	tenKH nvarchar(20),
-	emailKH char(30),
-	sdtKH char(10),
-	CONSTRAINT UN_EMAIL unique (emailKH,sdtKH),
+create table SINHVIEN(
+	maSV char(10) primary key,
+	tenSV nvarchar(20),
+	emailSV char(30),
+	sdtSV char(10),
+	CONSTRAINT UN_EMAIL unique (emailSV,sdtSV),
 )
 create table PHIEUMUON(
 	maPMUON char(6) primary key,
 	ngayMuon date,
-	maKH char(10),
-	CONSTRAINT FK_PMUON_KH FOREIGN KEY(maKH) REFERENCES KHACHHANG(maKH),
+	maSV char(10),
+	CONSTRAINT FK_PMUON_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 ) 
 
 create table PHIEUMUA(
 	maPMUA char(6) primary key,
 	ngayMua date,
-	maKH char(10),
-	CONSTRAINT FK_PMUA_KH FOREIGN KEY(maKH) REFERENCES KHACHHANG(maKH),
+	maSV char(10),
+	CONSTRAINT FK_PMUA_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 ) 
 
 create table PHIEUTRA(
 	maPTRA char(6) primary key,
 	ngayTra date,
-	maKH char(10),
+	maSV char(10),
 	maPMUON char(6),
-	CONSTRAINT FK_PTRA_KH FOREIGN KEY(maKH) REFERENCES KHACHHANG(maKH),
+	CONSTRAINT FK_PTRA_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 	CONSTRAINT FK_PTRA_PMUON FOREIGN KEY(maPMUON) REFERENCES PHIEUMUON(maPMUON),
 )
 
