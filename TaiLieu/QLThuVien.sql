@@ -1,6 +1,8 @@
 use master
 
-
+if exists(select * from sys.databases where name = 'QLThuVien')
+	drop database QLThuVien
+GO
 create database QLThuVien
 GO
 
