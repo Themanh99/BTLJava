@@ -17,7 +17,6 @@ create table  TACGIA(
 )
 
 
-
 create table NXB(
 	maNXB char(6) primary key,
 	tenNXB nvarchar(40),
@@ -53,6 +52,15 @@ create table PHIEUMUA(
 	maKH char(10),
 	CONSTRAINT FK_PMUA_KH FOREIGN KEY(maKH) REFERENCES KHACHHANG(maKH),
 ) 
+
+create table PHIEUTRA(
+	maPTRA char(6) primary key,
+	ngayTra date,
+	maKH char(10),
+	maPMUON char(6),
+	CONSTRAINT FK_PTRA_KH FOREIGN KEY(maKH) REFERENCES KHACHHANG(maKH),
+	CONSTRAINT FK_PTRA_PMUON FOREIGN KEY(maPMUON) REFERENCES PHIEUMUON(maPMUON),
+)
 
 create table SACH(
 	maSach char(6) PRIMARY KEY,
