@@ -7,8 +7,8 @@ GO
 USE QLThuVien
 GO
 create table TAIKHOAN(
-	tk char(10) primary key,
-	mk char(10) ,
+	tk varchar(10) primary key,
+	mk varchar(10) ,
 )
 create table  TACGIA(
 	maTacGia char(6) primary key,
@@ -21,7 +21,7 @@ create table NXB(
 	maNXB char(6) primary key,
 	tenNXB nvarchar(40),
 	sdtNXB char(10),
-	diaChiNXB char(40),
+	diaChiNXB nvarchar(40),
 )
 
 
@@ -35,7 +35,7 @@ create table NCC(
 create table SINHVIEN(
 	maSV char(10) primary key,
 	tenSV nvarchar(20),
-	emailSV char(30),
+	emailSV varchar(30),
 	sdtSV char(10),
 	CONSTRAINT UN_EMAIL unique (emailSV,sdtSV),
 )
@@ -64,11 +64,11 @@ create table PHIEUTRA(
 
 create table SACH(
 	maSach char(6) PRIMARY KEY,
-	tenSach char(20),
+	tenSach nvarchar(20),
 	maTacGia char(6),
 	maNXB char(6),
 	giaSach float,
-	theLoai char(20),
+	theLoai nvarchar(20),
 	CONSTRAINT FK_SACH_NXB FOREIGN KEY(maNXB) REFERENCES NXB(maNXB),
 	CONSTRAINT FK_SACH_TACGIA FOREIGN KEY(maTacGia) REFERENCES TACGIA(maTacGia),
 	)
