@@ -11,6 +11,7 @@ GO
 create table TAIKHOAN(
 	tk varchar(10) primary key,
 	mk varchar(10) ,
+	loaitk varchar(5);
 )
 create table  TACGIA(
 	maTacGia char(6) primary key,
