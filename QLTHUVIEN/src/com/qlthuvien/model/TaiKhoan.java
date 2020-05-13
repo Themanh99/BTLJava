@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package com.qlthuvien.model;
 
 /**
  *
@@ -12,12 +12,12 @@ package Model;
 public class TaiKhoan {
     private String tk;
     private String mk;
-    private String loaiTk;
+    private boolean loaiTk;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tk, String mk, String loaiTk) {
+    public TaiKhoan(String tk, String mk, boolean loaiTk) {
         this.tk = tk;
         this.mk = mk;
         this.loaiTk = loaiTk;
@@ -31,7 +31,7 @@ public class TaiKhoan {
         return mk;
     }
 
-    public String getLoaiTk() {
+    public boolean getLoaiTk() {
         return loaiTk;
     }
 
@@ -43,7 +43,7 @@ public class TaiKhoan {
         this.mk = mk;
     }
 
-    public void setLoaiTk(String loaiTk) {
+    public void setLoaiTk(boolean loaiTk) {
         this.loaiTk = loaiTk;
     }
     

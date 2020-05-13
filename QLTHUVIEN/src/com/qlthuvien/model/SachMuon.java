@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package com.qlthuvien.model;
 
 /**
  *
  * @author son30
  */
-public class SachBan extends Sach{
+public class SachMuon extends Sach {
+
     private int soLuong;
 
-    public SachBan() {
+    public SachMuon() {
     }
 
-    public SachBan(String maSach, String tenSach, String maTacGia, String maNxb, float giaSach, String theLoai) {
+    public SachMuon(String maSach, String tenSach, String maTacGia, String maNxb, float giaSach, String theLoai) {
         super(maSach, tenSach, maTacGia, maNxb, giaSach, theLoai);
     }
 
@@ -26,6 +27,4 @@ public class SachBan extends Sach{
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
-    
-    
 }

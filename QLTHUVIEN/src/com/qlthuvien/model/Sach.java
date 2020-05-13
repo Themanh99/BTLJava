@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package com.qlthuvien.model;
 
 /**
  *
@@ -11,12 +11,12 @@ package Model;
  */
 public class Sach {
 
-    private String maSach;
-    private String tenSach;
-    private String maTacGia;
-    private String maNxb;
-    private float giaSach;
-    private String theLoai;
+    protected String maSach;
+    protected String tenSach;
+    protected String maTacGia;
+    protected String maNxb;
+    protected float giaSach;
+    protected String theLoai;
 
     public Sach() {
     }
