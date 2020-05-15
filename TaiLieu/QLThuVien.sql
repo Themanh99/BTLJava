@@ -13,19 +13,6 @@ create table TAIKHOAN(
 	mk varchar(10) ,
 	loaitk bit
 )
-create table  TACGIA(
-	maTacGia char(6) primary key,
-	tenTacGia nvarchar(30) ,
-	namSinhTacgia date,
-)
-
-
-create table NXB(
-	maNXB char(6) primary key,
-	tenNXB nvarchar(40),
-	sdtNXB char(10),
-	diaChiNXB nvarchar(40),
-)
 
 
 create table NCC(
@@ -42,7 +29,7 @@ create table SINHVIEN(
 	sdtSV char(10),
 	CONSTRAINT UN_EMAIL unique (emailSV,sdtSV),
 )
-create table PHIEUMUON(
+create table PHIEUMUONTRA(
 	maPMUON char(6) primary key,
 	ngayMuon date,
 	maSV char(10),
@@ -56,37 +43,18 @@ create table PHIEUMUA(
 	CONSTRAINT FK_PMUA_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 ) 
 
-create table PHIEUTRA(
-	maPTRA char(6) primary key,
-	ngayTra date,
-	maSV char(10),
-	maPMUON char(6),
-	CONSTRAINT FK_PTRA_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
-	CONSTRAINT FK_PTRA_PMUON FOREIGN KEY(maPMUON) REFERENCES PHIEUMUON(maPMUON),
-)
 
 create table SACH(
 	maSach char(6) PRIMARY KEY,
 	tenSach nvarchar(20),
-	maTacGia char(6),
-	maNXB char(6),
+	tenTacGia nvarchar(30),
+	tenNXB nvarchar(40),
 	giaSach float,
 	theLoai nvarchar(20),
-	CONSTRAINT FK_SACH_NXB FOREIGN KEY(maNXB) REFERENCES NXB(maNXB),
-	CONSTRAINT FK_SACH_TACGIA FOREIGN KEY(maTacGia) REFERENCES TACGIA(maTacGia),
+	trangthai bit,
 	)
 
-create table SACHMUON(
-	maSach char(6) PRIMARY KEY,
-	soluong int,
-	CONSTRAINT FK_SACHMUON_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSACH),
-)
 
-create table SACHBAN(
-	maSach char(6) PRIMARY KEY,
-	soluong int,
-	CONSTRAINT FK_SACHBAN_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSACH),
-)
 
 create table PHIEUNHAP(
 	maPN char(6) primary key,
@@ -107,19 +75,21 @@ create table CHITIETPN(
 
 
 
-create table CHITIETMUON(
+create table CHITIETMUONTRA(
 	maPMUON char(6),
 	maSach char(6),
 	soluong int,
+	ngayTra date,
 	CONSTRAINT PK_CTPHIEUMUON PRIMARY KEY(maPMUON,masach),
 	CONSTRAINT FK_CTPHIEUMUON_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSach),
-	CONSTRAINT FK_CTPHIEUMUON_PM FOREIGN KEY(maPMUON) REFERENCES PHIEUMUON(maPMUON),
+	CONSTRAINT FK_CTPHIEUMUON_PM FOREIGN KEY(maPMUON) REFERENCES PHIEUMUONTRA(maPMUON),
 )
 
 create table CHITIETMUA(
 	maPMUA char(6),
 	maSach char(6),
 	soluong int,
+	gia float,
 	CONSTRAINT PK_CTPHIEUMUA PRIMARY KEY(maPMUA,masach),
 	CONSTRAINT FK_CTPHIEUMUA_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSach),
 	CONSTRAINT FK_CTPHIEUMUA_PM FOREIGN KEY(maPMUA) REFERENCES PHIEUMUA(maPMUA),

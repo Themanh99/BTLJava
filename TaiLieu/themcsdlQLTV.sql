@@ -107,5 +107,3 @@ insert into PHIEUTRA values
 ('PT0003',getdate(),'2017601709','PM0003'),
 ('PT0004',getdate(),'2017601709','PM0004'),
 ('PT0005',getdate(),'2017601709','PM0005')
-
-select * from PHIEUTRA
