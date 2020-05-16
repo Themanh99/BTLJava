@@ -52,6 +52,7 @@ create table SACH(
 	giaSach float,
 	theLoai nvarchar(20),
 	trangthai bit,
+	soluong int,
 	)
 
 
@@ -67,7 +68,7 @@ create table CHITIETPN(
 	maPN char(6),
 	maSach char(6),
 	soluongnhap int ,
-	gianhap float,
+	gia float,
 	CONSTRAINT PK_CTPHIEU PRIMARY KEY(mapn,masach),
 	CONSTRAINT FK_CTPHIEU_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSach),
 	CONSTRAINT FK_CTPHIEU_PN FOREIGN KEY(maPN) REFERENCES PHIEUNHAP(maPN),
@@ -80,6 +81,7 @@ create table CHITIETMUONTRA(
 	maSach char(6),
 	soluong int,
 	ngayTra date,
+	gia float,
 	CONSTRAINT PK_CTPHIEUMUON PRIMARY KEY(maPMUON,masach),
 	CONSTRAINT FK_CTPHIEUMUON_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSach),
 	CONSTRAINT FK_CTPHIEUMUON_PM FOREIGN KEY(maPMUON) REFERENCES PHIEUMUONTRA(maPMUON),
