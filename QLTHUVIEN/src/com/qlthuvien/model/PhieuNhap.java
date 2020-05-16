@@ -13,7 +13,6 @@ public class PhieuNhap {
     private String maPN;
     private String ngaynhap;
     private String maNCC;
-    //private static int count=5;
 
     public PhieuNhap() {
     }

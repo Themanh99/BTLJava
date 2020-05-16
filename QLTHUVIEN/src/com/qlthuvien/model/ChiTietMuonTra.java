@@ -9,18 +9,22 @@ package com.qlthuvien.model;
  *
  * @author Administrator
  */
-public class ChiTietMuon {
+public class ChiTietMuonTra {
     private String maPMuon;
     private String maSach;
     private int soluong;
+    private String ngaytra;
+    private float gia;
 
-    public ChiTietMuon() {
+    public ChiTietMuonTra() {
     }
 
-    public ChiTietMuon(String maPMuon, String maSach, int soluong) {
+    public ChiTietMuonTra(String maPMuon, String maSach, int soluong, String ngaytra, float gia) {
         this.maPMuon = maPMuon;
         this.maSach = maSach;
         this.soluong = soluong;
+        this.ngaytra = ngaytra;
+        this.gia = gia;
     }
 
     public String getMaPMuon() {
@@ -46,6 +50,24 @@ public class ChiTietMuon {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
+
+    public String getNgaytra() {
+        return ngaytra;
+    }
+
+    public void setNgaytra(String ngaytra) {
+        this.ngaytra = ngaytra;
+    }
+
+    public float getGia() {
+        return gia;
+    }
+
+    public void setGia(float gia) {
+        this.gia = gia;
+    }
+
+    
     
     
 }

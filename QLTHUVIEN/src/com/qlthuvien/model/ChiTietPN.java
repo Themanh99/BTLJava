@@ -13,16 +13,16 @@ public class ChiTietPN {
     private String maPN;
     private String maSach;
     private int soluongnhap;
-    private float gianhap;
+    private float gia;
 
     public ChiTietPN() {
     }
 
-    public ChiTietPN(String maPN, String maSach, int soluongnhap, float gianhap) {
+    public ChiTietPN(String maPN, String maSach, int soluongnhap, float gia) {
         this.maPN = maPN;
         this.maSach = maSach;
         this.soluongnhap = soluongnhap;
-        this.gianhap = gianhap;
+        this.gia = gia;
     }
 
     public String getMaPN() {
@@ -49,13 +49,15 @@ public class ChiTietPN {
         this.soluongnhap = soluongnhap;
     }
 
-    public float getGianhap() {
-        return gianhap;
+    public float getGia() {
+        return gia;
     }
 
-    public void setGianhap(float gianhap) {
-        this.gianhap = gianhap;
+    public void setGia(float gia) {
+        this.gia = gia;
     }
+
+    
     
     
 }

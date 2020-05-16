@@ -13,14 +13,16 @@ public class ChiTietMua {
     private String maPMua;
     private String maSach;
     private int soluong;
+    private float gia;
 
     public ChiTietMua() {
     }
 
-    public ChiTietMua(String maPMua, String maSach, int soluong) {
+    public ChiTietMua(String maPMua, String maSach, int soluong, float gia) {
         this.maPMua = maPMua;
         this.maSach = maSach;
         this.soluong = soluong;
+        this.gia = gia;
     }
 
     public String getMaPMua() {
@@ -46,6 +48,16 @@ public class ChiTietMua {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
+
+    public float getGia() {
+        return gia;
+    }
+
+    public void setGia(float gia) {
+        this.gia = gia;
+    }
+
+    
     
     
 }

@@ -9,12 +9,12 @@ package com.qlthuvien.model;
  *
  * @author Administrator
  */
-public class PhieuMuon {
+public class PhieuMuonTra {
     private String maPMuon;
     private String ngayMuon;
     private String maSV;
 
-    public PhieuMuon() {
+    public PhieuMuonTra() {
     }
 
     public String getMaPMuon() {
