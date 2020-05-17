@@ -5,8 +5,6 @@
  */
 package com.qlthuvien.view;
 
-import java.awt.Button;
-import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +20,7 @@ public class MainJFrame extends javax.swing.JFrame {
     JPanel qlSachJPanel = new QLSachJPanel();
     JPanel qlNhapSachJPanel = new QLNhapSachJPanel();
     JPanel qlMuonTraSachJPanel = new QLMuonTraSachJPanel();
+    JPanel qlTraSachJPanel = new QLTraSachJPanel();
     JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
     JPanel qlDocGiaJPanel = new QLDocGiaJPanel();
     
@@ -34,6 +33,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.qlBanSachJPanel.setVisible(false);
         this.qlDocGiaJPanel.setVisible(false);
         this.qlMuonTraSachJPanel.setVisible(false);
+        this.qlTraSachJPanel.setVisible(false);
         this.qlNhapSachJPanel.setVisible(false);
         this.qlSachJPanel.setVisible(false);
         this.qlTaiKhoanJPanel.setVisible(false);
@@ -64,13 +64,14 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLNhapSach = new javax.swing.JButton();
         btQLDocGia = new javax.swing.JButton();
         btQLTaiKhoan = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
-        btQLMuonTraSach.setText("Quản lý mượn trả sách");
+        btQLMuonTraSach.setText("Quản lý mượn sách");
         btQLMuonTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLMuonTraSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +119,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Quản lý trả sách");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,14 +139,20 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(btQLSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btQLNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(14, 14, 14))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btQLMuonTraSach, jButton1});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(159, 159, 159)
                 .addComponent(btQLMuonTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLBanSach, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,13 +163,16 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLTaiKhoan)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLDocGia, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLDocGia, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan, jButton1});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Quản lý thư viện");
+
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setText("Đăng xuất");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -163,13 +181,17 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel1)
-                .addContainerGap(605, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,7 +209,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 724, Short.MAX_VALUE))
+                .addGap(0, 719, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,6 +244,11 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         HienThiPanel(qlTaiKhoanJPanel);
     }//GEN-LAST:event_btQLTaiKhoanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        HienThiPanel(qlTraSachJPanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,6 +292,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btQLNhapSach;
     private javax.swing.JButton btQLSach;
     private javax.swing.JButton btQLTaiKhoan;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

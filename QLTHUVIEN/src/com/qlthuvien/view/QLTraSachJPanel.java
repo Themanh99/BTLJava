@@ -9,12 +9,12 @@ package com.qlthuvien.view;
  *
  * @author Administrator
  */
-public class QLMuonTraSachJPanel extends javax.swing.JPanel {
+public class QLTraSachJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form QLMuonTraSachJPanel
+     * Creates new form QLTraSachJPanel
      */
-    public QLMuonTraSachJPanel() {
+    public QLTraSachJPanel() {
         initComponents();
     }
 
@@ -31,11 +31,11 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
