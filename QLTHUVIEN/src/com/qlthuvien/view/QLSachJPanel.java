@@ -128,8 +128,18 @@ public class QLSachJPanel extends javax.swing.JPanel {
         jLabel6.setText("Giá Sách :");
 
         btTimms.setText("Tìm");
+        btTimms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimmsActionPerformed(evt);
+            }
+        });
 
         btTimtensach.setText("Tìm");
+        btTimtensach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimtensachActionPerformed(evt);
+            }
+        });
 
         btTimtentacgia.setText("Tìm");
 
@@ -458,6 +468,14 @@ public class QLSachJPanel extends javax.swing.JPanel {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void btTimmsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimmsActionPerformed
+        
+    }//GEN-LAST:event_btTimmsActionPerformed
+
+    private void btTimtensachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtensachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimtensachActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
