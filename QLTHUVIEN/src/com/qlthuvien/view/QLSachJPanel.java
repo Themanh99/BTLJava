@@ -5,19 +5,59 @@
  */
 package com.qlthuvien.view;
 
+import com.qlthuvien.service.QlSachService;
+import java.util.Hashtable;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import com.qlthuvien.model.Sach;
+import com.qlthuvien.service.SachService;
+import java.awt.Dialog;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.annotation.processing.Messager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrator
  */
 public class QLSachJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form QLSachJPanel
-     */
+    DefaultTableModel defaulttable,defaulttable1;
+    SachService sachService;
+    int index=-1,count=0;
+    public static Hashtable<String, Sach> Sach;
+    private final QlSachService QlsachService;
+    
     public QLSachJPanel() {
         initComponents();
+        QlsachService = new QlSachService();
+        HienThiQlSachTable();
+        
     }
-
+    
+    public void HienThiQlSachTable(){
+        defaulttable= new DefaultTableModel();
+        
+        Qlsachtable.setModel(defaulttable);
+        
+        defaulttable.addColumn("Mã sách");
+        defaulttable.addColumn("Tên sách");
+        defaulttable.addColumn("Tác giả");
+        defaulttable.addColumn("Thể loại");
+        defaulttable.addColumn("Nhà xuất bản");
+        defaulttable.addColumn("Giá");
+        defaulttable.addColumn("Số lượng");
+        Qlsachtable.setDefaultEditor(Object.class, null);
+        Display(QlsachService.getSach());
+    }
+    
+    private void Display(List<Sach> list){
+        defaulttable.setRowCount(0);
+        for(Sach sach:list){
+            defaulttable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTheLoai(),sach.getTenNxb(),sach.getGiaSach(),sach.getSoluong() });            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,18 +73,18 @@ public class QLSachJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        txtMasach = new javax.swing.JTextField();
+        txtTensach = new javax.swing.JTextField();
+        txtTentacgia = new javax.swing.JTextField();
+        txtTennxb = new javax.swing.JTextField();
+        txtGiasach = new javax.swing.JTextField();
+        btTimms = new javax.swing.JButton();
+        btTimtensach = new javax.swing.JButton();
+        btTimtentacgia = new javax.swing.JButton();
+        btTimtennxb = new javax.swing.JButton();
+        btTimgiasach = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btTimtrangthai = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
@@ -72,7 +112,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         jRadioButton3 = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Qlsachtable = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -87,20 +127,20 @@ public class QLSachJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Giá Sách :");
 
-        jButton1.setText("Tìm");
+        btTimms.setText("Tìm");
 
-        jButton2.setText("Tìm");
+        btTimtensach.setText("Tìm");
 
-        jButton3.setText("Tìm");
+        btTimtentacgia.setText("Tìm");
 
-        jButton4.setText("Tìm");
+        btTimtennxb.setText("Tìm");
 
-        jButton5.setText("Tìm");
+        btTimgiasach.setText("Tìm");
 
         jLabel1.setText("Trạng Thái :");
 
-        jButton6.setText("Tìm");
-        jButton6.setToolTipText("");
+        btTimtrangthai.setText("Tìm");
+        btTimtrangthai.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Tìm Kiếm");
@@ -136,10 +176,10 @@ public class QLSachJPanel extends javax.swing.JPanel {
                                             .addComponent(jLabel3))
                                         .addGap(19, 19, 19)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)))
+                                    .addComponent(txtTensach, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTentacgia, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTennxb, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMasach)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,15 +191,15 @@ public class QLSachJPanel extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jRadioButton4)
                                         .addGap(95, 95, 95))
-                                    .addComponent(jTextField5))))
+                                    .addComponent(txtGiasach))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5)
-                            .addComponent(jButton6))
+                            .addComponent(btTimms)
+                            .addComponent(btTimtensach)
+                            .addComponent(btTimtentacgia)
+                            .addComponent(btTimtennxb)
+                            .addComponent(btTimgiasach)
+                            .addComponent(btTimtrangthai))
                         .addGap(48, 48, 48))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,32 +209,32 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtMasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTimms))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(txtTensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTimtensach))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+                        .addComponent(txtTentacgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btTimtentacgia)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTennxb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jButton4))
+                    .addComponent(btTimtennxb))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(txtGiasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTimgiasach))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(btTimtrangthai)
                     .addComponent(jLabel1)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton4))
@@ -329,7 +369,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Qlsachtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -353,7 +393,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Qlsachtable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -406,7 +446,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -421,13 +461,14 @@ public class QLSachJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Qlsachtable;
+    private javax.swing.JButton btTimgiasach;
+    private javax.swing.JButton btTimms;
+    private javax.swing.JButton btTimtennxb;
+    private javax.swing.JButton btTimtensach;
+    private javax.swing.JButton btTimtentacgia;
+    private javax.swing.JButton btTimtrangthai;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -455,18 +496,17 @@ public class QLSachJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtGiasach;
+    private javax.swing.JTextField txtMasach;
+    private javax.swing.JTextField txtTennxb;
+    private javax.swing.JTextField txtTensach;
+    private javax.swing.JTextField txtTentacgia;
     // End of variables declaration//GEN-END:variables
 }
