@@ -98,6 +98,11 @@ public class Sach {
         this.soluong = soluong;
     }
 
+    @Override
+    public String toString() {
+        return "Sach{" + "maSach=" + maSach + ", tenSach=" + tenSach + ", tenTacGia=" + tenTacGia + ", tenNxb=" + tenNxb + ", giaSach=" + giaSach + ", theLoai=" + theLoai + ", trangthai=" + trangthai + ", soluong=" + soluong + '}';
+    }
+
     
 
 
