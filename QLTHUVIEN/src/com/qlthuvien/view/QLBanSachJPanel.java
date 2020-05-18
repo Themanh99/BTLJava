@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import com.qlthuvien.model.GioHang;
 import java.awt.Dialog;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.annotation.processing.Messager;
 import javax.swing.JOptionPane;
@@ -28,8 +29,11 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     DefaultTableModel defaulttable,defaulttable1;
     SachService sachService;
     int index=-1,count=0;
-    Hashtable<String,GioHang> gioHang;
+    public static Hashtable<String,GioHang> gioHang;
     
+    public  static Hashtable<String,GioHang> getGioHang(){
+        return gioHang;
+    }
     
     public QLBanSachJPanel() {
         initComponents();
@@ -71,7 +75,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     
     
     
-    
+    //Hien thi len sachtable
     private void Display(List<Sach> list){
         defaulttable.setRowCount(0);
         for(Sach sach:list){
@@ -156,6 +160,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             }
         });
         GioMua.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        GioMua.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(GioMua);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -365,21 +370,14 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private void btThemVaoGioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemVaoGioActionPerformed
         // TODO add your handling code here:
         if(index>=0){
-            String masach = String.valueOf(sachTable.getValueAt(index, 0));
-           
-            String tensach = String.valueOf(sachTable.getValueAt(index, 1));
-            
-            String tacgia = String.valueOf(sachTable.getValueAt(index, 2));
-            
-            String theloai = String.valueOf(sachTable.getValueAt(index, 3));
-            
-            String nxb = String.valueOf(sachTable.getValueAt(index, 4));
-           
+            //Lay du lieu tu bang
+            String masach = String.valueOf(sachTable.getValueAt(index, 0));           
+            String tensach = String.valueOf(sachTable.getValueAt(index, 1));                     
             String gia1 = String.valueOf( sachTable.getValueAt(index, 5));
             float gia = Float.parseFloat(gia1);
             
             
-            //Sach sach= new Sach(masach, tensach, tacgia, nxb, gia, theloai);
+            //Them vao gio hang
             GioHang gh = new GioHang(masach, tensach, 1, gia);
             
             if(!gioHang.containsKey(masach)){
@@ -398,10 +396,77 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sachTableChonSach
 
     private void btMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuaActionPerformed
-
-        new XacNhanMuaJFrame().setVisible(true);
+        
+        gioHang.clear();
+        //Luu lai danh sach san pham cung so luong 
+        for(int i=0;i<count;i++){
+            String masach = String.valueOf(GioMua.getValueAt(i, 0)); 
+            String tensach = String.valueOf(GioMua.getValueAt(i, 1));    
+            int soluong =Integer.parseInt( String.valueOf(GioMua.getValueAt(i, 2)));
+            float gia =Float.parseFloat(String.valueOf(GioMua.getValueAt(i, 3)));         
+            GioHang gh = new GioHang(masach,tensach,soluong,gia);
+            
+            gioHang.put(masach, gh);
+        }
+        
+        //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
+        List<String> danhsachloi = Check(gioHang,sachService.getSachBan() );
+        if(danhsachloi.isEmpty()){
+            new XacNhanMuaJFrame().setVisible(true);
+        }
+        else{
+            String tb = "";
+            int size = danhsachloi.size();
+            for(int i=0;i<size;i++){
+                if(i==size-1){
+                tb +=danhsachloi.get(i)+" : ";
+                }else{
+                tb +=danhsachloi.get(i)+" , ";
+                }
+            }
+            tb=tb+" Khong du so luong ban";
+            JOptionPane.showMessageDialog(null, tb, "Thông báo",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
     }//GEN-LAST:event_btMuaActionPerformed
-
+    //Ham tra ve danh sach cac san pham khong du so luong
+    private List<String> Check( Hashtable<String,GioHang> gh,List<Sach> sachban){
+        
+        Enumeration<String> enu=gh.keys();
+        List<String> danhsachloi = new ArrayList<String>();
+        danhsachloi.clear();
+        int size = sachban.size();
+        
+        
+        Hashtable<String,Sach> tg = new Hashtable<String,Sach>();
+        
+        for(int i =0;i<size;i++){
+            String ms = sachban.get(i).getMaSach();
+            tg.put(ms,sachban.get(i) );
+        }
+        
+        while(enu.hasMoreElements()){
+            
+            String key=enu.nextElement();
+     
+            GioHang value=gh.get(key);
+            String ms = value.getMasach();
+            int soban = value.getSoluong(); 
+            int soco  =  tg.get(ms).getSoluong(); 
+            if(  soban>soco ){
+               String tensach = tg.get(ms).getTenSach();             
+               danhsachloi.add(tensach);
+            }
+            
+            
+                    
+        }      
+        return danhsachloi;
+      
+    }
+    
     private void btTimMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimMSActionPerformed
         // TODO add your handling code here:
         String ms = txtMaSach.getText();
@@ -437,6 +502,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         int hang = GioMua.getSelectedRow();
         String ms = String.valueOf(GioMua.getValueAt(hang, 0));
         gioHang.remove(ms);
+        count--;
         HienThiGioHang(gioHang);
         
     }//GEN-LAST:event_btBoRaActionPerformed
