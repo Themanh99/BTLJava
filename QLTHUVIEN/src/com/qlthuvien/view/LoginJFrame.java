@@ -6,6 +6,7 @@
 package com.qlthuvien.view;
 
 import com.qlthuvien.service.TaiKhoanService;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -99,6 +100,9 @@ public class LoginJFrame extends javax.swing.JFrame {
         if(taiKhoanService.XacThucTaiKhoan(tk,mk)){
             new MainJFrame().setVisible(true);
             this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Sai Tai khoan hoặc mật khẩu","Thông báo",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btDangNhapActionPerformed
 
