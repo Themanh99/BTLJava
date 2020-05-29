@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.annotation.processing.Messager;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -61,7 +63,13 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     }
     
     public void HienThiGioMuaTable(){
-        defaulttable1= new DefaultTableModel();
+        defaulttable1= new DefaultTableModel(){
+            //chi cho phep sua cot so luong
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return columnIndex == 2;
+            }
+        };
         
         GioMua.setModel(defaulttable1);
         
@@ -412,7 +420,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
         List<String> danhsachloi = Check(gioHang,sachService.getSachBan() );
         if(danhsachloi.isEmpty()){
-            new XacNhanMuaJFrame().setVisible(true);
+            XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
+            xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            xn.setVisible(true);
         }
         else{
             String tb = "";
