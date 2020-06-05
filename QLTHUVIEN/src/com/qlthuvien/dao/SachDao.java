@@ -7,12 +7,8 @@ package com.qlthuvien.dao;
 
 import com.qlthuvien.model.Sach;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,12 +16,8 @@ import java.util.logging.Logger;
  *
  * @author Administrator
  */
-public class SachDao {
+public class SachDao extends Dao{
     //Lay ra danh sach Sach
-    Connection conn = null;
-    PreparedStatement ps = null;
-    Statement state =null;
-    ResultSet rs = null;
     public List<Sach> getSach(){
         conn = JDBCConnection.getJDBCConnection();
         try {
@@ -51,21 +43,7 @@ public class SachDao {
         } catch (SQLException ex) {
             Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-                if (rs != null) {
-                    try {
-                       rs.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
-                if (state != null) {
-                    try {
-                        state.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
+                CloseAll();
          }
          return null;
        

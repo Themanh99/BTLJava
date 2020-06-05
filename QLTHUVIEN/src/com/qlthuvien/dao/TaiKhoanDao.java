@@ -43,9 +43,7 @@ public class TaiKhoanDao {
            
             String pass="";
             while(rs.next()){
-                pass = rs.getString("mk"); 
-                System.out.println(pass);
-                System.out.println(rs.getInt("loaitk"));
+                pass = rs.getString("mk");                
                 if(rs.getInt("loaitk")==0){
                     loaiTK=false;
                 }
