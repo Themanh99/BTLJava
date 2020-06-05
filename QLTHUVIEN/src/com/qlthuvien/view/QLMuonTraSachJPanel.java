@@ -24,11 +24,11 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
     DefaultTableModel defautSachtable, defaulGiottable;
     SachService sachservice;
-    Hashtable<String, GioHang> dsGioHang;
+    public static Hashtable<String, GioHang> dsGioHang;
     int index = -1,//lay chi so hang trong bang sach
      count = 0;// so luong hang co trong gio;
-
-    public Hashtable<String, GioHang> getGioHang() {
+    float tongtien = 0;
+    public static Hashtable<String, GioHang> getGioHang() {
         return dsGioHang;
     }
 
@@ -141,13 +141,9 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         txTheloai = new javax.swing.JTextField();
         txNhaxuatban = new javax.swing.JTextField();
         btTimMasach = new javax.swing.JButton();
-        btTimTensach = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btTimTacgia = new javax.swing.JButton();
-        btTimtheloai = new javax.swing.JButton();
-        btTimNhaxuatban = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -255,40 +251,12 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             }
         });
 
-        btTimTensach.setText("Tìm");
-        btTimTensach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimtensach(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Tìm Kiếm");
 
         jLabel2.setText("Mã Sách");
 
         jLabel3.setText("Tên Sách");
-
-        btTimTacgia.setText("Tìm");
-        btTimTacgia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimtacgia(evt);
-            }
-        });
-
-        btTimtheloai.setText("Tìm");
-        btTimtheloai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimtheloai(evt);
-            }
-        });
-
-        btTimNhaxuatban.setText("Tìm");
-        btTimNhaxuatban.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimnhaxuatban(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -297,38 +265,31 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             .addGap(0, 355, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(146, 146, 146)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(115, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(134, 134, 134)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(103, 103, 103))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btTimMasach)
-                                .addComponent(btTimNhaxuatban)
-                                .addComponent(btTimtheloai)
-                                .addComponent(btTimTacgia)
-                                .addComponent(btTimTensach))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addComponent(btTimMasach)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 297, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -344,22 +305,18 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btTimTensach)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(13, 13, 13)
+                                    .addGap(16, 16, 16)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btTimTacgia)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btTimtheloai)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btTimNhaxuatban)
                                 .addComponent(jLabel6)))
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(61, Short.MAX_VALUE)))
@@ -455,22 +412,6 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btTimmasach
 
-    private void btTimtensach(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtensach
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btTimtensach
-
-    private void btTimtacgia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtacgia
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btTimtacgia
-
-    private void btTimtheloai(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtheloai
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btTimtheloai
-
-    private void btTimnhaxuatban(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimnhaxuatban
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btTimnhaxuatban
-
     private void btThemvaogio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemvaogio
         if (index >= 0) {
             String masach = String.valueOf(tbSach.getValueAt(index, 0));
@@ -497,15 +438,18 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
     private void btMuon(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuon
         // TODO add your handling code here:
+        if(count > 0){
         dsGioHang.clear();
         
         for(int i=0;i<count;i++){
             String masach = String.valueOf(tbGio.getValueAt(i, 0));
             String tensach = String.valueOf(tbGio.getValueAt(i, 1));
-            String soluong = String.valueOf(tbGio.getValueAt(i, 2));
+            int soluong = Integer.parseInt(String.valueOf(tbGio.getValueAt(i, 2)));
             float gia = Float.parseFloat(String.valueOf(tbGio.getValueAt(i, 3)));
             
-          
+            GioHang gh = new GioHang(masach,tensach,soluong,gia);
+            tongtien += soluong * gia;
+            dsGioHang.put(masach, gh);
         }
         
         
@@ -523,6 +467,8 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,tb, "Thông báo",JOptionPane.ERROR_MESSAGE);
         }
         
+        }else
+            JOptionPane.showMessageDialog(null,"Chua chon sach","Thông báo",JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btMuon
 
     private void btTaomoi(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaomoi
@@ -551,10 +497,6 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btTimMasach;
-    private javax.swing.JButton btTimNhaxuatban;
-    private javax.swing.JButton btTimTacgia;
-    private javax.swing.JButton btTimTensach;
-    private javax.swing.JButton btTimtheloai;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

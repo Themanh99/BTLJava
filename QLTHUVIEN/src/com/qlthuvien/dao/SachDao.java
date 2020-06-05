@@ -107,7 +107,51 @@ public class SachDao extends Dao{
         return null;
     }
     
-    
+     public List<Sach> TimSachMuon(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+        
+        conn = JDBCConnection.getJDBCConnection();
+        try {
+            state = conn.createStatement();
+            String sql="select * from sach where trangthai='false' and maSach like '%"+masach+"%' and tenSach like '%"+tensach+"%' and tenTacGia like'%"+tentacgia+"%' and tenNXB like '%"+tennxb+"%' and theLoai like '%"+theloai+"%'";      
+            System.out.println(sql);
+            rs=state.executeQuery(sql);
+            List<Sach> list = new ArrayList<Sach>();
+            while(rs.next()){
+                 String maSach = rs.getString("maSach");
+                 String tenSach = rs.getString("tenSach");
+                 String tenTacGia= rs.getString("tenTacGia");
+                 String tenNxb= rs.getString("tenNXB");
+                 float giaSach= rs.getFloat("giaSach");
+                 String theLoai= rs.getString("theLoai");
+                 boolean trangthai= rs.getBoolean("trangthai");
+                 int soluong = rs.getInt("soluong") ;
+                 
+                 Sach sach = new Sach(maSach, tenSach, tenTacGia, tenNxb, giaSach, theLoai, trangthai, soluong);
+                 list.add(sach);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                if (rs != null) {
+                    try {
+                       rs.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+                if (state != null) {
+                    try {
+                        state.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+         }
+        return null;
+    }
+
    
     
 }

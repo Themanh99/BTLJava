@@ -211,39 +211,29 @@
               <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" pref="94" max="-2" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" pref="94" max="-2" attributes="0"/>
-                              <EmptySpace min="103" pref="103" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txMasach" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="txNhaxuatban" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="txTheloai" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="txTacgia" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Component id="txTensach" min="-2" pref="144" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btTimMasach" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimNhaxuatban" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimtheloai" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimTacgia" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimTensach" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txMasach" min="-2" pref="144" max="-2" attributes="0"/>
+                          <Component id="txNhaxuatban" min="-2" pref="144" max="-2" attributes="0"/>
+                          <Component id="txTheloai" min="-2" pref="144" max="-2" attributes="0"/>
+                          <Component id="txTacgia" min="-2" pref="144" max="-2" attributes="0"/>
+                          <Component id="txTensach" min="-2" pref="144" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btTimMasach" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -251,7 +241,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="297" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -268,19 +258,16 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txTensach" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btTimTensach" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel3" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txTacgia" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btTimTacgia" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel4" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txTheloai" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btTimtheloai" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel5" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -288,7 +275,6 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txNhaxuatban" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimNhaxuatban" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -337,14 +323,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTimmasach"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btTimTensach">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTimtensach"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -362,30 +340,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btTimTacgia">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTimtacgia"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btTimtheloai">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTimtheloai"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btTimNhaxuatban">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTimnhaxuatban"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

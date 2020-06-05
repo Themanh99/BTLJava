@@ -64,12 +64,12 @@ public class QlSachDao {
         return null;
         }
     
-    public List<Sach> TimSach(String thuoctinh,String value){
+    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai,boolean Trangthai){
         
         conn = JDBCConnection.getJDBCConnection();
         try {
             st = conn.createStatement();
-            String sql="select * from sach where trangthai='true' and "+thuoctinh+" LIKE '%"+value+"%'";      
+            String sql="select * from sach where trangthai='"+(Trangthai ? "1":"0")+"' and maSach like '%"+masach+"%' and tenSach like '%"+tensach+"%' and tenTacGia like'%"+tentacgia+"%' and tenNXB like '%"+tennxb+"%' and theLoai like '%"+theloai+"%'";     
             rs=st.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
             while(rs.next()){
@@ -106,5 +106,17 @@ public class QlSachDao {
                 }
          }
         return null;
+    }
+    public static void UpdateSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+       
+        try {
+            Statement st = JDBCConnection.getJDBCConnection().createStatement();
+            String sql = "update sach set masach = '"+masach+"',tenSach = '"+tensach+"', tenTacGia ='"+tentacgia+"', tenNXB = '"+tennxb+"' , theLoai = '"+theloai+"' where masach = "+masach;          
+            int rs = st.executeUpdate(sql);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }
     }
