@@ -6,6 +6,10 @@
 package com.qlthuvien.service;
 
 import com.qlthuvien.dao.TaiKhoanDao;
+import com.qlthuvien.model.Sach;
+import com.qlthuvien.model.TaiKhoan;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,10 +27,15 @@ public class TaiKhoanService {
     public boolean XacThucTaiKhoan(String tk,String mk){
         return taiKhoanDao.XacThucTaiKhoan(tk,mk);
     }
-    
+    public List<TaiKhoan> getTaikhoan() {
+        return taiKhoanDao.gettaikhoan();
+    }
     public boolean getLoaiTK(){
         return TaiKhoanDao.loaiTK;
     }
-    
+    public List<TaiKhoan> TimTk(String tk,boolean loaitk) {
+        return taiKhoanDao.TimTk(tk,loaitk);
+    }
+
     
 }

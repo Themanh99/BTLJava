@@ -6,6 +6,8 @@
 package com.qlthuvien.dao;
 
 
+import com.qlthuvien.model.Sach;
+import com.qlthuvien.model.TaiKhoan;
 import com.qlthuvien.view.XacNhanMuaJFrame;
 import java.sql.Connection;
 import java.sql.CallableStatement;
@@ -13,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,5 +74,79 @@ public class TaiKhoanDao {
         else{
             System.out.println("That bai");
         }
+    }
+    
+    public List<TaiKhoan> gettaikhoan(){
+        conn = JDBCConnection.getJDBCConnection();
+        try {
+            
+            state = conn.createStatement();
+            String sql = "select * from TAIKHOAN";
+            rs = state.executeQuery(sql);
+            List<TaiKhoan> list = new ArrayList<TaiKhoan>();
+            while(rs.next()){
+                String Tk = rs.getString("tk");
+                String Mk = rs.getString("mk");              
+                boolean Loaitk= rs.getBoolean("loaitk");             
+                
+                TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,Loaitk);
+                list.add(taikhoan);
+            }
+            return list;
+            }catch (SQLException ex) {
+                Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE,null,ex);
+                
+            } finally {
+                if(rs !=null){
+                 try {rs.close();}catch (SQLException e)  {} 
+                }
+                if(state !=null){
+                 try {state.close();}catch (SQLException e)  {} 
+                }
+                if(conn !=null){
+                 try {conn.close();}catch (SQLException e)  {} 
+                }
+            }
+        return null;
+        }
+    
+    public List<TaiKhoan> TimTk(String tk,boolean loaiTk){
+        
+        conn = JDBCConnection.getJDBCConnection();
+        try {
+            state = conn.createStatement();
+            String sql="select * from taikhoan where loaitk='%"+loaiTk+"%' and tk like '%"+tk+"%'";      
+            System.out.println(sql);
+            rs=state.executeQuery(sql);
+            List<TaiKhoan> list = new ArrayList<TaiKhoan>();
+            while(rs.next()){
+                 String Tk = rs.getString("tk");
+                 String Mk = rs.getString("mk");
+                 boolean loaiTK= rs.getBoolean("loaiTk");
+               
+                 TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,loaiTk);
+                 list.add(taikhoan);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                if (rs != null) {
+                    try {
+                       rs.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+                if (state != null) {
+                    try {
+                        state.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+         }
+        return null;
     }
 }
