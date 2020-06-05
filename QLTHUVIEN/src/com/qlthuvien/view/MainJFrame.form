@@ -55,7 +55,7 @@
                       <Component id="btQLNhapSach" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
                       <Component id="btQLDocGia" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
                       <Component id="btQLTaiKhoan" alignment="0" min="-2" pref="235" max="-2" attributes="0"/>
-                      <Component id="jButton1" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btQLTraSach" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -67,7 +67,7 @@
                   <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                   <Component id="btQLMuonTraSach" linkSize="1" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" linkSize="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btQLTraSach" linkSize="1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btQLBanSach" linkSize="1" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -138,13 +138,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btQLTaiKhoanActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btQLTraSach">
           <Properties>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; tr&#x1ea3; s&#xe1;ch"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btQLTraSachActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
