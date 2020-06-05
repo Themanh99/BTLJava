@@ -84,7 +84,7 @@ public class SachDao {
     
     
     //Tim sach
-    public List<Sach> TimSachBan(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){
         
         conn = JDBCConnection.getJDBCConnection();
         try {
