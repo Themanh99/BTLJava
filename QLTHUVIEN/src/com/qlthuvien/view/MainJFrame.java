@@ -5,6 +5,7 @@
  */
 package com.qlthuvien.view;
 
+import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
@@ -39,6 +40,22 @@ public class MainJFrame extends javax.swing.JFrame {
         this.qlTaiKhoanJPanel.setVisible(false);
     }
     
+    private void XoaMauButton(){
+        btQLMuonTraSach.setBackground(Color.white);
+  
+        btQLTraSach.setBackground(Color.white);
+  
+        btQLBanSach.setBackground(Color.white);
+      
+        btQLSach.setBackground(Color.white);
+      
+        btQLNhapSach.setBackground(Color.white);
+        
+        btQLDocGia.setBackground(Color.white);
+       
+        btQLTaiKhoan.setBackground(Color.white);
+       
+    }
     private void HienThiPanel(JPanel panel){
         AnPanel();
         panel.setSize(1050,620);
@@ -64,7 +81,7 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLNhapSach = new javax.swing.JButton();
         btQLDocGia = new javax.swing.JButton();
         btQLTaiKhoan = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btQLTraSach = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -119,11 +136,11 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Quản lý trả sách");
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btQLTraSach.setText("Quản lý trả sách");
+        btQLTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btQLTraSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btQLTraSachActionPerformed(evt);
             }
         });
 
@@ -140,11 +157,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(btQLNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btQLTraSach))
                 .addGap(14, 14, 14))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btQLMuonTraSach, jButton1});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btQLMuonTraSach, btQLTraSach});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +169,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(159, 159, 159)
                 .addComponent(btQLMuonTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btQLTraSach)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLBanSach, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +183,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLDocGia, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan, jButton1});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLDocGia, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan, btQLTraSach});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Quản lý thư viện");
@@ -218,37 +235,52 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btQLBanSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLBanSachActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlBanSachJPanel);
+        XoaMauButton();
+        btQLBanSach.setBackground(Color.CYAN);
+     
     }//GEN-LAST:event_btQLBanSachActionPerformed
 
     private void btQLMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLMuonTraSachActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlMuonTraSachJPanel);
+        XoaMauButton();
+        btQLMuonTraSach.setBackground(Color.CYAN);
     }//GEN-LAST:event_btQLMuonTraSachActionPerformed
 
     private void btQLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLSachActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlSachJPanel);
+        XoaMauButton();
+        btQLSach.setBackground(Color.CYAN);
     }//GEN-LAST:event_btQLSachActionPerformed
 
     private void btQLNhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNhapSachActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlNhapSachJPanel);
+        XoaMauButton();
+        btQLNhapSach.setBackground(Color.CYAN);
     }//GEN-LAST:event_btQLNhapSachActionPerformed
 
     private void btQLDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLDocGiaActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlDocGiaJPanel);
+        XoaMauButton();
+        btQLDocGia.setBackground(Color.CYAN);
     }//GEN-LAST:event_btQLDocGiaActionPerformed
 
     private void btQLTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTaiKhoanActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlTaiKhoanJPanel);
+        XoaMauButton();
+        btQLTaiKhoan.setBackground(Color.CYAN);
     }//GEN-LAST:event_btQLTaiKhoanActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btQLTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTraSachActionPerformed
         // TODO add your handling code here:
         HienThiPanel(qlTraSachJPanel);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        XoaMauButton();
+        btQLTraSach.setBackground(Color.CYAN);
+    }//GEN-LAST:event_btQLTraSachActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,7 +324,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btQLNhapSach;
     private javax.swing.JButton btQLSach;
     private javax.swing.JButton btQLTaiKhoan;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btQLTraSach;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
