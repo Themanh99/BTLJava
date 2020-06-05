@@ -44,9 +44,10 @@ public class QLSachJPanel extends javax.swing.JPanel {
         defaulttable.addColumn("Mã sách");
         defaulttable.addColumn("Tên sách");
         defaulttable.addColumn("Tác giả");
-        defaulttable.addColumn("Thể loại");
         defaulttable.addColumn("Nhà xuất bản");
         defaulttable.addColumn("Giá");
+        defaulttable.addColumn("Thể loại");
+        defaulttable.addColumn("Trạng thái");
         defaulttable.addColumn("Số lượng");
         Qlsachtable.setDefaultEditor(Object.class, null);
         Display(QlsachService.getSach());
@@ -55,7 +56,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
     private void Display(List<Sach> list){
         defaulttable.setRowCount(0);
         for(Sach sach:list){
-            defaulttable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTheLoai(),sach.getTenNxb(),sach.getGiaSach(),sach.getSoluong() });            
+            defaulttable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTenNxb(),sach.getGiaSach(),sach.getTheLoai(),( sach.isTrangthai() ? "Sách bán":"Sách mua"),sach.getSoluong() });            
         }
     }
     /**
