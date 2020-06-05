@@ -23,11 +23,10 @@ public class QlSachService {
     public List<Sach> getSach() {
         return qlsachDao.getsach();
     }
-    
-//    public List<Sach> getSach(){
-//        List<Sach> sach = getsach();
-//        
-//    }
+    public List<Sach> TimSach(String thuoctinh,String value){
+        return qlsachDao.TimSach(thuoctinh, value);
+    }
+
     }
  
     

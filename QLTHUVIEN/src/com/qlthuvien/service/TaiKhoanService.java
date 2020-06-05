@@ -21,7 +21,7 @@ public class TaiKhoanService {
     }
     
     public boolean XacThucTaiKhoan(String tk,String mk){
-        return TaiKhoanDao.XacThucTaiKhoan(tk,mk);
+        return taiKhoanDao.XacThucTaiKhoan(tk,mk);
     }
     
     public boolean getLoaiTK(){

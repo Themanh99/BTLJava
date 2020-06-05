@@ -22,16 +22,24 @@ import java.util.logging.Logger;
  */
 public class TaiKhoanDao {
     public static boolean loaiTK;
-
+    private Connection conn = null;
+    private PreparedStatement pre = null;
+    private Statement state =null;
+    private ResultSet rs = null;
     public TaiKhoanDao() {
+        
     }
             
-    public static boolean XacThucTaiKhoan(String tk,String mk){
-       
+    public boolean XacThucTaiKhoan(String tk,String mk){
+        conn = JDBCConnection.getJDBCConnection();
         try {
-            Statement statement = JDBCConnection.getJDBCConnection().createStatement();
-            String sql = "select * from TAIKHOAN where tk='"+tk+"' and mk='"+mk+"'";        
-            ResultSet rs = statement.executeQuery(sql);
+            
+            String sql = "select * from TAIKHOAN where tk=? and mk=?";   
+            
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tk);
+            pre.setString(2, mk);
+            rs = pre.executeQuery();
            
             String pass="";
             while(rs.next()){
@@ -54,7 +62,8 @@ public class TaiKhoanDao {
     }
     
     public static void main(String[] args) {
-        boolean kq = XacThucTaiKhoan("admin","admin");
+        TaiKhoanDao tkd = new TaiKhoanDao();
+        boolean kq = tkd.XacThucTaiKhoan("admin","admin");
         if(kq==true){
             System.out.println("Thanh cong");
         }

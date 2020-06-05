@@ -22,9 +22,8 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
      * Creates new form XacNhanMuaJFrame
      */
     
-    float tong=0;
-    DefaultTableModel defaulttable;
-    
+    DefaultTableModel defaultGioHangTable;
+    private float tong = 0;
     public XacNhanMuaJFrame() {
         initComponents();
         Date dNow = new Date( );
@@ -32,14 +31,14 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         new SimpleDateFormat ("yyyy-MM-dd");               
         txtNgayMua.setText(String.valueOf(ft.format(dNow)));
         
-        defaulttable= new DefaultTableModel();
+        defaultGioHangTable= new DefaultTableModel();
         
-        dsMua.setModel(defaulttable);
+        dsMua.setModel(defaultGioHangTable);
         
-        defaulttable.addColumn("Ma sach");
-        defaulttable.addColumn("Ten sach");
-        defaulttable.addColumn("So luong");
-        defaulttable.addColumn("Gia");
+        defaultGioHangTable.addColumn("Ma sach");
+        defaultGioHangTable.addColumn("Ten sach");
+        defaultGioHangTable.addColumn("So luong");
+        defaultGioHangTable.addColumn("Gia");
         
         Hashtable<String,GioHang> gh = QLBanSachJPanel.getGioHang();
         
@@ -48,7 +47,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
             String key=enu.nextElement();
             GioHang sach=gh.get(key);
             
-            defaulttable.addRow(new Object[]{ sach.getMasach(),sach.getTensach(),String.valueOf(sach.getSoluong()),String.valueOf(sach.getGia()) });
+            defaultGioHangTable.addRow(new Object[]{ sach.getMasach(),sach.getTensach(),String.valueOf(sach.getSoluong()),String.valueOf(sach.getGia()) });
             
             tong+=sach.getSoluong()*sach.getGia();   
             

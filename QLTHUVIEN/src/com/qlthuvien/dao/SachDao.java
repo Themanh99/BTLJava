@@ -72,9 +72,9 @@ public class SachDao {
         
     }
     
-   /* public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SachDao test = new SachDao();
-        List<Sach> abc = test.TimSach("tenSach", "cao");
+        List<Sach> abc = test.TimSachBan("00", "", "", "", "");
         for(Sach sach :abc ){
             System.out.println(sach);
         }
@@ -84,12 +84,13 @@ public class SachDao {
     
     
     //Tim sach
-    public List<Sach> TimSach(String thuoctinh,String value){
+    public List<Sach> TimSachBan(String masach,String tensach,String tentacgia,String tennxb,String theloai){
         
         conn = JDBCConnection.getJDBCConnection();
         try {
             state = conn.createStatement();
-            String sql="select * from sach where trangthai='true' and "+thuoctinh+" LIKE '%"+value+"%'";      
+            String sql="select * from sach where trangthai='true' and maSach like '%"+masach+"%' and tenSach like '%"+tensach+"%' and tenTacGia like'%"+tentacgia+"%' and tenNXB like '%"+tennxb+"%' and theLoai like '%"+theloai+"%'";      
+            System.out.println(sql);
             rs=state.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
             while(rs.next()){
@@ -128,5 +129,7 @@ public class SachDao {
         return null;
     }
     
+    
+   
     
 }
