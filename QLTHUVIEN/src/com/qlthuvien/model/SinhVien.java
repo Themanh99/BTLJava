@@ -57,6 +57,11 @@ public class SinhVien {
         this.dienthoaiSV = dienthoaiSV;
     }
 
+    @Override
+    public String toString() {
+        return "SinhVien{" + "maSV=" + maSV + ", tenSV=" + tenSV + ", emailSV=" + emailSV + ", dienthoaiSV=" + dienthoaiSV + '}';
+    }
+
     
     
     
