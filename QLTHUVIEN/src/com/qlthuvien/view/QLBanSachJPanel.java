@@ -28,41 +28,42 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLBanSachJPanel
      */
-    private float tong=0;
-    private DefaultTableModel defaultSachTable,defaultGioHangTable;
+    private float tong = 0;
+    private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index=-1,count=0;
-    
-    public static void ClearAll(){
-        
+    private int index = -1, count = 0;
+
+    public static void ClearAll() {
+
     }
-    
-    public float getTongTien(){
+
+    public float getTongTien() {
         return tong;
     }
-    private static Hashtable<String,GioHang> dsGioHang;
-    
-    public static Hashtable<String,GioHang> getGioHang(){
+    private static Hashtable<String, GioHang> dsGioHang;
+
+    public static Hashtable<String, GioHang> getGioHang() {
         return dsGioHang;
     }
-    
-    public DefaultTableModel getGioHangTable(){
+
+    public DefaultTableModel getGioHangTable() {
         return defaultGioHangTable;
     }
+
     public QLBanSachJPanel() {
         initComponents();
         sachService = new SachService();
-        dsGioHang = new Hashtable<String,GioHang>();
+        dsGioHang = new Hashtable<String, GioHang>();
         HienThiSachTable();
         HienThiGioHangTable();
-        
+
     }
-    
-    public void HienThiSachTable(){
-        defaultSachTable= new DefaultTableModel();
-        
+
+    public void HienThiSachTable() {
+        defaultSachTable = new DefaultTableModel();
+
         sachTable.setModel(defaultSachTable);
-        
+
         defaultSachTable.addColumn("Mã sách");
         defaultSachTable.addColumn("Tên sách");
         defaultSachTable.addColumn("Tác giả");
@@ -73,41 +74,32 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         sachTable.setDefaultEditor(Object.class, null);
         Display(sachService.getSachBan());
     }
-    
-    public void HienThiGioHangTable(){
-        defaultGioHangTable= new DefaultTableModel(){
+
+    public void HienThiGioHangTable() {
+        defaultGioHangTable = new DefaultTableModel() {
             //chi cho phep sua cot so luong
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return columnIndex == 2;
             }
         };
-        
+
         gioHangTable.setModel(defaultGioHangTable);
-        
+
         defaultGioHangTable.addColumn("Mã sách");
         defaultGioHangTable.addColumn("Tên sách");
         defaultGioHangTable.addColumn("Số Lượng");
         defaultGioHangTable.addColumn("Giá");
-        
+
     }
-    
-    
-    
-    
+
     //Hien thi len sachtable
-    private void Display(List<Sach> list){
+    private void Display(List<Sach> list) {
         defaultSachTable.setRowCount(0);
-        for(Sach sach:list){
-            defaultSachTable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTheLoai(),sach.getTenNxb(),sach.getGiaSach(),sach.getSoluong() });            
+        for (Sach sach : list) {
+            defaultSachTable.addRow(new Object[]{sach.getMaSach(), sach.getTenSach(), sach.getTenTacGia(), sach.getTheLoai(), sach.getTenNxb(), sach.getGiaSach(), sach.getSoluong()});
         }
     }
-    
-    
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,7 +111,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        btTimTS = new javax.swing.JButton();
         btTimMS = new javax.swing.JButton();
         txtTheLoai = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -128,30 +119,20 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         txtMaSach = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btTimNXB = new javax.swing.JButton();
         txtTenSach = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNXB = new javax.swing.JTextField();
         btThemVaoGio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btTimTL = new javax.swing.JButton();
         btBoRa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sachTable = new javax.swing.JTable();
         txtTacGia = new javax.swing.JTextField();
-        btTimTG = new javax.swing.JButton();
         btMua = new javax.swing.JButton();
         btReset = new javax.swing.JButton();
 
         jLabel5.setText("Thể loại");
-
-        btTimTS.setText("Tìm");
-        btTimTS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimTSActionPerformed(evt);
-            }
-        });
 
         btTimMS.setText("Tìm");
         btTimMS.addActionListener(new java.awt.event.ActionListener() {
@@ -194,13 +175,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         jLabel3.setText("Tác giả");
         jLabel3.setToolTipText("");
 
-        btTimNXB.setText("Tìm");
-        btTimNXB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimNXBActionPerformed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Quản lý bán sách");
 
@@ -216,13 +190,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         jLabel1.setToolTipText("");
 
         jLabel6.setText("Nhà xuất bản");
-
-        btTimTL.setText("Tìm");
-        btTimTL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimTLActionPerformed(evt);
-            }
-        });
 
         btBoRa.setText("Bỏ ra khỏi giỏ");
         btBoRa.addActionListener(new java.awt.event.ActionListener() {
@@ -264,13 +231,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(sachTable);
 
-        btTimTG.setText("Tìm");
-        btTimTG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimTGActionPerformed(evt);
-            }
-        });
-
         btMua.setText("Mua");
         btMua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,12 +268,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                             .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btTimMS)
-                            .addComponent(btTimTS)
-                            .addComponent(btTimTG)
-                            .addComponent(btTimTL)
-                            .addComponent(btTimNXB))
+                        .addComponent(btTimMS)
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -360,24 +315,19 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btTimTS))
+                                    .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btTimTG))
+                                    .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(txtNXB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btTimTL))
+                                    .addComponent(txtNXB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btTimNXB)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addComponent(btThemVaoGio)
@@ -389,24 +339,23 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void btThemVaoGioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemVaoGioActionPerformed
         // TODO add your handling code here:
-        if(index>=0){
+        if (index >= 0) {
             //Lay du lieu tu bang
-            String masach = String.valueOf(sachTable.getValueAt(index, 0));           
-            String tensach = String.valueOf(sachTable.getValueAt(index, 1));                     
-            String gia1 = String.valueOf( sachTable.getValueAt(index, 5));
+            String masach = String.valueOf(sachTable.getValueAt(index, 0));
+            String tensach = String.valueOf(sachTable.getValueAt(index, 1));
+            String gia1 = String.valueOf(sachTable.getValueAt(index, 5));
             float gia = Float.parseFloat(gia1);
-            
-            
+
             //Them vao gio hang
             GioHang gh = new GioHang(masach, tensach, 1, gia);
-            
-            if(!dsGioHang.containsKey(masach)){
-                dsGioHang.put(masach,gh);
+
+            if (!dsGioHang.containsKey(masach)) {
+                dsGioHang.put(masach, gh);
                 count++;
-                defaultGioHangTable.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),"1",gh.getGia() });
+                defaultGioHangTable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), "1", gh.getGia()});
             }
-        }
-        else JOptionPane.showMessageDialog(null, "Chưa chọn sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else
+            JOptionPane.showMessageDialog(null, "Chưa chọn sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btThemVaoGioActionPerformed
 
     private void sachTableChonSach(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sachTableChonSach
@@ -416,108 +365,86 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sachTableChonSach
 
     private void btMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuaActionPerformed
-        
-        dsGioHang.clear();
-        //Luu lai danh sach san pham cung so luong 
-        for(int i=0;i<count;i++){
-            String masach = String.valueOf(gioHangTable.getValueAt(i, 0)); 
-            String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));    
-            int soluong =Integer.parseInt( String.valueOf(gioHangTable.getValueAt(i, 2)));
-            float gia =Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));         
-            GioHang gh = new GioHang(masach,tensach,soluong,gia);
-            tong+=soluong*gia;
-            dsGioHang.put(masach, gh);
-        }
-        
-        //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
-        List<String> danhsachloi = Check(dsGioHang,sachService.getSachBan() );
-        if(danhsachloi.isEmpty()){
-            XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
-            xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            xn.setVisible(true);
-        }
-        else{
-            String tb = "";
-            int size = danhsachloi.size();
-            for(int i=0;i<size;i++){
-                if(i==size-1){
-                tb +=danhsachloi.get(i)+" : ";
-                }else{
-                tb +=danhsachloi.get(i)+" , ";
-                }
+        if (count != 0) {
+            dsGioHang.clear();
+            //Luu lai danh sach san pham cung so luong 
+            for (int i = 0; i < count; i++) {
+                String masach = String.valueOf(gioHangTable.getValueAt(i, 0));
+                String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));
+                int soluong = Integer.parseInt(String.valueOf(gioHangTable.getValueAt(i, 2)));
+                float gia = Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));
+                GioHang gh = new GioHang(masach, tensach, soluong, gia);
+                tong += soluong * gia;
+                dsGioHang.put(masach, gh);
             }
-            tb=tb+" Khong du so luong ban";
-            JOptionPane.showMessageDialog(null, tb, "Thông báo",JOptionPane.ERROR_MESSAGE);
+
+            //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
+            List<String> danhsachloi = Check(dsGioHang, sachService.getSachBan());
+            if (danhsachloi.isEmpty()) {
+                XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
+                xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                xn.setVisible(true);
+            } else {
+                String tb = "";
+                int size = danhsachloi.size();
+                for (int i = 0; i < size; i++) {
+                    if (i == size - 1) {
+                        tb += danhsachloi.get(i) + " : ";
+                    } else {
+                        tb += danhsachloi.get(i) + " , ";
+                    }
+                }
+                tb = tb + " Khong du so luong ban";
+                JOptionPane.showMessageDialog(null, tb, "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa có gì trong giỏ hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btMuaActionPerformed
     //Ham tra ve danh sach cac san pham khong du so luong
-    private List<String> Check( Hashtable<String,GioHang> gh,List<Sach> sachban){
-        
-        Enumeration<String> enu=gh.keys();
+    private List<String> Check(Hashtable<String, GioHang> gh, List<Sach> sachban) {
+
+        Enumeration<String> enu = gh.keys();
         List<String> danhsachloi = new ArrayList<String>();
         danhsachloi.clear();
         int size = sachban.size();
-        
-        
-        Hashtable<String,Sach> tg = new Hashtable<String,Sach>();
-        
-        for(int i =0;i<size;i++){
+
+        Hashtable<String, Sach> tg = new Hashtable<String, Sach>();
+
+        for (int i = 0; i < size; i++) {
             String ms = sachban.get(i).getMaSach();
-            tg.put(ms,sachban.get(i) );
+            tg.put(ms, sachban.get(i));
         }
-        
-        while(enu.hasMoreElements()){
-            
-            String key=enu.nextElement();
-     
-            GioHang value=gh.get(key);
+
+        while (enu.hasMoreElements()) {
+
+            String key = enu.nextElement();
+
+            GioHang value = gh.get(key);
             String ms = value.getMasach();
-            int soban = value.getSoluong(); 
-            int soco  =  tg.get(ms).getSoluong(); 
-            if(  soban>soco ){
-               String tensach = tg.get(ms).getTenSach();             
-               danhsachloi.add(tensach);
+            int soban = value.getSoluong();
+            int soco = tg.get(ms).getSoluong();
+            if (soban > soco) {
+                String tensach = tg.get(ms).getTenSach();
+                danhsachloi.add(tensach);
             }
-            
-            
-                    
-        }      
+
+        }
         return danhsachloi;
-      
+
     }
-    
+
     private void btTimMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimMSActionPerformed
         // TODO add your handling code here:
-        String ms = txtMaSach.getText();
-        Display(sachService.TimSach("maSach" ,ms));
+        String masach = txtMaSach.getText();
+        String tensach = txtTenSach.getText();
+        String tentacgia = txtTacGia.getText();
+        String theloai = txtTheLoai.getText();
+        String tennxb = txtNXB.getText();
+        Display(sachService.TimSachBan( masach, tensach, tentacgia, tennxb, theloai));   
     }//GEN-LAST:event_btTimMSActionPerformed
-
-    private void btTimTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTSActionPerformed
-        // TODO add your handling code here:
-        String ms = txtTenSach.getText();
-        Display(sachService.TimSach("tenSach" ,ms));
-    }//GEN-LAST:event_btTimTSActionPerformed
-
-    private void btTimTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTGActionPerformed
-        // TODO add your handling code here:
-        String ms = txtTacGia.getText();
-        Display(sachService.TimSach("tenTacGia" ,ms));
-    }//GEN-LAST:event_btTimTGActionPerformed
-
-    private void btTimTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTLActionPerformed
-        // TODO add your handling code here:
-        String ms = txtTheLoai.getText();
-        Display(sachService.TimSach("theLoai" ,ms));
-    }//GEN-LAST:event_btTimTLActionPerformed
-
-    private void btTimNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimNXBActionPerformed
-        // TODO add your handling code here:
-        String ms = txtNXB.getText();
-        Display(sachService.TimSach("tenNXB" ,ms));
-    }//GEN-LAST:event_btTimNXBActionPerformed
 
     private void btBoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBoRaActionPerformed
         // TODO add your handling code here:
@@ -526,7 +453,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         dsGioHang.remove(ms);
         count--;
         HienThiGioHang(dsGioHang);
-        
+
     }//GEN-LAST:event_btBoRaActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
@@ -534,18 +461,16 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         dsGioHang.clear();
         HienThiGioHang(dsGioHang);
     }//GEN-LAST:event_btResetActionPerformed
-    
-    
-    private void HienThiGioHang(Hashtable<String,GioHang> list){
+
+    private void HienThiGioHang(Hashtable<String, GioHang> list) {
         defaultGioHangTable.setRowCount(0);
-        Enumeration <String> enu = dsGioHang.keys();
-        while (enu.hasMoreElements()){
+        Enumeration<String> enu = dsGioHang.keys();
+        while (enu.hasMoreElements()) {
             String key = enu.nextElement();
             GioHang gh = dsGioHang.get(key);
-            defaultGioHangTable.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),gh.getSoluong(),gh.getGia() });    
+            defaultGioHangTable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
         }
-                  
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -554,10 +479,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btReset;
     private javax.swing.JButton btThemVaoGio;
     private javax.swing.JButton btTimMS;
-    private javax.swing.JButton btTimNXB;
-    private javax.swing.JButton btTimTG;
-    private javax.swing.JButton btTimTL;
-    private javax.swing.JButton btTimTS;
     private javax.swing.JTable gioHangTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

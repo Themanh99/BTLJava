@@ -42,8 +42,8 @@ public class SachService {
     
 
     
-    public List<Sach> TimSach(String thuoctinh,String value){
-        return sachDao.TimSach(thuoctinh, value);
+    public List<Sach> TimSachBan(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+        return sachDao.TimSachBan( masach, tensach, tentacgia, tennxb, theloai);
     }
     
 }
