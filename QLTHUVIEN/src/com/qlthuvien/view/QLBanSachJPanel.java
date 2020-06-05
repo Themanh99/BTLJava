@@ -28,42 +28,54 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLBanSachJPanel
      */
-    DefaultTableModel defaulttable,defaulttable1;
-    SachService sachService;
-    int index=-1,count=0;
-    public static Hashtable<String,GioHang> gioHang;
+    private float tong=0;
+    private DefaultTableModel defaultSachTable,defaultGioHangTable;
+    private SachService sachService;
+    private int index=-1,count=0;
     
-    public  static Hashtable<String,GioHang> getGioHang(){
-        return gioHang;
+    public static void ClearAll(){
+        
     }
     
+    public float getTongTien(){
+        return tong;
+    }
+    private static Hashtable<String,GioHang> dsGioHang;
+    
+    public static Hashtable<String,GioHang> getGioHang(){
+        return dsGioHang;
+    }
+    
+    public DefaultTableModel getGioHangTable(){
+        return defaultGioHangTable;
+    }
     public QLBanSachJPanel() {
         initComponents();
         sachService = new SachService();
-        gioHang = new Hashtable<String,GioHang>();
+        dsGioHang = new Hashtable<String,GioHang>();
         HienThiSachTable();
-        HienThiGioMuaTable();
+        HienThiGioHangTable();
         
     }
     
     public void HienThiSachTable(){
-        defaulttable= new DefaultTableModel();
+        defaultSachTable= new DefaultTableModel();
         
-        sachTable.setModel(defaulttable);
+        sachTable.setModel(defaultSachTable);
         
-        defaulttable.addColumn("Mã sách");
-        defaulttable.addColumn("Tên sách");
-        defaulttable.addColumn("Tác giả");
-        defaulttable.addColumn("Thể loại");
-        defaulttable.addColumn("Nhà xuất bản");
-        defaulttable.addColumn("Giá");
-        defaulttable.addColumn("Số lượng");
+        defaultSachTable.addColumn("Mã sách");
+        defaultSachTable.addColumn("Tên sách");
+        defaultSachTable.addColumn("Tác giả");
+        defaultSachTable.addColumn("Thể loại");
+        defaultSachTable.addColumn("Nhà xuất bản");
+        defaultSachTable.addColumn("Giá");
+        defaultSachTable.addColumn("Số lượng");
         sachTable.setDefaultEditor(Object.class, null);
         Display(sachService.getSachBan());
     }
     
-    public void HienThiGioMuaTable(){
-        defaulttable1= new DefaultTableModel(){
+    public void HienThiGioHangTable(){
+        defaultGioHangTable= new DefaultTableModel(){
             //chi cho phep sua cot so luong
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -71,12 +83,12 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             }
         };
         
-        GioMua.setModel(defaulttable1);
+        gioHangTable.setModel(defaultGioHangTable);
         
-        defaulttable1.addColumn("Mã sách");
-        defaulttable1.addColumn("Tên sách");
-        defaulttable1.addColumn("Số Lượng");
-        defaulttable1.addColumn("Giá");
+        defaultGioHangTable.addColumn("Mã sách");
+        defaultGioHangTable.addColumn("Tên sách");
+        defaultGioHangTable.addColumn("Số Lượng");
+        defaultGioHangTable.addColumn("Giá");
         
     }
     
@@ -85,9 +97,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     
     //Hien thi len sachtable
     private void Display(List<Sach> list){
-        defaulttable.setRowCount(0);
+        defaultSachTable.setRowCount(0);
         for(Sach sach:list){
-            defaulttable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTheLoai(),sach.getTenNxb(),sach.getGiaSach(),sach.getSoluong() });            
+            defaultSachTable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTheLoai(),sach.getTenNxb(),sach.getGiaSach(),sach.getSoluong() });            
         }
     }
     
@@ -111,7 +123,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         btTimMS = new javax.swing.JButton();
         txtTheLoai = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        GioMua = new javax.swing.JTable();
+        gioHangTable = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         txtMaSach = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -148,7 +160,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             }
         });
 
-        GioMua.setModel(new javax.swing.table.DefaultTableModel(
+        gioHangTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -167,9 +179,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        GioMua.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        GioMua.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(GioMua);
+        gioHangTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        gioHangTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(gioHangTable);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Giỏ");
@@ -388,10 +400,10 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             //Them vao gio hang
             GioHang gh = new GioHang(masach, tensach, 1, gia);
             
-            if(!gioHang.containsKey(masach)){
-                gioHang.put(masach,gh);
+            if(!dsGioHang.containsKey(masach)){
+                dsGioHang.put(masach,gh);
                 count++;
-                defaulttable1.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),"1",gh.getGia() });
+                defaultGioHangTable.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),"1",gh.getGia() });
             }
         }
         else JOptionPane.showMessageDialog(null, "Chưa chọn sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -405,20 +417,20 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void btMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuaActionPerformed
         
-        gioHang.clear();
+        dsGioHang.clear();
         //Luu lai danh sach san pham cung so luong 
         for(int i=0;i<count;i++){
-            String masach = String.valueOf(GioMua.getValueAt(i, 0)); 
-            String tensach = String.valueOf(GioMua.getValueAt(i, 1));    
-            int soluong =Integer.parseInt( String.valueOf(GioMua.getValueAt(i, 2)));
-            float gia =Float.parseFloat(String.valueOf(GioMua.getValueAt(i, 3)));         
+            String masach = String.valueOf(gioHangTable.getValueAt(i, 0)); 
+            String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));    
+            int soluong =Integer.parseInt( String.valueOf(gioHangTable.getValueAt(i, 2)));
+            float gia =Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));         
             GioHang gh = new GioHang(masach,tensach,soluong,gia);
-            
-            gioHang.put(masach, gh);
+            tong+=soluong*gia;
+            dsGioHang.put(masach, gh);
         }
         
         //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
-        List<String> danhsachloi = Check(gioHang,sachService.getSachBan() );
+        List<String> danhsachloi = Check(dsGioHang,sachService.getSachBan() );
         if(danhsachloi.isEmpty()){
             XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
             xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -509,35 +521,34 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void btBoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBoRaActionPerformed
         // TODO add your handling code here:
-        int hang = GioMua.getSelectedRow();
-        String ms = String.valueOf(GioMua.getValueAt(hang, 0));
-        gioHang.remove(ms);
+        int hang = gioHangTable.getSelectedRow();
+        String ms = String.valueOf(gioHangTable.getValueAt(hang, 0));
+        dsGioHang.remove(ms);
         count--;
-        HienThiGioHang(gioHang);
+        HienThiGioHang(dsGioHang);
         
     }//GEN-LAST:event_btBoRaActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         // TODO add your handling code here:
-        gioHang.clear();
-        HienThiGioHang(gioHang);
+        dsGioHang.clear();
+        HienThiGioHang(dsGioHang);
     }//GEN-LAST:event_btResetActionPerformed
     
     
     private void HienThiGioHang(Hashtable<String,GioHang> list){
-        defaulttable1.setRowCount(0);
-        Enumeration <String> enu = gioHang.keys();
+        defaultGioHangTable.setRowCount(0);
+        Enumeration <String> enu = dsGioHang.keys();
         while (enu.hasMoreElements()){
             String key = enu.nextElement();
-            GioHang gh = gioHang.get(key);
-            defaulttable1.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),gh.getSoluong(),gh.getGia() });    
+            GioHang gh = dsGioHang.get(key);
+            defaultGioHangTable.addRow(new Object[]{ gh.getMasach(),gh.getTensach(),gh.getSoluong(),gh.getGia() });    
         }
                   
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable GioMua;
     private javax.swing.JButton btBoRa;
     private javax.swing.JButton btMua;
     private javax.swing.JButton btReset;
@@ -547,6 +558,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btTimTG;
     private javax.swing.JButton btTimTL;
     private javax.swing.JButton btTimTS;
+    private javax.swing.JTable gioHangTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
