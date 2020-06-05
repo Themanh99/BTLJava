@@ -39,6 +39,20 @@ public class SachService {
         
         return sachBan;
     }
+    public List<Sach> getSachMuon(){
+        List<Sach> sach = this.getSach();
+        List<Sach> sachmuon = new ArrayList<>();
+        
+        
+        for(Sach item : sach){
+            if(item.isTrangthai()==false){
+                sachmuon.add(item);
+            }
+        }
+            
+        return sachmuon;
+        
+    }
     
 
     

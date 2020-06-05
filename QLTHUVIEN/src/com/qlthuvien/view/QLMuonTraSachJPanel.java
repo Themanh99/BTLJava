@@ -5,19 +5,115 @@
  */
 package com.qlthuvien.view;
 
+import com.qlthuvien.model.GioHang;
+import com.qlthuvien.model.Sach;
+import com.qlthuvien.service.SachService;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrator
  */
 public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
+    DefaultTableModel defautSachtable, defaulGiottable;
+    SachService sachservice;
+    Hashtable<String, GioHang> dsGioHang;
+    int index = -1,//lay chi so hang trong bang sach
+     count = 0;// so luong hang co trong gio;
+
+    public Hashtable<String, GioHang> getGioHang() {
+        return dsGioHang;
+    }
+
     /**
      * Creates new form QLMuonTraSachJPanel
      */
     public QLMuonTraSachJPanel() {
         initComponents();
+        sachservice = new SachService();
+        dsGioHang = new Hashtable<String, GioHang>();
+        HienThiSachTable();
+        KhoiTaoGioMuonTable();
+
     }
 
+    public void HienThiSachTable() {
+        defautSachtable = new DefaultTableModel();
+        tbSach.setModel(defautSachtable);
+
+        defautSachtable.addColumn("Mã sách");
+        defautSachtable.addColumn("Tên sách");
+        defautSachtable.addColumn("Tác giả");
+        defautSachtable.addColumn("Thể loại");
+        defautSachtable.addColumn("Nhà xuất bản");
+        defautSachtable.addColumn("Giá");
+        defautSachtable.addColumn("Số lượng");
+        //ngan khong cho nguoi dung edit bang
+        tbSach.setDefaultEditor(Object.class, null);
+
+        List<Sach> listSach = sachservice.getSachMuon();
+        defautSachtable.setRowCount(0);
+        for (Sach sach : listSach) {
+            defautSachtable.addRow(new Object[]{
+                sach.getMaSach(),
+                sach.getTenSach(),
+                sach.getTenTacGia(),
+                sach.getTheLoai(),
+                sach.getTenNxb(),
+                sach.getGiaSach(),
+                sach.getSoluong()
+            });
+        }
+    }
+
+    private void KhoiTaoGioMuonTable() {
+        defaulGiottable = new DefaultTableModel() {
+            //chi cho phep sua cot so luong
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return columnIndex == 2;
+            }
+        };
+        tbGio.setModel(defaulGiottable);
+        //tbGio.setDefaultEditor(Object.class, null);
+
+        defaulGiottable.addColumn("Mã sách");
+        defaulGiottable.addColumn("Tên sách");
+        defaulGiottable.addColumn("Số Lượng");
+        defaulGiottable.addColumn("Giá");
+    }
+    private List<String> Check(Hashtable<String,GioHang> gh, List<Sach> sachmuon){
+        Enumeration<String> enu = gh.keys();
+        ArrayList<String> dsloi = new ArrayList<String>();
+        Hashtable<String,Sach> tg = new Hashtable<String,Sach>();
+        
+        //Lay ds sach muon;
+        for(Sach s : sachmuon){
+            String ms = s.getMaSach();
+            tg.put(ms, s);
+        }
+        while(enu.hasMoreElements()){
+            String key = enu.nextElement();
+            //lay gia tri ma sach, so luong trong dsGioHang
+            GioHang value = gh.get(key);
+            String ms = value.getMasach();
+            int somuon = value.getSoluong();
+            int soco = tg.get(ms).getSoluong();
+            if(somuon>soco){
+            String tensach = tg.get(ms).getTenSach();
+            dsloi.add(tensach);
+        }
+        }   
+        
+        return dsloi;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,59 +128,79 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         jButton9 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbGio = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txMasach = new javax.swing.JTextField();
+        txTensach = new javax.swing.JTextField();
+        txTacgia = new javax.swing.JTextField();
+        txTheloai = new javax.swing.JTextField();
+        txNhaxuatban = new javax.swing.JTextField();
+        btTimMasach = new javax.swing.JButton();
+        btTimTensach = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btTimTacgia = new javax.swing.JButton();
+        btTimtheloai = new javax.swing.JButton();
+        btTimNhaxuatban = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbSach = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
         jButton8.setText("Mượn");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMuon(evt);
+            }
+        });
 
         jButton9.setText("Tạo Mới");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTaomoi(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Giỏ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbGio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"dff", "sđ", "eqeqe2", "64646"}
             },
             new String [] {
                 "Mã sách", "Tên sách", "Số lượng", "Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, true
+                false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tbGio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbGioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbGio);
 
         jButton7.setText("Bỏ Ra Khỏi Giỏ");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBorakhoigio(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -130,11 +246,21 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Nhà Xuất Bản");
 
-        jTextField5.setToolTipText("");
+        txNhaxuatban.setToolTipText("");
 
-        jButton1.setText("Tìm");
+        btTimMasach.setText("Tìm");
+        btTimMasach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimmasach(evt);
+            }
+        });
 
-        jButton2.setText("Tìm");
+        btTimTensach.setText("Tìm");
+        btTimTensach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimtensach(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Tìm Kiếm");
@@ -143,11 +269,26 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Tên Sách");
 
-        jButton3.setText("Tìm");
+        btTimTacgia.setText("Tìm");
+        btTimTacgia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimtacgia(evt);
+            }
+        });
 
-        jButton4.setText("Tìm");
+        btTimtheloai.setText("Tìm");
+        btTimtheloai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimtheloai(evt);
+            }
+        });
 
-        jButton5.setText("Tìm");
+        btTimNhaxuatban.setText("Tìm");
+        btTimNhaxuatban.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimnhaxuatban(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,18 +312,18 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton1)
-                                .addComponent(jButton5)
-                                .addComponent(jButton4)
-                                .addComponent(jButton3)
-                                .addComponent(jButton2))))
+                                .addComponent(btTimMasach)
+                                .addComponent(btTimNhaxuatban)
+                                .addComponent(btTimtheloai)
+                                .addComponent(btTimTacgia)
+                                .addComponent(btTimTensach))))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -198,43 +339,53 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1))
+                                        .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btTimMasach))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton2)
+                                        .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btTimTensach)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(13, 13, 13)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton3)
+                                        .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btTimTacgia)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton4)
+                                        .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btTimtheloai)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton5)
+                                .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btTimNhaxuatban)
                                 .addComponent(jLabel6)))
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(61, Short.MAX_VALUE)))
         );
 
         jButton6.setText("Thêm Vào Giỏ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemvaogio(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"12", "313", "441", "4141", "535355", "gegdsg", "90"}
             },
             new String [] {
                 "Mã sách", "Tên sách", "Tác giả", "Thể loại", "Nhà xuất bản", "Giá", "Số lượng"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tbSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSachMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbSach);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -291,13 +442,119 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
+        // TODO add your handling code here:
+        index = tbSach.getSelectedRow();
+    }//GEN-LAST:event_tbSachMouseClicked
+
+    private void tbGioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbGioMouseClicked
+
+    private void btTimmasach(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimmasach
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimmasach
+
+    private void btTimtensach(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtensach
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimtensach
+
+    private void btTimtacgia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtacgia
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimtacgia
+
+    private void btTimtheloai(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimtheloai
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimtheloai
+
+    private void btTimnhaxuatban(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimnhaxuatban
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTimnhaxuatban
+
+    private void btThemvaogio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemvaogio
+        if (index >= 0) {
+            String masach = String.valueOf(tbSach.getValueAt(index, 0));
+            String tensach = String.valueOf(tbSach.getValueAt(index, 1));
+            float gia = Float.parseFloat(String.valueOf(tbSach.getValueAt(index, 5)));
+
+            GioHang gh = new GioHang(masach, tensach, 1, gia);
+
+            if (!dsGioHang.containsKey(masach)) {
+                dsGioHang.put(masach, gh);
+                count++;
+                defaulGiottable.addRow(new Object[]{
+                    gh.getMasach(),
+                    gh.getTensach(),
+                    "1",
+                    gh.getGia()
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btThemvaogio
+
+    private void btMuon(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuon
+        // TODO add your handling code here:
+        dsGioHang.clear();
+        
+        for(int i=0;i<count;i++){
+            String masach = String.valueOf(tbGio.getValueAt(i, 0));
+            String tensach = String.valueOf(tbGio.getValueAt(i, 1));
+            String soluong = String.valueOf(tbGio.getValueAt(i, 2));
+            float gia = Float.parseFloat(String.valueOf(tbGio.getValueAt(i, 3)));
+            
+          
+        }
+        
+        
+        List<String> dsloi = Check(dsGioHang, sachservice.getSachMuon());
+        if(dsloi.isEmpty()){
+            XacNhanMuonJFrame xn = new XacNhanMuonJFrame();
+            xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            xn.setVisible(true);
+        }else{
+            String tb= "";
+            for(String t : dsloi){
+                tb+=t+" ";
+            }
+            tb+="Khong du so luong de cho muon";
+            JOptionPane.showMessageDialog(null,tb, "Thông báo",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btMuon
+
+    private void btTaomoi(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaomoi
+        // TODO add your handling code here:
+        dsGioHang.clear();
+        HienThiGio(dsGioHang);
+    }//GEN-LAST:event_btTaomoi
+
+    private void btBorakhoigio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBorakhoigio
+        // TODO add your handling code here:
+        int hang = tbGio.getSelectedRow();
+        String ms = String.valueOf(tbGio.getValueAt(hang, 0));
+        dsGioHang.remove(ms);
+        count--;
+        HienThiGio(dsGioHang);
+    }//GEN-LAST:event_btBorakhoigio
+    private void HienThiGio(Hashtable<String, GioHang> gio1) {
+        defaulGiottable.setRowCount(0);
+        Enumeration<String> enu = gio1.keys();
+        while (enu.hasMoreElements()) {
+            String key = enu.nextElement();
+            GioHang gh = gio1.get(key);
+            defaulGiottable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btTimMasach;
+    private javax.swing.JButton btTimNhaxuatban;
+    private javax.swing.JButton btTimTacgia;
+    private javax.swing.JButton btTimTensach;
+    private javax.swing.JButton btTimtheloai;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -315,12 +572,12 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tbGio;
+    private javax.swing.JTable tbSach;
+    private javax.swing.JTextField txMasach;
+    private javax.swing.JTextField txNhaxuatban;
+    private javax.swing.JTextField txTacgia;
+    private javax.swing.JTextField txTensach;
+    private javax.swing.JTextField txTheloai;
     // End of variables declaration//GEN-END:variables
 }
