@@ -1,4 +1,24 @@
 use QLThuVien
+
+--Trigger
+create trigger tg_themchitietphieumua
+on CHITIETMUA
+for insert
+as
+begin
+	declare @maPMUA char(6)
+	declare @maSach char(6)
+	declare @slban int
+	declare @slcon int
+	set @maPMUA =(	select maPMUA
+						from inserted)
+	set @maSach=(	select maSach
+						from inserted)
+	set @slban = (	select soluong
+						from inserted)
+	
+	update Sach set soluong=soluong-@slban where maSach=@masach
+end
 -- taikhoan admin
 insert into TAIKHOAN values 
 ('admin','admin',1),
@@ -62,13 +82,15 @@ insert into PHIEUMUONTRA(maPMUON,maSV) values
 ('PM0004','2017601707'),
 ('PM0005','2017601709')
 
-insert into CHITIETMUONTRA values
-('PM0001','MS0001',1,'',20000),
-('PM0002','MS0002',2,'',30000),
-('PM0003','MS0003',1,'',24000),
-('PM0004','MS0005',5,'',28000),
-('PM0005','MS0001',7,'',40000)
+insert into CHITIETMUONTRA(maPMUON,maSach ,soluong ,gia ) values
+('PM0001','MS0001',1,20000),
+('PM0002','MS0002',2,30000),
+('PM0003','MS0003',1,24000),
+('PM0004','MS0005',5,28000),
+('PM0005','MS0001',7,40000)
 
+
+select * from CHITIETMUONTRA
 insert into CHITIETPN values
 ('PN0001','MS0001',300,39000),
 ('PN0002','MS0002',200,49000),
@@ -85,9 +107,8 @@ insert into CHITIETMUA values
 ('PM0005','MS0001',3,24000)
 
 
-create trigger tg_themphieumua
-on PHIEUMUA
-for insert
-as
-begin
-	declare @
+
+
+
+
+
