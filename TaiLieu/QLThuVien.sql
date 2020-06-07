@@ -33,7 +33,7 @@ create table SINHVIEN(
 
 create table PHIEUMUA(
 	maPMUA char(6) primary key,
-	ngayMua date,
+	ngayMua datetime default getdate(),
 	maSV char(10),
 	CONSTRAINT FK_PMUA_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 ) 
@@ -54,7 +54,7 @@ create table SACH(
 
 create table PHIEUNHAP(
 	maPN char(6) primary key,
-	ngaynhap date,
+	ngaynhap datetime default getdate(),
 	maNCC char(6),
 	CONSTRAINT FK_PHIEUNHAP_NCC FOREIGN KEY(maNCC) REFERENCES NCC(maNCC),
 )
@@ -71,7 +71,7 @@ create table CHITIETPN(
 
 create table PHIEUMUONTRA(
 	maPMUON char(6) primary key,
-	ngayMuon date,
+	ngayMuon datetime default getdate(),
 	maSV char(10),
 	CONSTRAINT FK_PMUON_SV FOREIGN KEY(maSV) REFERENCES SINHVIEN(maSV),
 ) 
@@ -80,7 +80,7 @@ create table CHITIETMUONTRA(
 	maPMUON char(6),
 	maSach char(6),
 	soluong int,
-	ngayTra date,
+	ngayTra datetime default getdate(),
 	gia float,
 	CONSTRAINT PK_CTPHIEUMUON PRIMARY KEY(maPMUON,maSach),
 	CONSTRAINT FK_CTPHIEUMUON_SACH FOREIGN KEY(maSach) REFERENCES SACH(maSach),
