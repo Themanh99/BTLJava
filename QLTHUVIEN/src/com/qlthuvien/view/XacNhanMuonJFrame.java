@@ -6,10 +6,13 @@
 package com.qlthuvien.view;
 
 import com.qlthuvien.model.GioHang;
+import com.qlthuvien.model.SinhVien;
+import com.qlthuvien.service.SinhVienService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,21 +26,22 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
      */
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
+    private SinhVienService svsv;
     public XacNhanMuonJFrame() {
         initComponents();
+        svsv = new SinhVienService();
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         txtNgayMuon.setText(String.valueOf(f.format(date)));
-        
+        //khoi tao bang dsMuon
         defaultGioHangTable= new DefaultTableModel();
-        
         dsMuonTable.setModel(defaultGioHangTable);
-        
         defaultGioHangTable.addColumn("Ma sach");
         defaultGioHangTable.addColumn("Ten sach");
         defaultGioHangTable.addColumn("So luong");
         defaultGioHangTable.addColumn("Gia");
-        
+        dsMuonTable.setDefaultEditor(Object.class, null);
+        //Hien thi sach muon vao bang dsMuon 
         Hashtable<String,GioHang> gh = QLMuonTraSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
@@ -51,7 +55,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         }
         txtTongTien.setText("Tong so tien la :"+tong);
     }
-        
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +77,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         txtDienthoai = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtNgayMuon = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btKiemTra = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtMaPhieuMuon = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -97,11 +101,30 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Ngày Mượn");
 
+        txtMasv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMasvKeyTyped(evt);
+            }
+        });
+
+        txtHoten.setEditable(false);
+
+        txtDienthoai.setEditable(false);
+
+        txtEmail.setEditable(false);
+
         txtNgayMuon.setEditable(false);
 
-        jButton1.setText("Kiểm tra");
+        btKiemTra.setText("Kiểm tra");
+        btKiemTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btKiemTraActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Mã Phiếu Mượn");
+
+        txtMaPhieuMuon.setEditable(false);
 
         jLabel5.setText("Danh Sách Mượn");
 
@@ -121,6 +144,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         txtTongTien.setText("Tổng tiền :");
 
         btXong.setText("Xong");
+        btXong.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,7 +188,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtMaPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton1))))))
+                                    .addComponent(btKiemTra))))))
                 .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -187,7 +211,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtMasv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btKiemTra))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -220,6 +244,33 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKiemTraActionPerformed
+        // TODO add your handling code here:
+        
+        SinhVien sv = new SinhVien();
+        sv = svsv.getSinhVien(txtMasv.getText());
+        if(sv.getMaSV()==null){
+            btXong.setEnabled(false);
+            txtHoten.setText("");
+            txtDienthoai.setText("");
+            txtEmail.setText("");
+            JOptionPane.showMessageDialog(null,"Không tìm thấy sinh viên có mã : "+txtMasv.getText());
+        }
+        else{
+            txtHoten.setText(sv.getTenSV());
+            txtDienthoai.setText(sv.getDienthoaiSV());
+            txtEmail.setText(sv.getEmailSV());
+            
+            btXong.setEnabled(true);
+            
+        }
+    }//GEN-LAST:event_btKiemTraActionPerformed
+        // khi txtMasv thay doi, disable btXong
+    private void txtMasvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasvKeyTyped
+        // TODO add your handling code here:
+        btXong.setEnabled(false);
+    }//GEN-LAST:event_txtMasvKeyTyped
 
     /**
      * @param args the command line arguments
@@ -257,9 +308,9 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btKiemTra;
     private javax.swing.JButton btXong;
     private javax.swing.JTable dsMuonTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

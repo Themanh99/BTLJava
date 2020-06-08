@@ -5,7 +5,9 @@
  */
 package com.qlthuvien.view;
 
+import com.qlthuvien.service.NCCService;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -15,13 +17,27 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class QLNhapSachJPanel extends javax.swing.JPanel {
     DefaultComboBoxModel modelCombo = new DefaultComboBoxModel();
-    /**
-     * Creates new form QLNhapSachJPanel
-     */
+    DefaultTableModel DefaultPhieuNhapTableModel;  
+    NCCService nccService;
     public QLNhapSachJPanel() {
         initComponents();
     }
-
+    public void KhoitaoPhieuNhapTable(){
+        DefaultPhieuNhapTableModel = new DefaultTableModel();
+        PhieuNhapTable.setModel(DefaultPhieuNhapTableModel);
+        DefaultPhieuNhapTableModel.addColumn("Mã sách");
+        DefaultPhieuNhapTableModel.addColumn("Tên sách");
+        DefaultPhieuNhapTableModel.addColumn("Nhà cung cấp");
+        DefaultPhieuNhapTableModel.addColumn("Số lượng nhập");
+        DefaultPhieuNhapTableModel.addColumn("Giá sách nhập");
+        DefaultPhieuNhapTableModel.addColumn("Trạng thái");
+        
+        PhieuNhapTable.setDefaultEditor(Object.class, null);
+        
+    }
+    public void HienThiPhieuNhapTable(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
