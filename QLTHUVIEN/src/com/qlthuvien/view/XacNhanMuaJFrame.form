@@ -177,6 +177,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtMaSV">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMaSVKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNgayMua">
       <Properties>
@@ -191,6 +194,7 @@
     <Component class="javax.swing.JButton" name="btXong">
       <Properties>
         <Property name="text" type="java.lang.String" value="Xong"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btXongActionPerformed"/>

@@ -34,21 +34,19 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         initComponents();
         sinhVienService = new SinhVienService();
         phieuMuaService = new PhieuMuaService();
-        
+
         //Tu dong dien ngay
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayMua.setText(String.valueOf(ft.format(dNow)));
-        
-        
+
         //Tu dong dien ma phieu mua
         txtMaPM.setText(phieuMuaService.getMaPhieuMua());
-        
-        
+
+        dsMua.setDefaultEditor(Object.class, null);
         //Tao va hien thi bang gio hang
         HienThiTable();
-        
-        
+
     }
 
     /**
@@ -108,11 +106,18 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         dsMua.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(dsMua);
 
+        txtMaSV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMaSVKeyTyped(evt);
+            }
+        });
+
         txtNgayMua.setEditable(false);
 
         txtTongTien.setText("Tổng Thanh Toán");
 
         btXong.setText("Xong");
+        btXong.setEnabled(false);
         btXong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btXongActionPerformed(evt);
@@ -227,7 +232,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void HienThiTable(){
+    private void HienThiTable() {
         defaultGioHangTable = new DefaultTableModel();
 
         dsMua.setModel(defaultGioHangTable);
@@ -252,9 +257,8 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
         txtTongTien.setText("Tong so tien la :" + tong);
     }
-    
-    
-    
+
+
     private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -262,15 +266,36 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
     private void btCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCheckActionPerformed
         // TODO add your handling code here:
-        String masv = String.valueOf(txtMaSV.getText());
+//        String masv = String.valueOf(txtMaSV.getText());
+//        SinhVien sv = new SinhVien();
+//        
+//        sv = sinhVienService.getSinhVien(masv);       
+//        txtHoTen.setText(String.valueOf(sv.getTenSV()));
+//        txtDienThoai.setText(String.valueOf(sv.getDienthoaiSV()));
+//        txtEmail.setText(String.valueOf(sv.getEmailSV()));
         SinhVien sv = new SinhVien();
-        
-        sv = sinhVienService.getSinhVien(masv);       
-        txtHoTen.setText(String.valueOf(sv.getTenSV()));
-        txtDienThoai.setText(String.valueOf(sv.getDienthoaiSV()));
-        txtEmail.setText(String.valueOf(sv.getEmailSV()));
-        
+        sv = sinhVienService.getSinhVien(txtMaSV.getText());
+        if (sv.getMaSV() == null) {
+            btXong.setEnabled(false);
+            txtHoTen.setText("");
+            txtDienThoai.setText("");
+            txtEmail.setText("");
+            JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên có mã : " + txtMaSV.getText());
+        } else {
+            txtHoTen.setText(sv.getTenSV());
+            txtDienThoai.setText(sv.getDienthoaiSV());
+            txtEmail.setText(sv.getEmailSV());
+
+            btXong.setEnabled(true);
+
+        }
+
     }//GEN-LAST:event_btCheckActionPerformed
+// khi txtMasv thay doi, disable btXong
+    private void txtMaSVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSVKeyTyped
+        // TODO add your handling code here:
+        btXong.setEnabled(false);
+    }//GEN-LAST:event_txtMaSVKeyTyped
 
     /**
      * @param args the command line arguments
