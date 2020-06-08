@@ -13,14 +13,16 @@ public class PhieuMua {
     private String maPMua;
     private String ngayMua;
     private String maSV;
+    private float tongtien;
 
     public PhieuMua() {
     }
 
-    public PhieuMua(String maPMua, String ngayMua, String maSV) {
+    public PhieuMua(String maPMua, String ngayMua, String maSV, float tongtien) {
         this.maPMua = maPMua;
         this.ngayMua = ngayMua;
         this.maSV = maSV;
+        this.tongtien = tongtien;
     }
 
     public String getMaPMua() {
@@ -46,6 +48,16 @@ public class PhieuMua {
     public void setMaSV(String maSV) {
         this.maSV = maSV;
     }
+
+    public float getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(float tongtien) {
+        this.tongtien = tongtien;
+    }
+
+    
     
     
 }

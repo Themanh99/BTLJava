@@ -9,6 +9,6 @@ package com.qlthuvien.dao;
  *
  * @author son30
  */
-public class PhieuNhapDao {
+public class PhieuNhapDao extends Dao{
     
 }

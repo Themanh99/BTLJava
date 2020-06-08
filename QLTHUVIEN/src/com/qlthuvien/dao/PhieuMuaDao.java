@@ -5,6 +5,7 @@
  */
 package com.qlthuvien.dao;
 
+import com.qlthuvien.model.PhieuMua;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,8 +33,22 @@ public class PhieuMuaDao extends Dao{
         }
         return sl;
     }
-    public static void main(String[] args) {
-        PhieuMuaDao pm = new PhieuMuaDao();
-        System.out.println(pm.getSoLuongPhieu());
+    
+    public void themPhieuMua(PhieuMua pm){
+        conn = JDBCConnection.getJDBCConnection();
+        String sql = "insert into PHIEUMUA(maPMUA,maSV,tongtien) values(?,?,?)";
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1,pm.getMaPMua());
+            pre.setString(2, pm.getMaSV());
+            pre.setFloat(3, pm.getTongtien());
+            int kq = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuMuaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+        
     }
+    
 }

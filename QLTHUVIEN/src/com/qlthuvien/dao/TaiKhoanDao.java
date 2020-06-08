@@ -31,7 +31,7 @@ public class TaiKhoanDao {
     private Statement state =null;
     private ResultSet rs = null;
     public TaiKhoanDao() {
-        
+        loaiTK=false;
     }
             
     public boolean XacThucTaiKhoan(String tk,String mk){

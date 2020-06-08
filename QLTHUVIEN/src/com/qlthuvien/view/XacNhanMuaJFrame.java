@@ -6,7 +6,9 @@
 package com.qlthuvien.view;
 
 import com.qlthuvien.model.GioHang;
+import com.qlthuvien.model.PhieuMua;
 import com.qlthuvien.model.SinhVien;
+import com.qlthuvien.service.ChiTietMuaService;
 import com.qlthuvien.service.PhieuMuaService;
 import com.qlthuvien.service.SinhVienService;
 import java.text.SimpleDateFormat;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,30 +28,30 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
     /**
      * Creates new form XacNhanMuaJFrame
      */
-    DefaultTableModel defaultGioHangTable;
-    SinhVienService sinhVienService;
-    PhieuMuaService phieuMuaService;
+    private DefaultTableModel defaultGioHangTable;
+    private SinhVienService sinhVienService;
+    private PhieuMuaService phieuMuaService;
+    private ChiTietMuaService chiTietMuaService;
+    
     private float tong = 0;
-
+    public static boolean check = false;
     public XacNhanMuaJFrame() {
         initComponents();
         sinhVienService = new SinhVienService();
         phieuMuaService = new PhieuMuaService();
-        
+        chiTietMuaService = new ChiTietMuaService();
+
         //Tu dong dien ngay
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         txtNgayMua.setText(String.valueOf(ft.format(dNow)));
-        
-        
+
         //Tu dong dien ma phieu mua
         txtMaPM.setText(phieuMuaService.getMaPhieuMua());
-        
-        
+
         //Tao va hien thi bang gio hang
         HienThiTable();
-        
-        
+
     }
 
     /**
@@ -69,7 +72,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         dsMua = new javax.swing.JTable();
         txtMaSV = new javax.swing.JTextField();
         txtNgayMua = new javax.swing.JTextField();
-        txtTongTien = new javax.swing.JLabel();
+        labeltongtien = new javax.swing.JLabel();
         btXong = new javax.swing.JButton();
         btCheck = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -79,6 +82,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         txtDienThoai = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtMaPM = new javax.swing.JLabel();
+        txtTongTien = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,9 +114,10 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
         txtNgayMua.setEditable(false);
 
-        txtTongTien.setText("Tổng Thanh Toán");
+        labeltongtien.setText("Tổng Thanh Toán");
 
         btXong.setText("Xong");
+        btXong.setEnabled(false);
         btXong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btXongActionPerformed(evt);
@@ -140,14 +145,18 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
         txtMaPM.setText(" ");
 
+        txtTongTien.setText("  ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labeltongtien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTongTien)
-                .addGap(153, 153, 153))
+                .addGap(106, 106, 106))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -218,7 +227,9 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTongTien)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labeltongtien)
+                    .addComponent(txtTongTien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btXong, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -227,7 +238,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void HienThiTable(){
+    private void HienThiTable() {
         defaultGioHangTable = new DefaultTableModel();
 
         dsMua.setModel(defaultGioHangTable);
@@ -237,39 +248,60 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         defaultGioHangTable.addColumn("So luong");
         defaultGioHangTable.addColumn("Gia");
 
-        Hashtable<String, GioHang> gh = QLBanSachJPanel.getGioHang();
+        Hashtable<String, GioHang> listGioHang = QLBanSachJPanel.getGioHang();
 
-        Enumeration<String> enu = gh.keys();
+        Enumeration<String> enu = listGioHang.keys();
         while (enu.hasMoreElements()) {
             String key = enu.nextElement();
-            GioHang sach = gh.get(key);
+            GioHang gioHang = listGioHang.get(key);
 
-            defaultGioHangTable.addRow(new Object[]{sach.getMasach(), sach.getTensach(), String.valueOf(sach.getSoluong()), String.valueOf(sach.getGia())});
+            defaultGioHangTable.addRow(new Object[]{gioHang.getMasach(), gioHang.getTensach(), String.valueOf(gioHang.getSoluong()), String.valueOf(gioHang.getGia())});
 
-            tong += sach.getSoluong() * sach.getGia();
+            tong += gioHang.getSoluong() * gioHang.getGia();
 
         }
 
-        txtTongTien.setText("Tong so tien la :" + tong);
+        txtTongTien.setText("" + tong);
     }
-    
-    
-    
+
+
     private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
         // TODO add your handling code here:
+
+        String mapm = txtMaPM.getText();
+        String masv = txtMaSV.getText();
+        float tongtien = Float.parseFloat(txtTongTien.getText());
+
+        PhieuMua pm = new PhieuMua(mapm, "", masv, tongtien);
+
+        phieuMuaService.themPhieuMua(pm);
+
+        Hashtable<String, GioHang> listGioHang = QLBanSachJPanel.getGioHang();
+        chiTietMuaService.themChiTietMua(listGioHang, pm.getMaPMua());  
+        check=true;
         this.dispose();
+        
+
     }//GEN-LAST:event_btXongActionPerformed
 
     private void btCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCheckActionPerformed
         // TODO add your handling code here:
         String masv = String.valueOf(txtMaSV.getText());
         SinhVien sv = new SinhVien();
-        
-        sv = sinhVienService.getSinhVien(masv);       
-        txtHoTen.setText(String.valueOf(sv.getTenSV()));
-        txtDienThoai.setText(String.valueOf(sv.getDienthoaiSV()));
-        txtEmail.setText(String.valueOf(sv.getEmailSV()));
-        
+        if (sinhVienService.checkSinhVien(masv)==true) {
+            sv = sinhVienService.getSinhVien(masv);
+            txtHoTen.setText(String.valueOf(sv.getTenSV()));
+            txtDienThoai.setText(String.valueOf(sv.getDienthoaiSV()));
+            txtEmail.setText(String.valueOf(sv.getEmailSV()));
+            btXong.setEnabled(true);
+            
+        }
+        else{
+            btXong.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Mã sinh viên không tồn tại","Thông báo",JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btCheckActionPerformed
 
     /**
@@ -320,6 +352,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labeltongtien;
     private javax.swing.JTextField txtDienThoai;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;

@@ -6,6 +6,7 @@
 package com.qlthuvien.service;
 
 import com.qlthuvien.dao.PhieuMuaDao;
+import com.qlthuvien.model.PhieuMua;
 
 /**
  *
@@ -29,9 +30,10 @@ public class PhieuMuaService {
         return maphieumua;
     }
     
-    public static void main(String[] args) {
-        PhieuMuaService test = new PhieuMuaService();
-        System.out.println(test.getMaPhieuMua());
+    public void themPhieuMua(PhieuMua pm){
+        phieuMuaDao.themPhieuMua(pm);
     }
+    
+    
     
 }

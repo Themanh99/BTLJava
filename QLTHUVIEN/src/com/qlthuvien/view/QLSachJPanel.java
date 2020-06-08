@@ -25,24 +25,24 @@ import com.qlthuvien.dao.QlSachDao;
  */
 public class QLSachJPanel extends javax.swing.JPanel {
 
-    DefaultTableModel defaulttable,defaulttable1;
+    DefaultTableModel defaulttable, defaulttable1;
     SachService sachService;
-    int index=-1,count=0;
+    int index = -1, count = 0;
     public static Hashtable<String, Sach> Sach;
     private final QlSachService QlsachService;
-    
+
     public QLSachJPanel() {
         initComponents();
         QlsachService = new QlSachService();
         HienThiQlSachTable();
-        
+
     }
-    
-    public void HienThiQlSachTable(){
-        defaulttable= new DefaultTableModel();
-        
+
+    public void HienThiQlSachTable() {
+        defaulttable = new DefaultTableModel();
+
         Qlsachtable.setModel(defaulttable);
-        
+
         defaulttable.addColumn("Mã sách");
         defaulttable.addColumn("Tên sách");
         defaulttable.addColumn("Tác giả");
@@ -54,23 +54,23 @@ public class QLSachJPanel extends javax.swing.JPanel {
         Qlsachtable.setDefaultEditor(Object.class, null);
         Display(QlsachService.getSach());
     }
-    
-    private void Display(List<Sach> list){
+
+    private void Display(List<Sach> list) {
         defaulttable.setRowCount(0);
-        for(Sach sach:list){
-            defaulttable.addRow(new Object[]{ sach.getMaSach(),sach.getTenSach(),sach.getTenTacGia(),sach.getTenNxb(),sach.getGiaSach(),sach.getTheLoai(),( sach.isTrangthai() ? "Sách bán":"Sách mượn"),sach.getSoluong() });            
+        for (Sach sach : list) {
+            defaulttable.addRow(new Object[]{sach.getMaSach(), sach.getTenSach(), sach.getTenTacGia(), sach.getTenNxb(), sach.getGiaSach(), sach.getTheLoai(), (sach.isTrangthai() ? "Sách bán" : "Sách mượn"), sach.getSoluong()});
         }
     }
+
     private void ClearText() {
         txtMasach.setText(null);
         txtTensach.setText(null);
         txtTennxb.setText(null);
         txtGiasach.setText(null);
         txtTentacgia.setText(null);
- 
+
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +93,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         radioMuon = new javax.swing.JRadioButton();
         radioBan = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        radioAll = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -156,6 +157,9 @@ public class QLSachJPanel extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(radioAll);
+        radioAll.setText("Tất cả");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -167,46 +171,46 @@ public class QLSachJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(19, 19, 19))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18)))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtTensach, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTentacgia, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTennxb, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMasach)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(radioMuon)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(radioBan)
-                                    .addGap(95, 95, 95))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(txtGiasach)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(19, 19, 19))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTensach, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTentacgia, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTennxb, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMasach)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(txtGiasach))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(radioMuon)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioBan)
+                                .addGap(27, 27, 27)
+                                .addComponent(radioAll))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(241, 241, 241)))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btTimms, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(btTimms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
@@ -244,7 +248,8 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(radioMuon)
-                    .addComponent(radioBan))
+                    .addComponent(radioBan)
+                    .addComponent(radioAll))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -417,7 +422,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -472,7 +477,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btTimmsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimmsActionPerformed
@@ -482,29 +487,35 @@ public class QLSachJPanel extends javax.swing.JPanel {
         String theloai = txtTennxb.getText();
         String tennxb = txtGiasach.getText();
         boolean Trangthai = true;
-                if(radioMuon.isSelected()){
-                    Trangthai = false;
-                    
-                }
-                if(radioBan.isSelected())
-                { Trangthai = true;
-                }
+        if (radioMuon.isSelected()) {
+            Trangthai = false;
+            Display(QlsachService.TimSach(masach, tensach, tentacgia, tennxb, theloai, Trangthai));
+
+        }
+        if (radioBan.isSelected()) {
+            Trangthai = true;
+            Display(QlsachService.TimSach(masach, tensach, tentacgia, tennxb, theloai, Trangthai));
+        }
+
         
-        Display(QlsachService.TimSach( masach, tensach, tentacgia, tennxb, theloai,Trangthai));   
+        
+        
+        if(radioAll.isSelected()){
+            Display(sachService.TimSach(masach, tensach, tentacgia, tennxb, theloai));
+        }
         //ClearText();
     }//GEN-LAST:event_btTimmsActionPerformed
-   
+
     private void QlsachtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QlsachtableMouseClicked
         int index = Qlsachtable.getSelectedRow();
-        
-        
+
         viewtxtMasach.setText(String.valueOf(Qlsachtable.getValueAt(index, 0)));
         viewtxtTensach.setText(String.valueOf(Qlsachtable.getValueAt(index, 1)));
         viewtxtTentg.setText(String.valueOf(Qlsachtable.getValueAt(index, 2)));
         viewtxtTennxb.setText(String.valueOf(Qlsachtable.getValueAt(index, 3)));
         viewtxtGiasach.setText(String.valueOf(Qlsachtable.getValueAt(index, 4)));
         viewtxtTheloai.setText(String.valueOf(Qlsachtable.getValueAt(index, 5)));
-        
+
         viewtxtTrangthai.setText(String.valueOf(Qlsachtable.getValueAt(index, 6)));
         viewtxtSoluong.setText(String.valueOf(Qlsachtable.getValueAt(index, 7)));
     }//GEN-LAST:event_QlsachtableMouseClicked
@@ -520,9 +531,9 @@ public class QLSachJPanel extends javax.swing.JPanel {
         String tentacgia = txtTentacgia.getText();
         String theloai = txtTennxb.getText();
         String tennxb = txtGiasach.getText();
-        
-        QlSachDao.UpdateSach(masach,tensach,tentacgia,tennxb,theloai);
-        
+
+        QlSachDao.UpdateSach(masach, tensach, tentacgia, tennxb, theloai);
+
         Display(QlsachService.getSach());
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -560,6 +571,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton radioAll;
     private javax.swing.JRadioButton radioBan;
     private javax.swing.JRadioButton radioMuon;
     private javax.swing.JTextField txtGiasach;

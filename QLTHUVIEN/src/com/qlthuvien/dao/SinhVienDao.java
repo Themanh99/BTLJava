@@ -18,7 +18,29 @@ public class SinhVienDao extends Dao {
 
     public SinhVienDao() {
     }
-
+    public boolean checkSinhVien(String masv){
+        conn = JDBCConnection.getJDBCConnection();
+        try {
+            
+            String sql = "select * from SINHVIEN where masv='" + masv + "'";
+            
+            
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+           
+            String kiemtra="";
+            while(rs.next()){
+                kiemtra = rs.getString("maSV");                
+                
+            }                  
+            return kiemtra.equals(masv);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return false;
+    }
     public SinhVien getSinhVien(String masv) {
         conn = JDBCConnection.getJDBCConnection();
         SinhVien sv = new SinhVien();
@@ -27,7 +49,6 @@ public class SinhVienDao extends Dao {
             state = conn.createStatement();
             
             String sql = "select * from SINHVIEN where masv='" + masv + "'";
-            System.out.println(sql);
             rs = state.executeQuery(sql);
             
             while (rs.next()) {
@@ -48,8 +69,5 @@ public class SinhVienDao extends Dao {
 
     }
 
-    public static void main(String[] args) {
-        SinhVienDao sv = new SinhVienDao();
-        System.out.println(sv.getSinhVien("2017601707"));
-    }
+    
 }

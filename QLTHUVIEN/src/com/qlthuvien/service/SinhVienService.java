@@ -23,5 +23,7 @@ public class SinhVienService {
         return sinhVienDao.getSinhVien(masv);
     }
     
-    
+    public boolean checkSinhVien(String masv){
+        return sinhVienDao.checkSinhVien(masv);
+    }
 }
