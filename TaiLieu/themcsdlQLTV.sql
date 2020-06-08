@@ -1,4 +1,24 @@
 use QLThuVien
+
+--Trigger
+create trigger tg_themchitietphieumua
+on CHITIETMUA
+for insert
+as
+begin
+	declare @maPMUA char(6)
+	declare @maSach char(6)
+	declare @slban int
+	declare @slcon int
+	set @maPMUA =(	select maPMUA
+						from inserted)
+	set @maSach=(	select maSach
+						from inserted)
+	set @slban = (	select soluong
+						from inserted)
+	
+	update Sach set soluong=soluong-@slban where maSach=@masach
+end
 -- taikhoan admin
 insert into TAIKHOAN values 
 ('admin','admin',1),
@@ -38,37 +58,39 @@ insert into SINHVIEN values
 ('2017601711','Tran Tuan Anh','tuananh@gmail.com','0345574955')
 
 
-insert into PHIEUMUA values
-('PM0001','2020/11/05','2017601707'),
-('PM0002','2020/12/05','2017601707'),
-('PM0003','2020/9/05','2017601709'),
-('PM0004','2020/7/05','2017601710'),
-('PM0005','2020/1/05','2017601709')
+insert into PHIEUMUA(maPMUA,maSV) values
+('PM0001','2017601707'),
+('PM0002','2017601707'),
+('PM0003','2017601709'),
+('PM0004','2017601710'),
+('PM0005','2017601709')
 
 
-insert into PHIEUNHAP values
-('PN0001','2020/01/04','NCC001'),
-('PN0002','2020/01/04','NCC002'),
-('PN0003','2020/01/05','NCC003'),
-('PN0004','2020/01/05','NCC001'),
-('PN0005','2020/01/05','NCC004')
+insert into PHIEUNHAP(maPN,maNCC) values
+('PN0001','NCC001'),
+('PN0002','NCC002'),
+('PN0003','NCC003'),
+('PN0004','NCC001'),
+('PN0005','NCC004')
 
 
 
-insert into PHIEUMUONTRA values
-('PM0001','2019/04/05','2017601708'),
-('PM0002','2019/04/05','2017601707'),
-('PM0003','2019/04/05','2017601709'),
-('PM0004','2019/05/05','2017601707'),
-('PM0005','2019/05/05','2017601709')
+insert into PHIEUMUONTRA(maPMUON,maSV) values
+('PM0001','2017601708'),
+('PM0002','2017601707'),
+('PM0003','2017601709'),
+('PM0004','2017601707'),
+('PM0005','2017601709')
 
-insert into CHITIETMUONTRA values
-('PM0001','MS0001',1,'',20000),
-('PM0002','MS0002',2,'',30000),
-('PM0003','MS0003',1,'',24000),
-('PM0004','MS0005',5,'',28000),
-('PM0005','MS0001',7,'',40000)
+insert into CHITIETMUONTRA(maPMUON,maSach ,soluong ,gia ) values
+('PM0001','MS0001',1,20000),
+('PM0002','MS0002',2,30000),
+('PM0003','MS0003',1,24000),
+('PM0004','MS0005',5,28000),
+('PM0005','MS0001',7,40000)
 
+
+select * from CHITIETMUONTRA
 insert into CHITIETPN values
 ('PN0001','MS0001',300,39000),
 ('PN0002','MS0002',200,49000),
@@ -83,3 +105,10 @@ insert into CHITIETMUA values
 ('PM0003','MS0002',2,7000),
 ('PM0004','MS0003',1,12000),
 ('PM0005','MS0001',3,24000)
+
+
+
+
+
+
+
