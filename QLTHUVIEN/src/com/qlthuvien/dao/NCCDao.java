@@ -4,39 +4,41 @@
  * and open the template in the editor.
  */
 package com.qlthuvien.dao;
-import com.qlthuvien.model.PhieuNhap;
+
+import com.qlthuvien.model.NCC;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author son30
  */
-public class PhieuNhapDao extends Dao {
-    public List<PhieuNhap> GetPhieuNhap(){
+public class NCCDao extends Dao{
+    public List<NCC> getNCC(){
+        List<NCC> list = new ArrayList<NCC>();
+        String sql = "select * from NCC";
         conn = JDBCConnection.getJDBCConnection();
-        List<PhieuNhap> list = new ArrayList<PhieuNhap>();
         try {
             state = conn.createStatement();
-            String sql = "Select * from PHIEUNHAP";
             rs = state.executeQuery(sql);
             while(rs.next()){
-                String maPN = rs.getString("maPN");
-                String ngaynhap = rs.getString("ngaynhap");
-                String maNCC =rs.getString("maNCC");
-                PhieuNhap pn = new PhieuNhap(maPN, ngaynhap, maNCC);
-                list.add(pn);
+                String maNCC = rs.getString("maNCC");
+                String tenNCC = rs.getString("tenNCC");
+                String sdtNCC = rs.getString("sdtNCC");
+                String diaChiNCC = rs.getString("diachiNCC");
+                NCC ncc = new NCC(maNCC, tenNCC, sdtNCC, diaChiNCC);
+                list.add(ncc);
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(PhieuNhapDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             CloseAll();
         }
         return null;
     }
-   
 }
