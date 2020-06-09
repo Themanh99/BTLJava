@@ -27,6 +27,14 @@ public class ChiTietMuonTra {
         this.gia = gia;
     }
 
+    public ChiTietMuonTra(String maPMuon, String maSach, int soluong, float gia) {
+        this.maPMuon = maPMuon;
+        this.maSach = maSach;
+        this.soluong = soluong;
+        this.gia = gia;
+    }
+
+    
     public String getMaPMuon() {
         return maPMuon;
     }

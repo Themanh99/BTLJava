@@ -261,6 +261,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
     private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
         // TODO add your handling code here:
+        
         this.dispose();
     }//GEN-LAST:event_btXongActionPerformed
 

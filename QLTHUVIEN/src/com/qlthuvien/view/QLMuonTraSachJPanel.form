@@ -234,7 +234,7 @@
                                   <Component id="txTensach" min="-2" pref="144" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btTimMasach" min="-2" max="-2" attributes="0"/>
+                              <Component id="btTim" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -256,7 +256,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txMasach" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btTimMasach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btTim" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -318,7 +318,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btTimMasach">
+        <Component class="javax.swing.JButton" name="btTim">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xec;m"/>
           </Properties>

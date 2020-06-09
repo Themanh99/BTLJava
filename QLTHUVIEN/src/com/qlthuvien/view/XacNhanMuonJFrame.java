@@ -7,6 +7,8 @@ package com.qlthuvien.view;
 
 import com.qlthuvien.model.GioHang;
 import com.qlthuvien.model.SinhVien;
+import com.qlthuvien.service.ChiTietMuonTraService;
+import com.qlthuvien.service.PhieuMuonTraService;
 import com.qlthuvien.service.SinhVienService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,13 +28,22 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
      */
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
-    private SinhVienService svsv;
+    private SinhVienService svService;
+    private PhieuMuonTraService pmService;
+    private ChiTietMuonTraService ctmtService;
     public XacNhanMuonJFrame() {
         initComponents();
-        svsv = new SinhVienService();
+        svService = new SinhVienService();
+        ctmtService = new ChiTietMuonTraService();
+        
+        //Tao ma phieuMuonTra
+        pmService = new PhieuMuonTraService();
+        txtMaPhieuMuon.setText(pmService.taoMaPhieuMuonTra());
+        //Tao ngay 
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         txtNgayMuon.setText(String.valueOf(f.format(date)));
+        
         //khoi tao bang dsMuon
         defaultGioHangTable= new DefaultTableModel();
         dsMuonTable.setModel(defaultGioHangTable);
@@ -145,6 +156,11 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         btXong.setText("Xong");
         btXong.setEnabled(false);
+        btXong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXongActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +265,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         SinhVien sv = new SinhVien();
-        sv = svsv.getSinhVien(txtMasv.getText());
+        sv = svService.getSinhVien(txtMasv.getText());
         if(sv.getMaSV()==null){
             btXong.setEnabled(false);
             txtHoten.setText("");
@@ -272,6 +288,15 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         btXong.setEnabled(false);
     }//GEN-LAST:event_txtMasvKeyTyped
 
+    private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
+        // TODO add your handling code here:
+        int slhang = ctmtService.insert(QLMuonTraSachJPanel.getGioHang());
+        System.out.println(slhang);
+        if(slhang>0)
+            JOptionPane.showMessageDialog(null,"Thành công");
+        this.dispose();
+    }//GEN-LAST:event_btXongActionPerformed
+    
     /**
      * @param args the command line arguments
      */

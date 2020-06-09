@@ -59,5 +59,7 @@ public class SachService {
     public List<Sach> TimSachBan(String masach,String tensach,String tentacgia,String tennxb,String theloai){
         return sachDao.TimSachBan( masach, tensach, tentacgia, tennxb, theloai);
     }
-    
+    public List<Sach> TimSachMuon(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+        return sachDao.TimSachMuon( masach, tensach, tentacgia, tennxb, theloai);
+    }
 }
