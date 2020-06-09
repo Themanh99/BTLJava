@@ -26,10 +26,11 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
     /**
      * Creates new form XacNhanMuonJFrame
      */
+    
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
     private SinhVienService svService;
-    private PhieuMuonTraService pmService;
+    private PhieuMuonTraService pmtService;
     private ChiTietMuonTraService ctmtService;
     public XacNhanMuonJFrame() {
         initComponents();
@@ -37,8 +38,8 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         ctmtService = new ChiTietMuonTraService();
         
         //Tao ma phieuMuonTra
-        pmService = new PhieuMuonTraService();
-        txtMaPhieuMuon.setText(pmService.taoMaPhieuMuonTra());
+        pmtService = new PhieuMuonTraService();
+        txtMaPhieuMuon.setText(pmtService.taoMaPhieuMuonTra());
         //Tao ngay 
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
@@ -53,7 +54,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         defaultGioHangTable.addColumn("Gia");
         dsMuonTable.setDefaultEditor(Object.class, null);
         //Hien thi sach muon vao bang dsMuon 
-        Hashtable<String,GioHang> gh = QLMuonTraSachJPanel.getGioHang();
+        Hashtable<String,GioHang> gh = QLMuonSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
             String key=enu.nextElement();
@@ -66,8 +67,12 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         }
         txtTongTien.setText("Tong so tien la :"+tong);
     }
-     
 
+    public float getTong() {
+        return tong;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -290,13 +295,17 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
     private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
         // TODO add your handling code here:
-        int slhang = ctmtService.insert(QLMuonTraSachJPanel.getGioHang());
-        System.out.println(slhang);
-        if(slhang>0)
+        int sl1 = pmtService.insertPhieuMuonTra(txtMaPhieuMuon.getText(),txtMasv.getText(), getTong());
+        int sl2 = ctmtService.themChiTietMuonTra(txtMaPhieuMuon.getText(),QLMuonSachJPanel.getGioHang());
+        if(sl1==1&&sl2>0){
             JOptionPane.showMessageDialog(null,"Thành công");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");
+        }
         this.dispose();
     }//GEN-LAST:event_btXongActionPerformed
-    
+   
     /**
      * @param args the command line arguments
      */

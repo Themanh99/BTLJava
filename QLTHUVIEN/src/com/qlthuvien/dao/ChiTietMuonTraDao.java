@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  */
 public class ChiTietMuonTraDao extends Dao {
 
-    public int insertChiTietPMT(ArrayList<ChiTietMuonTra> ctmt) {
+    public int themChiTietMuonTra(String maPMUON, ArrayList<ChiTietMuonTra> ctmt) {
         try {
             conn = JDBCConnection.getJDBCConnection();
             int sl = 0;
-            String sql = "insert into CHITIETMUONTRA(maPMUON,maSach,soluong,gia) values ('?','?',?,?)";
+            String sql = "insert into CHITIETMUONTRA(maPMUON,maSach,soluong,gia) values (?,?,?,?)";
             pre = conn.prepareStatement(sql);
             for (ChiTietMuonTra item : ctmt) {
 //                String mapm = "";

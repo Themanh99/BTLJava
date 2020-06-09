@@ -33,10 +33,10 @@ public class PhieuMuonTraDao extends Dao {
         }
         return -1;
     }
-    public int insertPhieu(String mapm, String masv){
+    public int themPhieuMuonTra(String mapm, String masv, float tongtien){
         try {
             conn = JDBCConnection.getJDBCConnection();
-            String sql = "insert into PHIEUMUONTRA(maPMUON,maSV) values ('"+mapm+"','"+masv+"')";
+            String sql = "insert into PHIEUMUONTRA(maPMUON,maSV,tongtien) values ('"+mapm+"','"+masv+"',"+tongtien+")";
             state = conn.createStatement();
             int t = state.executeUpdate(sql);
             return t;

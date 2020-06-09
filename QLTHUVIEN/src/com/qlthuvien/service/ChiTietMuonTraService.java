@@ -22,7 +22,7 @@ public class ChiTietMuonTraService {
     public ChiTietMuonTraService() {
         ctmtDao = new ChiTietMuonTraDao();
     }
-    public int insert(Hashtable<String, GioHang> dsGioHang){
+    public int themChiTietMuonTra(String maPMUON, Hashtable<String, GioHang> dsGioHang){
         int slhang=0;
         ArrayList<ChiTietMuonTra> list = new ArrayList<ChiTietMuonTra>();
         Enumeration<String> enu = dsGioHang.keys();
@@ -31,11 +31,11 @@ public class ChiTietMuonTraService {
             String key = enu.nextElement();
             String mas = dsGioHang.get(key).getMasach();
             var soluong = dsGioHang.get(key).getSoluong();
-            float gia = dsGioHang.get(key).getSoluong();
-            ChiTietMuonTra ct = new ChiTietMuonTra(key, mas, soluong, gia);
+            float gia = dsGioHang.get(key).getGia();
+            ChiTietMuonTra ct = new ChiTietMuonTra(maPMUON, mas, soluong, gia);
             list.add(ct);
         }
-        slhang += ctmtDao.insertChiTietPMT(list);
+        slhang += ctmtDao.themChiTietMuonTra(maPMUON,list);
         return slhang;
     }
 }

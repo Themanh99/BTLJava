@@ -20,7 +20,7 @@ public class MainJFrame extends javax.swing.JFrame {
     JPanel qlBanSachJPanel = new QLBanSachJPanel();
     JPanel qlSachJPanel = new QLSachJPanel();
     JPanel qlNhapSachJPanel = new QLNhapSachJPanel();
-    JPanel qlMuonTraSachJPanel = new QLMuonTraSachJPanel();
+    JPanel qlMuonTraSachJPanel = new QLMuonSachJPanel();
     JPanel qlTraSachJPanel = new QLTraSachJPanel();
     JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
     JPanel qlDocGiaJPanel = new QLDocGiaJPanel();

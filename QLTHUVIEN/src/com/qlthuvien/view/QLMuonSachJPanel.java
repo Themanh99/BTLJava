@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrator
  */
-public class QLMuonTraSachJPanel extends javax.swing.JPanel {
+public class QLMuonSachJPanel extends javax.swing.JPanel {
 
-    DefaultTableModel defautSachtable, defaulGiottable;
+    DefaultTableModel defaultSachTable, defaultGioTable;
     SachService sachservice;
     public static Hashtable<String, GioHang> dsGioHang;
     int index = -1,//lay chi so hang trong bang sach
@@ -35,7 +35,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLMuonTraSachJPanel
      */
-    public QLMuonTraSachJPanel() {
+    public QLMuonSachJPanel() {
         initComponents();
         sachservice = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
@@ -45,23 +45,23 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     }
 
     public void HienThiSachTable() {
-        defautSachtable = new DefaultTableModel();
-        tbSach.setModel(defautSachtable);
+        defaultSachTable = new DefaultTableModel();
+        tbSach.setModel(defaultSachTable);
 
-        defautSachtable.addColumn("Mã sách");
-        defautSachtable.addColumn("Tên sách");
-        defautSachtable.addColumn("Tác giả");
-        defautSachtable.addColumn("Thể loại");
-        defautSachtable.addColumn("Nhà xuất bản");
-        defautSachtable.addColumn("Giá");
-        defautSachtable.addColumn("Số lượng");
+        defaultSachTable.addColumn("Mã sách");
+        defaultSachTable.addColumn("Tên sách");
+        defaultSachTable.addColumn("Tác giả");
+        defaultSachTable.addColumn("Thể loại");
+        defaultSachTable.addColumn("Nhà xuất bản");
+        defaultSachTable.addColumn("Giá");
+        defaultSachTable.addColumn("Số lượng");
         //ngan khong cho nguoi dung edit bang
         tbSach.setDefaultEditor(Object.class, null);
 
         List<Sach> listSach = sachservice.getSachMuon();
-        defautSachtable.setRowCount(0);
+        defaultSachTable.setRowCount(0);
         for (Sach sach : listSach) {
-            defautSachtable.addRow(new Object[]{
+            defaultSachTable.addRow(new Object[]{
                 sach.getMaSach(),
                 sach.getTenSach(),
                 sach.getTenTacGia(),
@@ -74,20 +74,20 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     }
 
     private void KhoiTaoGioMuonTable() {
-        defaulGiottable = new DefaultTableModel() {
+        defaultGioTable = new DefaultTableModel() {
             //chi cho phep sua cot so luong
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return columnIndex == 2;
             }
         };
-        tbGio.setModel(defaulGiottable);
+        tbGio.setModel(defaultGioTable);
         //tbGio.setDefaultEditor(Object.class, null);
 
-        defaulGiottable.addColumn("Mã sách");
-        defaulGiottable.addColumn("Tên sách");
-        defaulGiottable.addColumn("Số Lượng");
-        defaulGiottable.addColumn("Giá");
+        defaultGioTable.addColumn("Mã sách");
+        defaultGioTable.addColumn("Tên sách");
+        defaultGioTable.addColumn("Số Lượng");
+        defaultGioTable.addColumn("Giá");
     }
     private List<String> Check(Hashtable<String,GioHang> gh, List<Sach> sachmuon){
         Enumeration<String> enu = gh.keys();
@@ -170,7 +170,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         tbGio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"dff", "sđ", "eqeqe2", "64646"}
+
             },
             new String [] {
                 "Mã sách", "Tên sách", "Số lượng", "Giá"
@@ -332,7 +332,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         tbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"12", "313", "441", "4141", "535355", "gegdsg", "90"}
+
             },
             new String [] {
                 "Mã sách", "Tên sách", "Tác giả", "Thể loại", "Nhà xuất bản", "Giá", "Số lượng"
@@ -418,9 +418,9 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         String tennxb = txNhaxuatban.getText();
         
         List<Sach> listSach = sachservice.TimSachMuon(masach, tensach, tentacgia, tennxb, theloai);
-        defautSachtable.setRowCount(0);
+        defaultSachTable.setRowCount(0);
         for (Sach sach : listSach) {
-            defautSachtable.addRow(new Object[]{
+            defaultSachTable.addRow(new Object[]{
                 sach.getMaSach(),
                 sach.getTenSach(),
                 sach.getTenTacGia(),
@@ -443,7 +443,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             if (!dsGioHang.containsKey(masach)) {
                 dsGioHang.put(masach, gh);
                 count++;
-                defaulGiottable.addRow(new Object[]{
+                defaultGioTable.addRow(new Object[]{
                     gh.getMasach(),
                     gh.getTensach(),
                     "1",
@@ -477,7 +477,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         if(dsloi.isEmpty()){
             XacNhanMuonJFrame xn = new XacNhanMuonJFrame();
             xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            xn.setVisible(true);
+            xn.setVisible(true);         
         }else{
             String tb= "";
             for(String t : dsloi){
@@ -494,6 +494,8 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     private void btTaomoi(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaomoi
         // TODO add your handling code here:
         dsGioHang.clear();
+        defaultGioTable.setRowCount(0);
+        count = 0;
         HienThiGio(dsGioHang);
     }//GEN-LAST:event_btTaomoi
 
@@ -506,12 +508,12 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         HienThiGio(dsGioHang);
     }//GEN-LAST:event_btBorakhoigio
     private void HienThiGio(Hashtable<String, GioHang> gio1) {
-        defaulGiottable.setRowCount(0);
+        defaultGioTable.setRowCount(0);
         Enumeration<String> enu = gio1.keys();
         while (enu.hasMoreElements()) {
             String key = enu.nextElement();
             GioHang gh = gio1.get(key);
-            defaulGiottable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
+            defaultGioTable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
         }
     }
 

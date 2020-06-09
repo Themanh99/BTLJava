@@ -29,8 +29,8 @@ public class PhieuMuonTraService {
         ma+=soluong;
         return ma;
     }
-    public int insertPhieuMuonTra(String mapm, String masv){
-        int sl = pmDao.insertPhieu(mapm,masv);
+    public int insertPhieuMuonTra(String mapm, String masv,float tongtien){
+        int sl = pmDao.themPhieuMuonTra(mapm,masv,tongtien);
         return sl;
     }
 //    public static void main(String[] args) {
