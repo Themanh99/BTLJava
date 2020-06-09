@@ -13,6 +13,7 @@ import com.qlthuvien.service.TaiKhoanService;
 import java.awt.Color;
 import java.util.Hashtable;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -136,16 +137,16 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
         taikhoanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Tên Tài Khoản", "Mật Khẩu", "Loại Tài Khoản", "Trạng Thái Hoạt Động"
+                "Tên Tài Khoản", "Mật Khẩu", "Loại Tài Khoản"
             }
         ));
         taikhoanTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,6 +180,11 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         });
 
         btDong.setText("Đóng");
+        btDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDongActionPerformed(evt);
+            }
+        });
 
         txtLoaitk.setEnabled(false);
 
@@ -296,25 +302,20 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btLammoitkActionPerformed
 
     private void btTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimkiemActionPerformed
-//        String tk = txtTimtk.getText();
-//        
-//        
-//        boolean loaitk = true;
-//                if(radioMuon.isSelected()){
-//                    Trangthai = false;
-//                    
-//                }
-//                if(radioBan.isSelected())
-//                { Trangthai = true;
-//                }
-//        
-//        Display(QlsachService.TimSach( masach, tensach, tentacgia, tennxb, theloai,Trangthai));   
+        String tk = txtTimtk.getText();
+        DisplayTaiKhoan(taikhoanService.TimTk(tk)); 
     }//GEN-LAST:event_btTimkiemActionPerformed
 
     private void btXoatkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoatkActionPerformed
         
     }//GEN-LAST:event_btXoatkActionPerformed
 
+    private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed
+//        JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
+//        qlTaiKhoanJPanel.setVisible(false);
+//        new MainJFrame().setVisible(true);
+    }//GEN-LAST:event_btDongActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDong;

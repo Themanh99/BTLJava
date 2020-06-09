@@ -15,108 +15,118 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author The Manh
  */
 
 public class QlSachDao {
+
     Connection conn = null;
     PreparedStatement ps = null;
     Statement st = null;
     ResultSet rs = null;
-    public List<Sach> getsach(){
+
+    public List<Sach> getsach() {
         conn = JDBCConnection.getJDBCConnection();
         try {
-            
+
             st = conn.createStatement();
             String sql = "select * from SACH";
             rs = st.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
-            while(rs.next()){
+            while (rs.next()) {
                 String maSach = rs.getString("masach");
                 String tenSach = rs.getString("tensach");
-                String tenTacGia= rs.getString("tenTacGia");
-                String tenNxb= rs.getString("tenNXB");
-                float giaSach= rs.getFloat("giaSach");
-                String theLoai= rs.getString("theLoai");
-                boolean trangthai= rs.getBoolean("trangthai");
+                String tenTacGia = rs.getString("tenTacGia");
+                String tenNxb = rs.getString("tenNXB");
+                float giaSach = rs.getFloat("giaSach");
+                String theLoai = rs.getString("theLoai");
+                boolean trangthai = rs.getBoolean("trangthai");
                 int soluong = rs.getInt("soluong");
-                
-                Sach sach = new Sach(maSach, tenSach, tenTacGia, tenNxb, giaSach, theLoai, trangthai,soluong);
+
+                Sach sach = new Sach(maSach, tenSach, tenTacGia, tenNxb, giaSach, theLoai, trangthai, soluong);
                 list.add(sach);
             }
             return list;
-            }catch (SQLException ex) {
-                Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE,null,ex);
-                
-            } finally {
-                if(rs !=null){
-                 try {rs.close();}catch (SQLException e)  {} 
-                }
-                if(st !=null){
-                 try {st.close();}catch (SQLException e)  {} 
-                }
-                if(conn !=null){
-                 try {conn.close();}catch (SQLException e)  {} 
+        } catch (SQLException ex) {
+            Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
                 }
             }
-        return null;
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
         }
-    
-    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai,boolean Trangthai){
-        
+        return null;
+    }
+
+    public List<Sach> TimSach(String masach, String tensach, String tentacgia, String tennxb, String theloai, boolean Trangthai) {
+
         conn = JDBCConnection.getJDBCConnection();
         try {
             st = conn.createStatement();
-            String sql="select * from sach where trangthai='"+(Trangthai ? "1":"0")+"' and maSach like '%"+masach+"%' and tenSach like '%"+tensach+"%' and tenTacGia like'%"+tentacgia+"%' and tenNXB like '%"+tennxb+"%' and theLoai like '%"+theloai+"%'";     
-            rs=st.executeQuery(sql);
+            String sql = "select * from sach where trangthai='" + (Trangthai? "true":"false") + "' and maSach like '%" + masach + "%' and tenSach like '%" + tensach + "%' and tenTacGia like'%" + tentacgia + "%' and tenNXB like '%" + tennxb + "%' and theLoai like '%" + theloai + "%'";
+            rs = st.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
-            while(rs.next()){
-                 String maSach = rs.getString("maSach");
-                 String tenSach = rs.getString("tenSach");
-                 String tenTacGia= rs.getString("tenTacGia");
-                 String tenNxb= rs.getString("tenNXB");
-                 float giaSach= rs.getFloat("giaSach");
-                 String theLoai= rs.getString("theLoai");
-                 boolean trangthai= rs.getBoolean("trangthai");
-                 int soluong = rs.getInt("soluong") ;
-                 
-                 Sach sach = new Sach(maSach, tenSach, tenTacGia, tenNxb, giaSach, theLoai, trangthai, soluong);
-                 list.add(sach);
+            while (rs.next()) {
+                String maSach = rs.getString("maSach");
+                String tenSach = rs.getString("tenSach");
+                String tenTacGia = rs.getString("tenTacGia");
+                String tenNxb = rs.getString("tenNXB");
+                float giaSach = rs.getFloat("giaSach");
+                String theLoai = rs.getString("theLoai");
+                boolean trangthai = rs.getBoolean("trangthai");
+                int soluong = rs.getInt("soluong");
+
+                Sach sach = new Sach(maSach, tenSach, tenTacGia, tenNxb, giaSach, theLoai, trangthai, soluong);
+                list.add(sach);
             }
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-                if (rs != null) {
-                    try {
-                       rs.close();
-                    } catch (SQLException e) { /* ignored */}
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    /* ignored */
                 }
-                if (st != null) {
-                    try {
-                        st.close();
-                    } catch (SQLException e) { /* ignored */}
+            }
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    /* ignored */
                 }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    /* ignored */
                 }
-         }
+            }
+        }
         return null;
     }
-    public static void UpdateSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){
-       
-        try {
-            Statement st = JDBCConnection.getJDBCConnection().createStatement();
-            String sql = "update sach set masach = '"+masach+"',tenSach = '"+tensach+"', tenTacGia ='"+tentacgia+"', tenNXB = '"+tennxb+"' , theLoai = '"+theloai+"' where masach = "+masach;          
-            int rs = st.executeUpdate(sql);
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+
+    public static void UpdateSach(String masach, String tensach, String tentacgia, String tennxb, String theloai) {
+        
     }
-    }
+}

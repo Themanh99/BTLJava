@@ -33,8 +33,8 @@ public class TaiKhoanService {
     public boolean getLoaiTK(){
         return TaiKhoanDao.loaiTK;
     }
-    public List<TaiKhoan> TimTk(String tk,boolean loaitk) {
-        return taiKhoanDao.TimTk(tk,loaitk);
+    public List<TaiKhoan> TimTk(String tk) {
+        return taiKhoanDao.TimTk(tk);
     }
 
     

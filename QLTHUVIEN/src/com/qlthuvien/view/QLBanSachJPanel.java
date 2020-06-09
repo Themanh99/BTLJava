@@ -28,38 +28,31 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLBanSachJPanel
      */
-    private float tong = 0;
+   
     private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index = -1, count = 0;
-
-    public static void ClearAll() {
-
-    }
-
-    public float getTongTien() {
-        return tong;
-    }
+    private int index = -1, count = 0;  
     private static Hashtable<String, GioHang> dsGioHang;
 
     public static Hashtable<String, GioHang> getGioHang() {
         return dsGioHang;
     }
 
-    public DefaultTableModel getGioHangTable() {
-        return defaultGioHangTable;
-    }
-
     public QLBanSachJPanel() {
+        
         initComponents();
+        lammoi();
+
+    }
+    
+    private void lammoi(){
         sachService = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
         HienThiSachTable();
         HienThiGioHangTable();
-
     }
 
-    public void HienThiSachTable() {
+    private void HienThiSachTable() {
         defaultSachTable = new DefaultTableModel();
 
         sachTable.setModel(defaultSachTable);
@@ -75,7 +68,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         Display(sachService.getSachBan());
     }
 
-    public void HienThiGioHangTable() {
+    private void HienThiGioHangTable() {
         defaultGioHangTable = new DefaultTableModel() {
             //chi cho phep sua cot so luong
             @Override
@@ -373,8 +366,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));
                 int soluong = Integer.parseInt(String.valueOf(gioHangTable.getValueAt(i, 2)));
                 float gia = Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));
-                GioHang gh = new GioHang(masach, tensach, soluong, gia);
-                tong += soluong * gia;
+                GioHang gh = new GioHang(masach, tensach, soluong, gia);             
                 dsGioHang.put(masach, gh);
             }
 
@@ -435,7 +427,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         return danhsachloi;
 
     }
-
+    
+    
+    
     private void btTimMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimMSActionPerformed
         // TODO add your handling code here:
         String masach = txtMaSach.getText();

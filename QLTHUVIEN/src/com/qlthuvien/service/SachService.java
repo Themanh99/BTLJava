@@ -31,7 +31,7 @@ public class SachService {
         int size = sach.size();
         
         for(int i=0;i<size;i++){
-            if(sach.get(i).isTrangthai()==true){
+            if(sach.get(i).isTrangthai()==true && sach.get(i).getSoluong() >0 ){
                 sachBan.add(sach.get(i));
             }
         }
@@ -59,7 +59,14 @@ public class SachService {
     public List<Sach> TimSachBan(String masach,String tensach,String tentacgia,String tennxb,String theloai){
         return sachDao.TimSachBan( masach, tensach, tentacgia, tennxb, theloai);
     }
+    
     public List<Sach> TimSachMuon(String masach,String tensach,String tentacgia,String tennxb,String theloai){
         return sachDao.TimSachMuon( masach, tensach, tentacgia, tennxb, theloai);
+    }
+    
+    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+        return sachDao.TimSach( masach, tensach, tentacgia, tennxb, theloai);
+        
+        
     }
 }

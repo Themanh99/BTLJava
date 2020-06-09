@@ -234,52 +234,59 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btQLBanSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLBanSachActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlBanSachJPanel);
+        
         XoaMauButton();
         btQLBanSach.setBackground(Color.CYAN);
+        HienThiPanel(qlBanSachJPanel);
      
     }//GEN-LAST:event_btQLBanSachActionPerformed
 
     private void btQLMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLMuonTraSachActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlMuonTraSachJPanel);
+        
         XoaMauButton();
         btQLMuonTraSach.setBackground(Color.CYAN);
+        HienThiPanel(qlMuonTraSachJPanel);
     }//GEN-LAST:event_btQLMuonTraSachActionPerformed
 
     private void btQLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLSachActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlSachJPanel);
+        
         XoaMauButton();
         btQLSach.setBackground(Color.CYAN);
+        HienThiPanel(qlSachJPanel);
     }//GEN-LAST:event_btQLSachActionPerformed
 
     private void btQLNhapSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNhapSachActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlNhapSachJPanel);
+        
         XoaMauButton();
         btQLNhapSach.setBackground(Color.CYAN);
+        HienThiPanel(qlNhapSachJPanel);
     }//GEN-LAST:event_btQLNhapSachActionPerformed
 
     private void btQLDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLDocGiaActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlDocGiaJPanel);
+        
         XoaMauButton();
         btQLDocGia.setBackground(Color.CYAN);
+        HienThiPanel(qlDocGiaJPanel);
     }//GEN-LAST:event_btQLDocGiaActionPerformed
 
     private void btQLTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTaiKhoanActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlTaiKhoanJPanel);
+        
         XoaMauButton();
         btQLTaiKhoan.setBackground(Color.CYAN);
+        HienThiPanel(qlTaiKhoanJPanel);
     }//GEN-LAST:event_btQLTaiKhoanActionPerformed
 
     private void btQLTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTraSachActionPerformed
         // TODO add your handling code here:
-        HienThiPanel(qlTraSachJPanel);
+        
         XoaMauButton();
         btQLTraSach.setBackground(Color.CYAN);
+        HienThiPanel(qlTraSachJPanel);
     }//GEN-LAST:event_btQLTraSachActionPerformed
 
     /**
