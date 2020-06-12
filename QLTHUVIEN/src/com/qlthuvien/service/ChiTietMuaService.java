@@ -33,9 +33,7 @@ public class ChiTietMuaService {
             ctm.setMaSach(key);
             ctm.setSoluong(gioHang.getSoluong());
             ctm.setGia(gioHang.getGia());
-            chiTietMuaDao.themChiTietMua(ctm);
-            
-
+            chiTietMuaDao.themChiTietMua(ctm);            
         }
     }
     

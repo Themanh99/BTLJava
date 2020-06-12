@@ -41,7 +41,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         defaultGioHangTable.addColumn("So luong");
         defaultGioHangTable.addColumn("Gia");
         
-        Hashtable<String,GioHang> gh = QLMuonTraSachJPanel.getGioHang();
+        Hashtable<String,GioHang> gh = QLMuonSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
             String key=enu.nextElement();

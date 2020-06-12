@@ -34,5 +34,11 @@ public class ChiTietMuaDao extends Dao{
         
     }
     
+    public static void main(String[] args) {
+        ChiTietMua ctm = new ChiTietMua("PM0007", "MS0001", 2, 1200);
+        ChiTietMuaDao test = new ChiTietMuaDao();
+        test.themChiTietMua(ctm);
+    }
+    
     
 }
