@@ -31,7 +31,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
    
     private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index = -1, count = 0;  
+    private int index , count;  
     private static Hashtable<String, GioHang> dsGioHang;
 
     public static Hashtable<String, GioHang> getGioHang() {
@@ -48,6 +48,8 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private void lammoi(){
         sachService = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
+        index = -1;
+        count = 0;
         HienThiSachTable();
         HienThiGioHangTable();
     }
@@ -376,6 +378,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
                 xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 xn.setVisible(true);
+                lammoi();
             } else {
                 String tb = "";
                 int size = danhsachloi.size();

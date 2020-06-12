@@ -26,22 +26,21 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
      */
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
-    private SinhVienService svsv;
     public XacNhanMuonJFrame() {
         initComponents();
-        svsv = new SinhVienService();
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         txtNgayMuon.setText(String.valueOf(f.format(date)));
-        //khoi tao bang dsMuon
+        
         defaultGioHangTable= new DefaultTableModel();
+        
         dsMuonTable.setModel(defaultGioHangTable);
+        
         defaultGioHangTable.addColumn("Ma sach");
         defaultGioHangTable.addColumn("Ten sach");
         defaultGioHangTable.addColumn("So luong");
         defaultGioHangTable.addColumn("Gia");
-        dsMuonTable.setDefaultEditor(Object.class, null);
-        //Hien thi sach muon vao bang dsMuon 
+        
         Hashtable<String,GioHang> gh = QLMuonTraSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
@@ -100,12 +99,6 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         jLabel8.setText("Email");
 
         jLabel3.setText("Ngày Mượn");
-
-        txtMasv.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMasvKeyTyped(evt);
-            }
-        });
 
         txtHoten.setEditable(false);
 
@@ -247,7 +240,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
     private void btKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKiemTraActionPerformed
         // TODO add your handling code here:
-        
+        SinhVienService svsv = new SinhVienService();
         SinhVien sv = new SinhVien();
         sv = svsv.getSinhVien(txtMasv.getText());
         if(sv.getMaSV()==null){
@@ -255,7 +248,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             txtHoten.setText("");
             txtDienthoai.setText("");
             txtEmail.setText("");
-            JOptionPane.showMessageDialog(null,"Không tìm thấy sinh viên có mã : "+txtMasv.getText());
+            JOptionPane.showMessageDialog(null,"không tìm thấy sinh viên có mã"+txtMasv.getText());
         }
         else{
             txtHoten.setText(sv.getTenSV());
@@ -266,11 +259,6 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btKiemTraActionPerformed
-        // khi txtMasv thay doi, disable btXong
-    private void txtMasvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasvKeyTyped
-        // TODO add your handling code here:
-        btXong.setEnabled(false);
-    }//GEN-LAST:event_txtMasvKeyTyped
 
     /**
      * @param args the command line arguments

@@ -1,24 +1,4 @@
 use QLThuVien
-
---Trigger
-create trigger tg_themchitietphieumua
-on CHITIETMUA
-for insert
-as
-begin
-	declare @maPMUA char(6)
-	declare @maSach char(6)
-	declare @slban int
-	declare @slcon int
-	set @maPMUA =(	select maPMUA
-						from inserted)
-	set @maSach=(	select maSach
-						from inserted)
-	set @slban = (	select soluong
-						from inserted)
-	
-	update Sach set soluong=soluong-@slban where maSach=@masach
-end
 -- taikhoan admin
 insert into TAIKHOAN values 
 ('admin','admin',1),
@@ -58,29 +38,29 @@ insert into SINHVIEN values
 ('2017601711','Tran Tuan Anh','tuananh@gmail.com','0345574955')
 
 
-insert into PHIEUMUA(maPMUA,maSV) values
-('PM0001','2017601707'),
-('PM0002','2017601707'),
-('PM0003','2017601709'),
-('PM0004','2017601710'),
-('PM0005','2017601709')
+insert into PHIEUMUA(maPMUA,maSV,tongtien) values
+('PM0001','2017601707',23604),
+('PM0002','2017601707',23604),
+('PM0003','2017601709',23604),
+('PM0004','2017601710',23604),
+('PM0005','2017601709',23604)
 
 
-insert into PHIEUNHAP(maPN,maNCC) values
-('PN0001','NCC001'),
-('PN0002','NCC002'),
-('PN0003','NCC003'),
-('PN0004','NCC001'),
-('PN0005','NCC004')
+insert into PHIEUNHAP(maPN,maNCC,tongtien) values
+('PN0001','NCC001',23604),
+('PN0002','NCC002',23604),
+('PN0003','NCC003',23604),
+('PN0004','NCC001',23604),
+('PN0005','NCC004',23604)
 
 
 
-insert into PHIEUMUONTRA(maPMUON,maSV) values
-('PM0001','2017601708'),
-('PM0002','2017601707'),
-('PM0003','2017601709'),
-('PM0004','2017601707'),
-('PM0005','2017601709')
+insert into PHIEUMUONTRA(maPMUON,maSV,tongtien) values
+('PM0001','2017601708',23604),
+('PM0002','2017601707',23604),
+('PM0003','2017601709',23604),
+('PM0004','2017601707',23604),
+('PM0005','2017601709',23604)
 
 insert into CHITIETMUONTRA(maPMUON,maSach ,soluong ,gia ) values
 ('PM0001','MS0001',1,20000),
@@ -90,7 +70,7 @@ insert into CHITIETMUONTRA(maPMUON,maSach ,soluong ,gia ) values
 ('PM0005','MS0001',7,40000)
 
 
-select * from CHITIETMUONTRA
+
 insert into CHITIETPN values
 ('PN0001','MS0001',300,39000),
 ('PN0002','MS0002',200,49000),
@@ -107,8 +87,33 @@ insert into CHITIETMUA values
 ('PM0005','MS0001',3,24000)
 
 
+create trigger tg_themchitietphieumua
+on CHITIETMUA
+for insert
+as
+begin
+	declare @maPMUA char(6)
+	declare @maSach char(6)
+	declare @slban int
+	declare @slcon int
+	set @maPMUA =(	select maPMUA
+						from inserted)
+	set @maSach=(	select maSach
+						from inserted)
+	set @slban = (	select soluong
+						from inserted)
+	
+	update Sach set soluong=soluong-@slban where maSach=@masach
+end
+select * from CHITIETMUONTRA
+select * from CHITIETMUA where maPMUA='PM0006'
+select * from SACH where maSach='MS0001';
 
+insert into PHIEUMUA(maPMUA,maSV,tongtien) values
+('PM0006','2017601707',23604)
 
-
+insert into CHITIETMUA values('PM0006','MS0001',10,30000)
+insert into CHITIETMUA values('PM0006','MS0002',10,30000)
+insert into CHITIETMUA values('PM0006','MS0003',10,30000)
 
 
