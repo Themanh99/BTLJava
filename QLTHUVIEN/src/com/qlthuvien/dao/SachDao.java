@@ -7,6 +7,7 @@ package com.qlthuvien.dao;
 
 import com.qlthuvien.model.Sach;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,13 +51,6 @@ public class SachDao extends Dao {
 
     }
 
-    /*public static void main(String[] args) {
-        SachDao test = new SachDao();
-        List<Sach> abc = test.TimSachBan("00", "", "", "", "");
-        for(Sach sach :abc ){
-            System.out.println(sach);
-        }
-    }*/
     //Tim sach
     public List<Sach> TimSachBan(String masach, String tensach, String tentacgia, String tennxb, String theloai) {
 
@@ -169,4 +163,25 @@ public class SachDao extends Dao {
         }
         return null;
     }
+    public int UpdateSach(Sach sach){
+       conn = JDBCConnection.getJDBCConnection();
+       int n = 0;
+        try {
+            String sql = "update SACH set tenSach =?, tenTacGia=? , tenNXB=? , giaSach=? , theLoai=? , soluong=? where maSach=?";  
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, sach.getTenSach());
+            pre.setString(2, sach.getTenTacGia());
+            pre.setString(3, sach.getTenNxb());
+            pre.setFloat(4, sach.getGiaSach());
+            pre.setString(5, sach.getTheLoai());
+            pre.setInt(6, sach.getSoluong());
+            pre.setString(7,sach.getMaSach());
+            n = pre.executeUpdate(); 
+            System.out.println("n = "+n);
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        return n;
+    }
+
 }

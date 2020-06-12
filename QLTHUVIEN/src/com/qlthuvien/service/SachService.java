@@ -72,4 +72,8 @@ public class SachService {
     public String LayTenSachTheoMa(String mas){
         return sachDao.LayTenSachTheoMa(mas);
     }
+ 
+    public int UpdateSach(Sach sach){
+        return sachDao.UpdateSach(sach);
+    }
 }
