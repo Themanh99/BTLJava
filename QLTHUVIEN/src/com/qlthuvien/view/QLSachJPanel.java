@@ -5,7 +5,6 @@
  */
 package com.qlthuvien.view;
 
-import com.qlthuvien.service.QlSachService;
 import java.util.Hashtable;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +16,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 import javax.annotation.processing.Messager;
 import javax.swing.JOptionPane;
-import com.qlthuvien.dao.QlSachDao;
+import com.qlthuvien.dao.SachDao;
 
 /**
  *
@@ -25,15 +24,14 @@ import com.qlthuvien.dao.QlSachDao;
  */
 public class QLSachJPanel extends javax.swing.JPanel {
 
-    DefaultTableModel defaulttable, defaulttable1;
-    SachService sachService;
+    private DefaultTableModel defaulttable, defaulttable1;
+    private SachService sachService;
     int index = -1, count = 0;
     public static Hashtable<String, Sach> Sach;
-    private final QlSachService QlsachService;
 
     public QLSachJPanel() {
         initComponents();
-        QlsachService = new QlSachService();
+        sachService = new SachService();
         HienThiQlSachTable();
 
     }
@@ -52,7 +50,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         defaulttable.addColumn("Trạng thái");
         defaulttable.addColumn("Số lượng");
         Qlsachtable.setDefaultEditor(Object.class, null);
-        Display(QlsachService.getSach());
+        Display(sachService.getSach());
     }
 
     private void Display(List<Sach> list) {
@@ -149,7 +147,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         buttonGroup1.add(radioBan);
         radioBan.setText("Bán");
 
-        jButton1.setText("Clear");
+        jButton1.setText("Làm mới");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -268,7 +266,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton9.setText("Sửa Sách");
+        jButton9.setText("Cập Nhật");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -317,7 +315,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(viewtxtTrangthai))))
                     .addComponent(viewtxtTennxb, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,12 +466,12 @@ public class QLSachJPanel extends javax.swing.JPanel {
         boolean Trangthai = true;
         if (radioMuon.isSelected()) {
             Trangthai = false;
-            Display(QlsachService.TimSach(masach, tensach, tentacgia, tennxb, theloai, Trangthai));
+            Display(sachService.TimSachMuon(masach, tensach, tentacgia, tennxb, theloai));
 
         }
         if (radioBan.isSelected()) {
             Trangthai = true;
-            Display(QlsachService.TimSach(masach, tensach, tentacgia, tennxb, theloai, Trangthai));
+            Display(sachService.TimSachBan(masach, tensach, tentacgia, tennxb, theloai));
         }
         
         if(radioAll.isSelected()){
@@ -498,7 +496,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         defaulttable.setRowCount(0);
-        Display(QlsachService.getSach());
+        Display(sachService.getSach());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -508,9 +506,9 @@ public class QLSachJPanel extends javax.swing.JPanel {
         String theloai = txtTennxb.getText();
         String tennxb = txtGiasach.getText();
 
-        QlSachDao.UpdateSach(masach, tensach, tentacgia, tennxb, theloai);
+        //SachDao.UpdateSach(masach, tensach, tentacgia, tennxb, theloai);
 
-        Display(QlsachService.getSach());
+        Display(sachService.getSach());
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

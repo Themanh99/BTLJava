@@ -92,7 +92,7 @@ public class TaiKhoanDao {
             }
             return list;
             }catch (SQLException ex) {
-                Logger.getLogger(QlSachDao.class.getName()).log(Level.SEVERE,null,ex);
+                Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE,null,ex);
                 
             } finally {
                 if(rs !=null){

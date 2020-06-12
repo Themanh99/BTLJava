@@ -267,7 +267,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -333,7 +333,7 @@
                       </Group>
                       <Component id="viewtxtTennxb" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="137" max="32767" attributes="0"/>
+                  <EmptySpace pref="123" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jButton7" min="-2" pref="85" max="-2" attributes="0"/>
@@ -449,7 +449,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="S&#x1eed;a S&#xe1;ch"/>
+            <Property name="text" type="java.lang.String" value="C&#x1ead;p Nh&#x1ead;t"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
