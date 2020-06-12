@@ -12,6 +12,7 @@ import com.qlthuvien.service.TaiKhoanService;
 import java.awt.Color;
 import java.util.Hashtable;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,9 +34,9 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         btXoatk.setBackground(Color.red);
     }
 
-    private void ClearText() {
+    private void ClearText1() {
         txtTk.setText(null);
-        txtLoaitk.setText(null);
+        radioadmin.isSelected();
         passTk.setText(null);       
     }
     
@@ -53,8 +54,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
         defaultTaiKhoanTable.addColumn("Tên Tài Khoản");
         defaultTaiKhoanTable.addColumn("Mật Khẩu");
-        defaultTaiKhoanTable.addColumn("Loại Tài Khoản");
-        defaultTaiKhoanTable.addColumn("Trạng Thái Hoạt Động");       
+        defaultTaiKhoanTable.addColumn("Loại Tài Khoản");    
         taikhoanTable.setDefaultEditor(Object.class, null);
         DisplayTaiKhoan(taikhoanService.getTaikhoan());
     }
@@ -62,6 +62,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtTimtk = new javax.swing.JTextField();
@@ -74,13 +75,14 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         passTk = new javax.swing.JPasswordField();
         btLammoitk = new javax.swing.JButton();
         btThemtk = new javax.swing.JButton();
-        btSuatk = new javax.swing.JButton();
+        btXoatext = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taikhoanTable = new javax.swing.JTable();
         btXoatk = new javax.swing.JButton();
-        btDong = new javax.swing.JButton();
-        txtLoaitk = new javax.swing.JTextField();
+        btreset = new javax.swing.JButton();
+        radioadmin = new javax.swing.JRadioButton();
+        radiouser = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -131,8 +133,18 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         });
 
         btThemtk.setText("Thêm");
+        btThemtk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemtkActionPerformed(evt);
+            }
+        });
 
-        btSuatk.setText("Sửa");
+        btXoatext.setText("Xóa Text");
+        btXoatext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoatextActionPerformed(evt);
+            }
+        });
 
         taikhoanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,14 +190,18 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
             }
         });
 
-        btDong.setText("Đóng");
-        btDong.addActionListener(new java.awt.event.ActionListener() {
+        btreset.setText("Reset");
+        btreset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDongActionPerformed(evt);
+                btresetActionPerformed(evt);
             }
         });
 
-        txtLoaitk.setEnabled(false);
+        buttonGroup1.add(radioadmin);
+        radioadmin.setText("Admin");
+
+        buttonGroup1.add(radiouser);
+        radiouser.setText("User");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -200,21 +216,24 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTk)
-                    .addComponent(passTk, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(txtLoaitk))
-                .addGap(55, 55, 55)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btLammoitk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTk)
+                            .addComponent(passTk, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btreset)
+                        .addGap(99, 99, 99)
+                        .addComponent(btLammoitk, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btThemtk, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btThemtk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btXoatk, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(radioadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(radiouser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btXoatk, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDong, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btSuatk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btXoatext, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -231,21 +250,22 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passTk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(passTk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btreset))
                         .addGap(13, 13, 13)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLoaitk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(radioadmin)
+                            .addComponent(radiouser)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btLammoitk, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btThemtk, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btSuatk, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btThemtk, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btXoatk, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                            .addComponent(btDong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btXoatk, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btXoatext, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(238, Short.MAX_VALUE))
         );
 
@@ -291,7 +311,15 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         
         txtTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 0)));
         passTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 1)));
-        txtLoaitk.setText(String.valueOf(taikhoanTable.getValueAt(index, 2)));
+        String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2));
+        System.out.println("loaitj"+loaitk);
+        if("Admin".equals(loaitk)){
+            radioadmin.isSelected();
+            
+        }
+        else{
+            radiouser.isSelected();
+        }
         
     }//GEN-LAST:event_taikhoanTableMouseClicked
 
@@ -309,20 +337,52 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btXoatkActionPerformed
 
-    private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed
-//        JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
-//        qlTaiKhoanJPanel.setVisible(false);
-//        new MainJFrame().setVisible(true);
-    }//GEN-LAST:event_btDongActionPerformed
+    private void btXoatextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoatextActionPerformed
+        ClearText1();
+    }//GEN-LAST:event_btXoatextActionPerformed
+
+    private void btresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btresetActionPerformed
+        String tk = txtTk.getText();
+        if(taikhoanService.resetPass(tk)>0){
+        JOptionPane.showMessageDialog(null,
+                "Reset thành công! Mật khẩu mặc định là : 1", "Thông Báo",
+                JOptionPane.INFORMATION_MESSAGE);
+        DisplayTaiKhoan(taikhoanService.getTaikhoan());
+        ClearText1();}
+        else{
+            JOptionPane.showMessageDialog(null,
+                "Reset không thành công!", "Thông Báo",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btresetActionPerformed
+
+    private void btThemtkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemtkActionPerformed
+        
+        String tk = txtTk.getText();
+        String mk= String.valueOf(passTk.getPassword());
+        TaiKhoan taikhoan = new TaiKhoan(tk, mk, true);
+        if(taikhoanService.themTaikhoan(taikhoan)>0){
+            JOptionPane.showMessageDialog(null,
+                "Thêm thành công!", "Thông Báo",
+                JOptionPane.INFORMATION_MESSAGE);
+            DisplayTaiKhoan(taikhoanService.getTaikhoan());
+            ClearText1();
+        }else{
+            JOptionPane.showMessageDialog(null,
+                "Thêm Thât Bại", "Thông Báo",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btThemtkActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btDong;
     private javax.swing.JButton btLammoitk;
-    private javax.swing.JButton btSuatk;
     private javax.swing.JButton btThemtk;
     private javax.swing.JButton btTimkiem;
+    private javax.swing.JButton btXoatext;
     private javax.swing.JButton btXoatk;
+    private javax.swing.JButton btreset;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -333,8 +393,9 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPasswordField passTk;
+    private javax.swing.JRadioButton radioadmin;
+    private javax.swing.JRadioButton radiouser;
     private javax.swing.JTable taikhoanTable;
-    private javax.swing.JTextField txtLoaitk;
     private javax.swing.JTextField txtTimtk;
     private javax.swing.JTextField txtTk;
     // End of variables declaration//GEN-END:variables

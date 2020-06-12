@@ -36,6 +36,10 @@ public class TaiKhoanService {
     public List<TaiKhoan> TimTk(String tk) {
         return taiKhoanDao.TimTk(tk);
     }
-
-    
+    public int resetPass(String tentaikhoan){
+        return taiKhoanDao.ResetPass(tentaikhoan);
+    }
+    public int themTaikhoan(TaiKhoan taikhoan){
+        return taiKhoanDao.themTaiKhoan(taikhoan);
+    }
 }

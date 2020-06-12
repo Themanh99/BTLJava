@@ -5,7 +5,6 @@
  */
 package com.qlthuvien.dao;
 
-
 import com.qlthuvien.model.Sach;
 import com.qlthuvien.model.TaiKhoan;
 import com.qlthuvien.view.XacNhanMuaJFrame;
@@ -24,127 +23,138 @@ import java.util.logging.Logger;
  *
  * @author Administrator
  */
-public class TaiKhoanDao {
+public class TaiKhoanDao extends Dao{
+
     public static boolean loaiTK;
-    private Connection conn = null;
-    private PreparedStatement pre = null;
-    private Statement state =null;
-    private ResultSet rs = null;
+    
+
     public TaiKhoanDao() {
-        loaiTK=false;
+        loaiTK = false;
     }
-            
-    public boolean XacThucTaiKhoan(String tk,String mk){
+
+    public boolean XacThucTaiKhoan(String tk, String mk) {
         conn = JDBCConnection.getJDBCConnection();
         try {
-            
-            String sql = "select * from TAIKHOAN where tk=? and mk=?";   
-            
+
+            String sql = "select * from TAIKHOAN where tk=? and mk=?";
+
             pre = conn.prepareStatement(sql);
             pre.setString(1, tk);
             pre.setString(2, mk);
             rs = pre.executeQuery();
-           
-            String pass="";
-            while(rs.next()){
-                pass = rs.getString("mk");                
-                if(rs.getInt("loaitk")==0){
-                    loaiTK=false;
+
+            String pass = "";
+            while (rs.next()) {
+                pass = rs.getString("mk");
+                if (rs.getInt("loaitk") == 0) {
+                    loaiTK = false;
+                } else {
+                    loaiTK = true;
                 }
-                else loaiTK=true;
             }
-                    
+
             return pass.equals(mk);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
         }
-      
+
         return false;
     }
-    
-    public static void main(String[] args) {
-        TaiKhoanDao tkd = new TaiKhoanDao();
-        boolean kq = tkd.XacThucTaiKhoan("admin","admin");
-        if(kq==true){
-            System.out.println("Thanh cong");
-        }
-        else{
-            System.out.println("That bai");
-        }
-    }
-    
-    public List<TaiKhoan> gettaikhoan(){
+
+//    public static void main(String[] args) {
+//        TaiKhoanDao tkd = new TaiKhoanDao();
+//        boolean kq = tkd.XacThucTaiKhoan("admin", "admin");
+//        if (kq == true) {
+//            System.out.println("Thanh cong");
+//        } else {
+//            System.out.println("That bai");
+//        }
+//    }
+
+    public List<TaiKhoan> gettaikhoan() {
         conn = JDBCConnection.getJDBCConnection();
+
         try {
-            
             state = conn.createStatement();
             String sql = "select * from TAIKHOAN";
             rs = state.executeQuery(sql);
             List<TaiKhoan> list = new ArrayList<TaiKhoan>();
-            while(rs.next()){
+            while (rs.next()) {
                 String Tk = rs.getString("tk");
-                String Mk = rs.getString("mk");              
-                boolean Loaitk= rs.getBoolean("loaitk");             
-                
-                TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,Loaitk);
+                String Mk = rs.getString("mk");
+                boolean Loaitk = rs.getBoolean("loaitk");
+
+                TaiKhoan taikhoan = new TaiKhoan(Tk, Mk, Loaitk);
                 list.add(taikhoan);
             }
             return list;
-            }catch (SQLException ex) {
-                Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE,null,ex);
-                
-            } finally {
-                if(rs !=null){
-                 try {rs.close();}catch (SQLException e)  {} 
-                }
-                if(state !=null){
-                 try {state.close();}catch (SQLException e)  {} 
-                }
-                if(conn !=null){
-                 try {conn.close();}catch (SQLException e)  {} 
-                }
-            }
-        return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
         }
-    
-    public List<TaiKhoan> TimTk(String tk){
-        
+
+        return null;
+    }
+
+    public List<TaiKhoan> TimTk(String tk) {
+
         conn = JDBCConnection.getJDBCConnection();
+        
         try {
             state = conn.createStatement();
-            String sql="select * from taikhoan where tk like '%"+tk+"%'";      
+             String sql = "select * from taikhoan where tk like '%" + tk + "%'";
             System.out.println(sql);
-            rs=state.executeQuery(sql);
+            rs = state.executeQuery(sql);
             List<TaiKhoan> list = new ArrayList<TaiKhoan>();
-            while(rs.next()){
-                 String Tk = rs.getString("tk");
-                 String Mk = rs.getString("mk");
-                 boolean loaiTK= rs.getBoolean("loaiTk");
-               
-                 TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,loaiTK);
-                 list.add(taikhoan);
+            while (rs.next()) {
+                String Tk = rs.getString("tk");
+                String Mk = rs.getString("mk");
+                boolean loaiTK = rs.getBoolean("loaiTk");
+
+                TaiKhoan taikhoan = new TaiKhoan(Tk, Mk, loaiTK);
+                list.add(taikhoan);
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-                if (rs != null) {
-                    try {
-                       rs.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
-                if (state != null) {
-                    try {
-                        state.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) { /* ignored */}
-                }
-         }
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+           
+        
         return null;
     }
+    public int ResetPass(String tk){
+       conn = JDBCConnection.getJDBCConnection();
+       int n = 0;
+       try{
+           String sql = "update TAIKHOAN set mk='1' where tk=?";  
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tk);
+            n = pre.executeUpdate(); 
+           System.out.println("n ="+n);
+       }catch(SQLException ex){
+           Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return n;
+    }
+    public int themTaiKhoan(TaiKhoan taikhoan) {
+        conn = JDBCConnection.getJDBCConnection();
+        int n = 0;
+        String sql = "Insert into TAIKHOAN(tk,mk,loaitk) "
+                + " values('" + taikhoan.getTk()+ "','" + taikhoan.getMk()+ "'," + (taikhoan.getLoaiTk()? 1:0)+")";
+        try {
+            Statement state = conn.createStatement();
+            n = state.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+   
+ 
 }
