@@ -7,8 +7,6 @@ package com.qlthuvien.view;
 
 import com.qlthuvien.model.GioHang;
 import com.qlthuvien.model.SinhVien;
-import com.qlthuvien.service.ChiTietMuonTraService;
-import com.qlthuvien.service.PhieuMuonTraService;
 import com.qlthuvien.service.SinhVienService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,34 +24,23 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
     /**
      * Creates new form XacNhanMuonJFrame
      */
-    
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
-    private SinhVienService svService;
-    private PhieuMuonTraService pmtService;
-    private ChiTietMuonTraService ctmtService;
     public XacNhanMuonJFrame() {
         initComponents();
-        svService = new SinhVienService();
-        ctmtService = new ChiTietMuonTraService();
-        
-        //Tao ma phieuMuonTra
-        pmtService = new PhieuMuonTraService();
-        txtMaPhieuMuon.setText(pmtService.taoMaPhieuMuonTra());
-        //Tao ngay 
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         txtNgayMuon.setText(String.valueOf(f.format(date)));
         
-        //khoi tao bang dsMuon
         defaultGioHangTable= new DefaultTableModel();
+        
         dsMuonTable.setModel(defaultGioHangTable);
+        
         defaultGioHangTable.addColumn("Ma sach");
         defaultGioHangTable.addColumn("Ten sach");
         defaultGioHangTable.addColumn("So luong");
         defaultGioHangTable.addColumn("Gia");
-        dsMuonTable.setDefaultEditor(Object.class, null);
-        //Hien thi sach muon vao bang dsMuon 
+        
         Hashtable<String,GioHang> gh = QLMuonSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
@@ -67,12 +54,8 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         }
         txtTongTien.setText("Tong so tien la :"+tong);
     }
+     
 
-    public float getTong() {
-        return tong;
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,12 +100,6 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Ngày Mượn");
 
-        txtMasv.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMasvKeyTyped(evt);
-            }
-        });
-
         txtHoten.setEditable(false);
 
         txtDienthoai.setEditable(false);
@@ -161,11 +138,6 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         btXong.setText("Xong");
         btXong.setEnabled(false);
-        btXong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btXongActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,15 +240,15 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
     private void btKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKiemTraActionPerformed
         // TODO add your handling code here:
-        
+        SinhVienService svsv = new SinhVienService();
         SinhVien sv = new SinhVien();
-        sv = svService.getSinhVien(txtMasv.getText());
+        sv = svsv.getSinhVien(txtMasv.getText());
         if(sv.getMaSV()==null){
             btXong.setEnabled(false);
             txtHoten.setText("");
             txtDienthoai.setText("");
             txtEmail.setText("");
-            JOptionPane.showMessageDialog(null,"Không tìm thấy sinh viên có mã : "+txtMasv.getText());
+            JOptionPane.showMessageDialog(null,"không tìm thấy sinh viên có mã"+txtMasv.getText());
         }
         else{
             txtHoten.setText(sv.getTenSV());
@@ -287,25 +259,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btKiemTraActionPerformed
-        // khi txtMasv thay doi, disable btXong
-    private void txtMasvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasvKeyTyped
-        // TODO add your handling code here:
-        btXong.setEnabled(false);
-    }//GEN-LAST:event_txtMasvKeyTyped
 
-    private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
-        // TODO add your handling code here:
-        int sl1 = pmtService.insertPhieuMuonTra(txtMaPhieuMuon.getText(),txtMasv.getText(), getTong());
-        int sl2 = ctmtService.themChiTietMuonTra(txtMaPhieuMuon.getText(),QLMuonSachJPanel.getGioHang());
-        if(sl1==1&&sl2>0){
-            JOptionPane.showMessageDialog(null,"Thành công");
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");
-        }
-        this.dispose();
-    }//GEN-LAST:event_btXongActionPerformed
-   
     /**
      * @param args the command line arguments
      */

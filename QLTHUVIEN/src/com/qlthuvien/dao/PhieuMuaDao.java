@@ -42,7 +42,7 @@ public class PhieuMuaDao extends Dao{
             pre.setString(1,pm.getMaPMua());
             pre.setString(2, pm.getMaSV());
             pre.setFloat(3, pm.getTongtien());
-            int kq = pre.executeUpdate();
+            pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PhieuMuaDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -50,5 +50,13 @@ public class PhieuMuaDao extends Dao{
         }
         
     }
+    
+//    public static void main(String[] args) {
+//        PhieuMuaDao test = new PhieuMuaDao();
+//        
+//        PhieuMua pm = new PhieuMua("PM0007", "", "2017601707", 20000);
+//        
+//        test.themPhieuMua(pm);
+//    }
     
 }

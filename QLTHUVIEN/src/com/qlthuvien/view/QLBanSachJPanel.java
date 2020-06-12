@@ -11,12 +11,9 @@ import java.util.Hashtable;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import com.qlthuvien.model.GioHang;
-import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import javax.annotation.processing.Messager;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
@@ -28,10 +25,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLBanSachJPanel
      */
-   
     private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index = -1, count = 0;  
+    private int index, count;
     private static Hashtable<String, GioHang> dsGioHang;
 
     public static Hashtable<String, GioHang> getGioHang() {
@@ -39,15 +35,38 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     }
 
     public QLBanSachJPanel() {
-        
+
         initComponents();
         lammoi();
+        Thread tudonglammoi = new Thread() {
+        @Override
+        public void run() {
+            int count = 10;
+            do {
+                
+                if(XacNhanMuaJFrame.getCheck()==true){
+                    lammoi();
+                    XacNhanMuaJFrame.setCheck();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            while(1==1);
+        }
+    };
+    tudonglammoi.start();
 
     }
-    
-    private void lammoi(){
+
+    private void lammoi() {
         sachService = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
+        index = -1;
+        count = 0;
         HienThiSachTable();
         HienThiGioHangTable();
     }
@@ -90,7 +109,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private void Display(List<Sach> list) {
         defaultSachTable.setRowCount(0);
         for (Sach sach : list) {
-            defaultSachTable.addRow(new Object[]{sach.getMaSach(), sach.getTenSach(), sach.getTenTacGia(), sach.getTheLoai(), sach.getTenNxb(), sach.getGiaSach(), sach.getSoluong()});
+            if (sach.getSoluong() > 0) {
+                defaultSachTable.addRow(new Object[]{sach.getMaSach(), sach.getTenSach(), sach.getTenTacGia(), sach.getTheLoai(), sach.getTenNxb(), sach.getGiaSach(), sach.getSoluong()});
+            }
         }
     }
 
@@ -153,7 +174,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        gioHangTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         gioHangTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(gioHangTable);
 
@@ -215,7 +235,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             }
         });
         sachTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        sachTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         sachTable.getTableHeader().setReorderingAllowed(false);
         sachTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -261,8 +280,8 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                             .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btTimMS)
-                        .addGap(52, 52, 52)
+                        .addComponent(btTimMS, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -304,7 +323,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1)
-                                    .addComponent(btTimMS))
+                                    .addComponent(btTimMS, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
@@ -366,7 +385,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));
                 int soluong = Integer.parseInt(String.valueOf(gioHangTable.getValueAt(i, 2)));
                 float gia = Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));
-                GioHang gh = new GioHang(masach, tensach, soluong, gia);             
+                GioHang gh = new GioHang(masach, tensach, soluong, gia);
                 dsGioHang.put(masach, gh);
             }
 
@@ -375,7 +394,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             if (danhsachloi.isEmpty()) {
                 XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
                 xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                xn.setVisible(true);
+                xn.setVisible(true);              
             } else {
                 String tb = "";
                 int size = danhsachloi.size();
@@ -427,9 +446,8 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         return danhsachloi;
 
     }
-    
-    
-    
+
+
     private void btTimMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimMSActionPerformed
         // TODO add your handling code here:
         String masach = txtMaSach.getText();
@@ -437,7 +455,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         String tentacgia = txtTacGia.getText();
         String theloai = txtTheLoai.getText();
         String tennxb = txtNXB.getText();
-        Display(sachService.TimSachBan( masach, tensach, tentacgia, tennxb, theloai));   
+        Display(sachService.TimSachBan(masach, tensach, tentacgia, tennxb, theloai));
     }//GEN-LAST:event_btTimMSActionPerformed
 
     private void btBoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBoRaActionPerformed
@@ -492,4 +510,5 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenSach;
     private javax.swing.JTextField txtTheLoai;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,9 +31,8 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
     private SinhVienService sinhVienService;
     private PhieuMuaService phieuMuaService;
     private ChiTietMuaService chiTietMuaService;
-    
+    private static boolean check = false;
     private float tong = 0;
-    public static boolean check = false;
     public XacNhanMuaJFrame() {
         initComponents();
         sinhVienService = new SinhVienService();
@@ -52,6 +50,14 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         //Tao va hien thi bang gio hang
         HienThiTable();
 
+    }
+    
+    public static boolean getCheck(){
+        return check;
+    }
+    
+    public static void setCheck(){
+        check = false;
     }
 
     /**
@@ -273,12 +279,17 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         float tongtien = Float.parseFloat(txtTongTien.getText());
 
         PhieuMua pm = new PhieuMua(mapm, "", masv, tongtien);
-
+        //Them phieu mua
         phieuMuaService.themPhieuMua(pm);
-
+        
+        
+        //Them chi tiet phieu mua
         Hashtable<String, GioHang> listGioHang = QLBanSachJPanel.getGioHang();
         chiTietMuaService.themChiTietMua(listGioHang, pm.getMaPMua());  
-        check=true;
+        check = true;
+        
+        
+        //Dong JFrame nay  lai
         this.dispose();
         
 
