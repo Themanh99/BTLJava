@@ -38,6 +38,27 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
         initComponents();
         lammoi();
+        Thread tudonglammoi = new Thread() {
+        @Override
+        public void run() {
+            int count = 10;
+            do {
+                
+                if(XacNhanMuaJFrame.getCheck()==true){
+                    lammoi();
+                    XacNhanMuaJFrame.setCheck();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            while(1==1);
+        }
+    };
+    tudonglammoi.start();
 
     }
 
@@ -489,4 +510,5 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenSach;
     private javax.swing.JTextField txtTheLoai;
     // End of variables declaration//GEN-END:variables
+
 }

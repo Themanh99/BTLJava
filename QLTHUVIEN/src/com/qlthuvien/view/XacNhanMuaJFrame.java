@@ -31,7 +31,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
     private SinhVienService sinhVienService;
     private PhieuMuaService phieuMuaService;
     private ChiTietMuaService chiTietMuaService;
-    
+    private static boolean check = false;
     private float tong = 0;
     public XacNhanMuaJFrame() {
         initComponents();
@@ -50,6 +50,14 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         //Tao va hien thi bang gio hang
         HienThiTable();
 
+    }
+    
+    public static boolean getCheck(){
+        return check;
+    }
+    
+    public static void setCheck(){
+        check = false;
     }
 
     /**
@@ -278,6 +286,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
         //Them chi tiet phieu mua
         Hashtable<String, GioHang> listGioHang = QLBanSachJPanel.getGioHang();
         chiTietMuaService.themChiTietMua(listGioHang, pm.getMaPMua());  
+        check = true;
         
         
         //Dong JFrame nay  lai
