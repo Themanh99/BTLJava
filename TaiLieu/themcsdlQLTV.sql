@@ -105,6 +105,21 @@ begin
 	
 	update Sach set soluong=soluong-@slban where maSach=@masach
 end
+
+create trigger tg_chitietphieumuontra
+on CHITIETMUONTRA
+for insert
+as
+begin
+	declare @maPMUONTRA char(6)
+	declare @maSach char(6)
+	declare @slmuon int
+		set @maPMUONTRA = (select maPMUON from inserted)
+		set @maSach = (select maSach from inserted)
+		set @slmuon = (select soluong from inserted)
+	update Sach set soluong=soluong-@slmuon where maSach=@maSach
+end
+
 select * from CHITIETMUONTRA
 select * from CHITIETMUA where maPMUA='PM0006'
 select * from SACH where maSach='MS0001';

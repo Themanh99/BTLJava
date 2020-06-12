@@ -7,6 +7,8 @@ package com.qlthuvien.view;
 
 import com.qlthuvien.model.GioHang;
 import com.qlthuvien.model.SinhVien;
+import com.qlthuvien.service.ChiTietMuonTraService;
+import com.qlthuvien.service.PhieuMuonTraService;
 import com.qlthuvien.service.SinhVienService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,21 +28,31 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
      */
     DefaultTableModel defaultGioHangTable;
     private float tong =0;
+    private SinhVienService svService;
+    private PhieuMuonTraService pmtService;
+    private ChiTietMuonTraService ctmtService;
     public XacNhanMuonJFrame() {
         initComponents();
+        svService = new SinhVienService();
+        ctmtService = new ChiTietMuonTraService();
+        
+        //Tao ma phieuMuonTra
+        pmtService = new PhieuMuonTraService();
+        txtMaPhieuMuon.setText(pmtService.taoMaPhieuMuonTra());
+        //Tao ngay 
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         txtNgayMuon.setText(String.valueOf(f.format(date)));
         
+        //khoi tao bang dsMuon
         defaultGioHangTable= new DefaultTableModel();
-        
         dsMuonTable.setModel(defaultGioHangTable);
-        
-        defaultGioHangTable.addColumn("Ma sach");
-        defaultGioHangTable.addColumn("Ten sach");
-        defaultGioHangTable.addColumn("So luong");
-        defaultGioHangTable.addColumn("Gia");
-        
+        defaultGioHangTable.addColumn("Mã sách");
+        defaultGioHangTable.addColumn("Tên sách");
+        defaultGioHangTable.addColumn("Số lượng");
+        defaultGioHangTable.addColumn("Giá");
+        dsMuonTable.setDefaultEditor(Object.class, null);
+        //Hien thi sach muon vao bang dsMuon 
         Hashtable<String,GioHang> gh = QLMuonSachJPanel.getGioHang();
         Enumeration<String> enu=gh.keys();
         while(enu.hasMoreElements()){
@@ -52,9 +64,11 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             tong+=sach.getSoluong()*sach.getGia();   
             
         }
-        txtTongTien.setText("Tong so tien la :"+tong);
+        txtTongTien.setText("Tổng số tiền là :"+tong);
     }
-     
+    public float getTong() {
+        return tong;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,6 +114,12 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Ngày Mượn");
 
+        txtMasv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMasvKeyTyped(evt);
+            }
+        });
+
         txtHoten.setEditable(false);
 
         txtDienthoai.setEditable(false);
@@ -138,6 +158,12 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
         btXong.setText("Xong");
         btXong.setEnabled(false);
+        btXong.setPreferredSize(new java.awt.Dimension(79, 27));
+        btXong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXongActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,15 +210,15 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
                                     .addComponent(btKiemTra))))))
                 .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
                         .addComponent(txtTongTien)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btXong, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btXong, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -223,16 +249,15 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
                     .addComponent(txtNgayMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtMaPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTongTien)
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addComponent(btXong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btXong, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTongTien))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,15 +265,14 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
     private void btKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKiemTraActionPerformed
         // TODO add your handling code here:
-        SinhVienService svsv = new SinhVienService();
         SinhVien sv = new SinhVien();
-        sv = svsv.getSinhVien(txtMasv.getText());
+        sv = svService.getSinhVien(txtMasv.getText());
         if(sv.getMaSV()==null){
             btXong.setEnabled(false);
             txtHoten.setText("");
             txtDienthoai.setText("");
             txtEmail.setText("");
-            JOptionPane.showMessageDialog(null,"không tìm thấy sinh viên có mã"+txtMasv.getText());
+            JOptionPane.showMessageDialog(null,"Không tìm thấy sinh viên có mã : "+txtMasv.getText());
         }
         else{
             txtHoten.setText(sv.getTenSV());
@@ -259,6 +283,24 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btKiemTraActionPerformed
+
+    private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
+        // TODO add your handling code here:
+        int sl1 = pmtService.insertPhieuMuonTra(txtMaPhieuMuon.getText(),txtMasv.getText(), getTong());
+        int sl2 = ctmtService.themChiTietMuonTra(txtMaPhieuMuon.getText(),QLMuonSachJPanel.getGioHang());
+        if(sl1==1&&sl2>0){
+            JOptionPane.showMessageDialog(null,"Thành công");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");
+        }
+        this.dispose();
+    }//GEN-LAST:event_btXongActionPerformed
+    // khi txtMasv thay doi, disable btXong
+    private void txtMasvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasvKeyTyped
+        // TODO add your handling code here:
+        btXong.setEnabled(false);
+    }//GEN-LAST:event_txtMasvKeyTyped
 
     /**
      * @param args the command line arguments
