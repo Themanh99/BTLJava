@@ -24,7 +24,8 @@ public class MainJFrame extends javax.swing.JFrame {
     JPanel qlTraSachJPanel = new QLTraSachJPanel();
     JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
     JPanel qlDocGiaJPanel = new QLDocGiaJPanel();
-    
+    JPanel qlNhaCungCapJPanel = new QLNhaCungCapJPanel();
+    JPanel thongKeJPanel = new ThongKeJPanel();
     public MainJFrame() {
         initComponents();
     }
@@ -38,6 +39,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.qlNhapSachJPanel.setVisible(false);
         this.qlSachJPanel.setVisible(false);
         this.qlTaiKhoanJPanel.setVisible(false);
+        this.qlNhaCungCapJPanel.setVisible(false);
+        this.thongKeJPanel.setVisible(false);
     }
     
     private void XoaMauButton(){
@@ -54,6 +57,12 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLDocGia.setBackground(Color.white);
        
         btQLTaiKhoan.setBackground(Color.white);
+        
+        btThongKe.setBackground(Color.white);
+        
+        btQLNCC.setBackground(Color.white);
+        
+        
        
     }
     private void HienThiPanel(JPanel panel){
@@ -82,6 +91,8 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLDocGia = new javax.swing.JButton();
         btQLTaiKhoan = new javax.swing.JButton();
         btQLTraSach = new javax.swing.JButton();
+        btThongKe = new javax.swing.JButton();
+        btQLNCC = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -144,20 +155,38 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btThongKe.setText("Thống kê");
+        btThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThongKeActionPerformed(evt);
+            }
+        });
+
+        btQLNCC.setText("Quản lý Nhà cung cấp");
+        btQLNCC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btQLNCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btQLNCCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btQLMuonTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLBanSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLTraSach))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btQLNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLMuonTraSach, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(btQLBanSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLNhapSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btQLTraSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
 
@@ -166,7 +195,9 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
+                .addGap(106, 106, 106)
+                .addComponent(btThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLMuonTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLTraSach)
@@ -178,6 +209,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btQLNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btQLNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLTaiKhoan)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -226,7 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 719, Short.MAX_VALUE))
+                .addGap(0, 728, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,6 +322,20 @@ public class MainJFrame extends javax.swing.JFrame {
         HienThiPanel(qlTraSachJPanel);
     }//GEN-LAST:event_btQLTraSachActionPerformed
 
+    private void btThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThongKeActionPerformed
+        // TODO add your handling code here:
+        XoaMauButton();
+        btThongKe.setBackground(Color.CYAN);
+        HienThiPanel(thongKeJPanel);
+    }//GEN-LAST:event_btThongKeActionPerformed
+
+    private void btQLNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNCCActionPerformed
+        // TODO add your handling code here:
+        XoaMauButton();
+        btQLNCC.setBackground(Color.CYAN);
+        HienThiPanel(qlNhaCungCapJPanel);
+    }//GEN-LAST:event_btQLNCCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,10 +375,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btQLBanSach;
     private javax.swing.JButton btQLDocGia;
     private javax.swing.JButton btQLMuonTraSach;
+    private javax.swing.JButton btQLNCC;
     private javax.swing.JButton btQLNhapSach;
     private javax.swing.JButton btQLSach;
     private javax.swing.JButton btQLTaiKhoan;
     private javax.swing.JButton btQLTraSach;
+    private javax.swing.JButton btThongKe;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -57,6 +57,8 @@ public class NCC {
     public void setDiaChiNCC(String diaChiNCC) {
         this.diaChiNCC = diaChiNCC;
     }
+
+    
     
     
 }

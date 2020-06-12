@@ -21,9 +21,18 @@ public class NCCService {
     public NCCService(NCCDao nccDao) {
         this.nccDao = nccDao;
     }
+
+    public NCCService() {
+        nccDao = new NCCDao();
+    }
+    
     public List<NCC> getNCC(){
         List<NCC> list = new ArrayList<NCC>();
         list = nccDao.getNCC();
         return list;
+    }
+    
+    public List<NCC> TimNCC(NCC ncc){
+        return nccDao.TimNCC(ncc);
     }
 }

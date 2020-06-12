@@ -41,4 +41,31 @@ public class NCCDao extends Dao{
         }
         return null;
     }
+    
+    public List<NCC> TimNCC(NCC ncc){
+        List<NCC> list = new ArrayList<NCC>();
+        conn = JDBCConnection.getJDBCConnection();
+        String sql = "select * from NCC where maNCC like '%"+ncc.getMaNCC()+"%' and tenNCC like '%"+ncc.getTenNCC()+"%'and sdtNCC like '%"+ncc.getSdtNCC()+"%' and diachiNCC like '%"+ncc.getDiaChiNCC()+"%'";
+        try {
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+            
+            while(rs.next()){
+                String mancc = rs.getString("maNCC");
+                String tencc = rs.getString("tenNCC");
+                String sdt = rs.getString("sdtNCC");
+                String dc = rs.getString("diachiNCC");
+                
+                NCC item = new NCC(mancc,tencc,sdt,dc);
+                list.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+        return list;
+    }
+    
+    
 }
