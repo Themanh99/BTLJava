@@ -108,12 +108,12 @@ public class TaiKhoanDao {
         return null;
         }
     
-    public List<TaiKhoan> TimTk(String tk,boolean loaiTk){
+    public List<TaiKhoan> TimTk(String tk){
         
         conn = JDBCConnection.getJDBCConnection();
         try {
             state = conn.createStatement();
-            String sql="select * from taikhoan where loaitk='%"+loaiTk+"%' and tk like '%"+tk+"%'";      
+            String sql="select * from taikhoan where tk like '%"+tk+"%'";      
             System.out.println(sql);
             rs=state.executeQuery(sql);
             List<TaiKhoan> list = new ArrayList<TaiKhoan>();
@@ -122,7 +122,7 @@ public class TaiKhoanDao {
                  String Mk = rs.getString("mk");
                  boolean loaiTK= rs.getBoolean("loaiTk");
                
-                 TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,loaiTk);
+                 TaiKhoan taikhoan = new TaiKhoan(Tk,Mk,loaiTK);
                  list.add(taikhoan);
             }
             return list;

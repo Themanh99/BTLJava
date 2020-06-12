@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrator
  */
-public class QLMuonTraSachJPanel extends javax.swing.JPanel {
+public class QLMuonSachJPanel extends javax.swing.JPanel {
 
-    DefaultTableModel defautSachtable, defaulGiottable;
+    DefaultTableModel defaultSachTable, defaultGioTable;
     SachService sachservice;
     public static Hashtable<String, GioHang> dsGioHang;
     int index = -1,//lay chi so hang trong bang sach
@@ -35,7 +35,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     /**
      * Creates new form QLMuonTraSachJPanel
      */
-    public QLMuonTraSachJPanel() {
+    public QLMuonSachJPanel() {
         initComponents();
         sachservice = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
@@ -45,23 +45,23 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     }
 
     public void HienThiSachTable() {
-        defautSachtable = new DefaultTableModel();
-        tbSach.setModel(defautSachtable);
+        defaultSachTable = new DefaultTableModel();
+        tbSach.setModel(defaultSachTable);
 
-        defautSachtable.addColumn("Mã sách");
-        defautSachtable.addColumn("Tên sách");
-        defautSachtable.addColumn("Tác giả");
-        defautSachtable.addColumn("Thể loại");
-        defautSachtable.addColumn("Nhà xuất bản");
-        defautSachtable.addColumn("Giá");
-        defautSachtable.addColumn("Số lượng");
+        defaultSachTable.addColumn("Mã sách");
+        defaultSachTable.addColumn("Tên sách");
+        defaultSachTable.addColumn("Tác giả");
+        defaultSachTable.addColumn("Thể loại");
+        defaultSachTable.addColumn("Nhà xuất bản");
+        defaultSachTable.addColumn("Giá");
+        defaultSachTable.addColumn("Số lượng");
         //ngan khong cho nguoi dung edit bang
         tbSach.setDefaultEditor(Object.class, null);
 
         List<Sach> listSach = sachservice.getSachMuon();
-        defautSachtable.setRowCount(0);
+        defaultSachTable.setRowCount(0);
         for (Sach sach : listSach) {
-            defautSachtable.addRow(new Object[]{
+            defaultSachTable.addRow(new Object[]{
                 sach.getMaSach(),
                 sach.getTenSach(),
                 sach.getTenTacGia(),
@@ -74,20 +74,20 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     }
 
     private void KhoiTaoGioMuonTable() {
-        defaulGiottable = new DefaultTableModel() {
+        defaultGioTable = new DefaultTableModel() {
             //chi cho phep sua cot so luong
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return columnIndex == 2;
             }
         };
-        tbGio.setModel(defaulGiottable);
+        tbGio.setModel(defaultGioTable);
         //tbGio.setDefaultEditor(Object.class, null);
 
-        defaulGiottable.addColumn("Mã sách");
-        defaulGiottable.addColumn("Tên sách");
-        defaulGiottable.addColumn("Số Lượng");
-        defaulGiottable.addColumn("Giá");
+        defaultGioTable.addColumn("Mã sách");
+        defaultGioTable.addColumn("Tên sách");
+        defaultGioTable.addColumn("Số Lượng");
+        defaultGioTable.addColumn("Giá");
     }
     private List<String> Check(Hashtable<String,GioHang> gh, List<Sach> sachmuon){
         Enumeration<String> enu = gh.keys();
@@ -140,7 +140,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         txTacgia = new javax.swing.JTextField();
         txTheloai = new javax.swing.JTextField();
         txNhaxuatban = new javax.swing.JTextField();
-        btTimMasach = new javax.swing.JButton();
+        btTim = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -170,7 +170,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         tbGio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"dff", "sđ", "eqeqe2", "64646"}
+
             },
             new String [] {
                 "Mã sách", "Tên sách", "Số lượng", "Giá"
@@ -244,8 +244,8 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         txNhaxuatban.setToolTipText("");
 
-        btTimMasach.setText("Tìm");
-        btTimMasach.addActionListener(new java.awt.event.ActionListener() {
+        btTim.setText("Tìm");
+        btTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btTimmasach(evt);
             }
@@ -265,26 +265,27 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             .addGap(0, 355, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(146, 146, 146)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(115, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addComponent(btTimMasach)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(146, 146, 146)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTacgia, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(btTim)))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -301,7 +302,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txMasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btTimMasach))
+                                        .addComponent(btTim))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txTensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,7 +332,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
         tbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"12", "313", "441", "4141", "535355", "gegdsg", "90"}
+
             },
             new String [] {
                 "Mã sách", "Tên sách", "Tác giả", "Thể loại", "Nhà xuất bản", "Giá", "Số lượng"
@@ -410,6 +411,25 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
 
     private void btTimmasach(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimmasach
         // TODO add your handling code here:
+        String masach = txMasach.getText();
+        String tensach = txTensach.getText();
+        String tentacgia = txTacgia.getText();
+        String theloai = txTheloai.getText();
+        String tennxb = txNhaxuatban.getText();
+        
+        List<Sach> listSach = sachservice.TimSachMuon(masach, tensach, tentacgia, tennxb, theloai);
+        defaultSachTable.setRowCount(0);
+        for (Sach sach : listSach) {
+            defaultSachTable.addRow(new Object[]{
+                sach.getMaSach(),
+                sach.getTenSach(),
+                sach.getTenTacGia(),
+                sach.getTheLoai(),
+                sach.getTenNxb(),
+                sach.getGiaSach(),
+                sach.getSoluong()
+            });
+        }
     }//GEN-LAST:event_btTimmasach
 
     private void btThemvaogio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemvaogio
@@ -423,7 +443,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
             if (!dsGioHang.containsKey(masach)) {
                 dsGioHang.put(masach, gh);
                 count++;
-                defaulGiottable.addRow(new Object[]{
+                defaultGioTable.addRow(new Object[]{
                     gh.getMasach(),
                     gh.getTensach(),
                     "1",
@@ -457,7 +477,7 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         if(dsloi.isEmpty()){
             XacNhanMuonJFrame xn = new XacNhanMuonJFrame();
             xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            xn.setVisible(true);
+            xn.setVisible(true);         
         }else{
             String tb= "";
             for(String t : dsloi){
@@ -474,6 +494,8 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
     private void btTaomoi(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaomoi
         // TODO add your handling code here:
         dsGioHang.clear();
+        defaultGioTable.setRowCount(0);
+        count = 0;
         HienThiGio(dsGioHang);
     }//GEN-LAST:event_btTaomoi
 
@@ -486,17 +508,17 @@ public class QLMuonTraSachJPanel extends javax.swing.JPanel {
         HienThiGio(dsGioHang);
     }//GEN-LAST:event_btBorakhoigio
     private void HienThiGio(Hashtable<String, GioHang> gio1) {
-        defaulGiottable.setRowCount(0);
+        defaultGioTable.setRowCount(0);
         Enumeration<String> enu = gio1.keys();
         while (enu.hasMoreElements()) {
             String key = enu.nextElement();
             GioHang gh = gio1.get(key);
-            defaulGiottable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
+            defaultGioTable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), gh.getSoluong(), gh.getGia()});
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btTimMasach;
+    private javax.swing.JButton btTim;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

@@ -456,6 +456,8 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         // TODO add your handling code here:
         dsGioHang.clear();
+        count = 0;
+        defaultGioHangTable.setRowCount(0);
         HienThiGioHang(dsGioHang);
     }//GEN-LAST:event_btResetActionPerformed
 

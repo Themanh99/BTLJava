@@ -89,12 +89,7 @@
                                   <Component id="jTextField1" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btTimMasv" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimDT" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btTimHoTen" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btTimMasv" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -117,21 +112,18 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btTimHoTen" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btTimDT" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btTimEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btThem" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="btXoa" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
@@ -144,11 +136,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btTimEmail">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xe3; Sinh Vi&#xea;n"/>
@@ -173,11 +160,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField4">
         </Component>
-        <Component class="javax.swing.JButton" name="btTimHoTen">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btCapNhat">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p Nh&#x1ead;t"/>
@@ -186,11 +168,6 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="text" type="java.lang.String" value="Email"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btTimDT">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
@@ -214,7 +191,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; &#x110;&#x1ecd;c Gi&#x1ea3;"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; &#x110;&#x1ed9;c Gi&#x1ea3;"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

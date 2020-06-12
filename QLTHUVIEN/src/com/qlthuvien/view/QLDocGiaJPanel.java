@@ -28,17 +28,14 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btTimEmail = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btXoa = new javax.swing.JButton();
         btThem = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
-        btTimHoTen = new javax.swing.JButton();
         btCapNhat = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        btTimDT = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         btTimMasv = new javax.swing.JButton();
@@ -49,8 +46,6 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 204));
 
-        btTimEmail.setText("Tìm");
-
         jLabel2.setText("Mã Sinh Viên");
 
         jLabel6.setText("Họ Tên");
@@ -59,13 +54,9 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
 
         btThem.setText("Thêm");
 
-        btTimHoTen.setText("Tìm");
-
         btCapNhat.setText("Cập Nhật");
 
         jLabel8.setText("Email");
-
-        btTimDT.setText("Tìm");
 
         btTimMasv.setText("Tìm");
 
@@ -99,11 +90,7 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
                                 .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btTimMasv)
-                                .addComponent(btTimEmail)
-                                .addComponent(btTimDT)
-                                .addComponent(btTimHoTen))))
+                            .addComponent(btTimMasv)))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,19 +106,16 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btTimHoTen))
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btTimDT))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btTimEmail)
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(31, 31, 31)
+                    .addGap(33, 33, 33)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,7 +124,7 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Quản Lý Đọc Giả");
+        jLabel1.setText("Quản Lý Độc Giả");
 
         dsMua.setAutoCreateRowSorter(true);
         dsMua.setModel(new javax.swing.table.DefaultTableModel(
@@ -198,9 +182,6 @@ public class QLDocGiaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCapNhat;
     private javax.swing.JButton btThem;
-    private javax.swing.JButton btTimDT;
-    private javax.swing.JButton btTimEmail;
-    private javax.swing.JButton btTimHoTen;
     private javax.swing.JButton btTimMasv;
     private javax.swing.JButton btXoa;
     private javax.swing.JTable dsMua;
