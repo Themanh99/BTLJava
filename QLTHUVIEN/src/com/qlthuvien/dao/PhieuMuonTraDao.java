@@ -5,7 +5,12 @@
  */
 package com.qlthuvien.dao;
 
+import com.qlthuvien.model.PhieuMuonTra;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +27,13 @@ public class PhieuMuonTraDao extends Dao {
             String sql = "select count(maPMUON) from PHIEUMUONTRA ";
             state = conn.createStatement();
             rs = state.executeQuery(sql);
+            
+//            Calendar calendar = Calendar.getInstance();
+//            java.util.Date currentTime = calendar.getTime();
+//            long time = currentTime.getTime();
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setTimestamp(2, new Timestamp(time));
+            
             while (rs.next()) {
                 sl += rs.getInt(1);
             }
@@ -47,7 +59,31 @@ public class PhieuMuonTraDao extends Dao {
         }
         return -1;
     }
-    
+    public ArrayList<PhieuMuonTra> getPhieuMuonTra(){
+        ArrayList<PhieuMuonTra> listPhieu = new ArrayList<PhieuMuonTra>();
+        
+        try {
+            conn = JDBCConnection.getJDBCConnection();
+            String sql = "select * from PHIEUMUONTRA";
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                String maPMUON  = rs.getString("maPMUON");
+                String ngayMuon = rs.getString("ngayMuon");
+                String maSV = rs.getString("maSV");
+                float tongtien = rs.getFloat("tongtien");
+                
+                PhieuMuonTra pm = new PhieuMuonTra(maPMUON, ngayMuon, maSV, tongtien);
+                listPhieu.add(pm);
+            }
+            return listPhieu;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            CloseAll();
+        }
+        return null;
+    }
     public static void main(String[] args) {
         PhieuMuonTraDao pm = new PhieuMuonTraDao();
         System.out.println(pm.getSlPhieuMuon());

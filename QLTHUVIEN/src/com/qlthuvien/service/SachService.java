@@ -69,4 +69,7 @@ public class SachService {
         
         
     }
+    public String LayTenSachTheoMa(String mas){
+        return sachDao.LayTenSachTheoMa(mas);
+    }
 }

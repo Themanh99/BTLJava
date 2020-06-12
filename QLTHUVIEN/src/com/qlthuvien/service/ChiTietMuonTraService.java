@@ -38,4 +38,7 @@ public class ChiTietMuonTraService {
         slhang += ctmtDao.themChiTietMuonTra(maPMUON,list);
         return slhang;
     }
+    public ArrayList<ChiTietMuonTra> layChiTietMuonTra(String maPMUON){
+        return ctmtDao.layChiTietMuonTra(maPMUON);
+    }
 }

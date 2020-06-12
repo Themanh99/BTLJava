@@ -151,5 +151,22 @@ public class SachDao extends Dao {
         return null;
     }
     
-
+    public String LayTenSachTheoMa(String mas){
+        conn = JDBCConnection.getJDBCConnection();
+        try {
+            state = conn.createStatement();
+            String sql = "select tenSach  from sach where maSach='"+mas+"'";
+            String s="";
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                s = rs.getString("tenSach");
+            }
+            return s;
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            CloseAll();
+        }
+        return null;
+    }
 }

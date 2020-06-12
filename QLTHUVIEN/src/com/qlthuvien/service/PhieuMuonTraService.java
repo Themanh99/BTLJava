@@ -7,6 +7,7 @@ package com.qlthuvien.service;
 
 import com.qlthuvien.dao.PhieuMuonTraDao;
 import com.qlthuvien.model.PhieuMuonTra;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,6 +33,9 @@ public class PhieuMuonTraService {
     public int insertPhieuMuonTra(String mapm, String masv,float tongtien){
         int sl = pmDao.themPhieuMuonTra(mapm,masv,tongtien);
         return sl;
+    }
+    public ArrayList<PhieuMuonTra> getPhieuMuonTra(){
+        return pmDao.getPhieuMuonTra();
     }
 //    public static void main(String[] args) {
 //        PhieuMuonTraService a = new PhieuMuonTraService();

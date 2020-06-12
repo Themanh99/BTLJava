@@ -44,4 +44,28 @@ public class ChiTietMuonTraDao extends Dao {
         return -1;
 
     }
+    public ArrayList<ChiTietMuonTra> layChiTietMuonTra(String maPMUON){
+        ArrayList<ChiTietMuonTra> list = new ArrayList<ChiTietMuonTra>();
+                try {
+            conn = JDBCConnection.getJDBCConnection();
+            String sql = "select * from CHITIETMUONTRA where maPMUON='"+maPMUON +"'";
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                String maPMuon = rs.getString("maPMuon");
+                String maSach = rs.getString("maSach");
+                int soluong  = rs.getInt("soluong");
+                String ngaytra = rs.getString("ngaytra");
+                float gia = rs.getFloat("gia");
+                ChiTietMuonTra ct = new ChiTietMuonTra(maPMuon, maSach, soluong, ngaytra, gia);
+                list.add(ct);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            CloseAll();
+        }
+        return null;
+    }
 }
