@@ -51,12 +51,5 @@ public class PhieuMuaDao extends Dao{
         
     }
     
-//    public static void main(String[] args) {
-//        PhieuMuaDao test = new PhieuMuaDao();
-//        
-//        PhieuMua pm = new PhieuMua("PM0007", "", "2017601707", 20000);
-//        
-//        test.themPhieuMua(pm);
-//    }
     
 }

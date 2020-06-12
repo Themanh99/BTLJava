@@ -41,7 +41,6 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         Thread tudonglammoi = new Thread() {
         @Override
         public void run() {
-            int count = 10;
             do {
                 
                 if(XacNhanMuaJFrame.getCheck()==true){
