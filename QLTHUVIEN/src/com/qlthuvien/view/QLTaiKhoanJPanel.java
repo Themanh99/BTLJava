@@ -312,13 +312,13 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         txtTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 0)));
         passTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 1)));
         String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2));
-        System.out.println("loaitj"+loaitk);
+        //System.out.println("loaitk"+loaitk);
         if("Admin".equals(loaitk)){
-            radioadmin.isSelected();
+            radioadmin.setSelected(true);
             
         }
         else{
-            radiouser.isSelected();
+            radiouser.setSelected(true);
         }
         
     }//GEN-LAST:event_taikhoanTableMouseClicked
