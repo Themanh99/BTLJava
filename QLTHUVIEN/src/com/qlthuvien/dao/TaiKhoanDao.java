@@ -136,7 +136,7 @@ public class TaiKhoanDao extends Dao{
             pre = conn.prepareStatement(sql);
             pre.setString(1, tk);
             n = pre.executeUpdate(); 
-           System.out.println("n ="+n);
+           //System.out.println("n ="+n);
        }catch(SQLException ex){
            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -155,6 +155,18 @@ public class TaiKhoanDao extends Dao{
         }
         return n;
     }
-   
+   public int DeleteTaiKhoan(String tk){
+       conn = JDBCConnection.getJDBCConnection();
+       int n = 0;
+        try {
+            String sql = "Delete from TAIKHOAN  where tk =?";
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tk);
+            n = pre.executeUpdate();                     
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return n;
+    }
  
 }
