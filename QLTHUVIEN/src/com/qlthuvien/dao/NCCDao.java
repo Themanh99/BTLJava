@@ -66,6 +66,69 @@ public class NCCDao extends Dao{
         }
         return list;
     }
+
+    public int getSoLuongNCC() {
+        conn = JDBCConnection.getJDBCConnection();
+        int sl=0;
+        
+        try {
+            state = conn.createStatement();
+            String sql ="select count(maNCC) as 'tongphieu' from NCC ";
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                sl = rs.getInt("tongphieu");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+        return sl;
+    }
+    
+    
+    public void ThemNCC(NCC ncc){
+        conn = JDBCConnection.getJDBCConnection();
+        String sql = "insert into NCC(maNCC,tenNCC,sdtNCC,diachiNCC) values(?,?,?,?)";
+        
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1,ncc.getMaNCC());
+            pre.setString(2, ncc.getTenNCC());
+            pre.setString(3, ncc.getSdtNCC());
+            pre.setString(4, ncc.getDiaChiNCC());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+            
+       
+    }
+    
+        public void CapNhatNCC(NCC ncc){
+        conn = JDBCConnection.getJDBCConnection();
+        String sql = "update  NCC set tenNCC=? ,sdtNCC=? , diachiNCC=? where maNCC=?";
+        
+        try {
+            pre = conn.prepareStatement(sql);
+            
+            pre.setString(1, ncc.getTenNCC());
+            pre.setString(2, ncc.getSdtNCC());
+            pre.setString(3, ncc.getDiaChiNCC());
+            pre.setString(4,ncc.getMaNCC());
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+            
+       
+    }
+    
+    
     
     
 }

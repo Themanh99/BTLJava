@@ -183,5 +183,49 @@ public class SachDao extends Dao {
         }     
         return n;
     }
+    
+    public void ThemSach(Sach sach){
+        conn = JDBCConnection.getJDBCConnection();
+        String sql="insert into SACH (maSach,tenSach,tenTacGia,tenNXB,giaSach ,theLoai,trangthai ,soluong) values(?,?,?,?,?,?,?,?)" ;
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, sach.getMaSach());
+            pre.setString(2, sach.getTenSach());
+            pre.setString(3, sach.getTenTacGia());
+            pre.setString(4, sach.getTenNxb());
+            pre.setFloat(5, sach.getGiaSach());
+            pre.setString(6, sach.getTheLoai());
+            pre.setBoolean(7, sach.isTrangthai());
+            pre.setInt(8, sach.getSoluong());
+            
+            pre.executeUpdate();
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+                
+    }
+    
+    public int getSoLuongSach(){
+        conn = JDBCConnection.getJDBCConnection();
+        int sl=0;
+        try {
+            state = conn.createStatement();
+            String sql ="select count(maSach) as 'tongphieu' from SACH ";
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                sl = rs.getInt("tongphieu");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+        return sl;
+            
+    }
+    
 
 }
