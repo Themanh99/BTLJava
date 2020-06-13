@@ -76,4 +76,24 @@ public class SachService {
     public int UpdateSach(Sach sach){
         return sachDao.UpdateSach(sach);
     }
+    
+    public void ThemSach(Sach sach){
+        sachDao.ThemSach(sach);
+    }
+    
+    public String getMaSach(){
+        String masach="MS";
+        int soluong = sachDao.getSoLuongSach()+1;
+        String sl = String.valueOf(soluong);
+        for(int i=0;i<(4-sl.length());i++){
+            masach=masach+"0";
+        }
+        masach=masach+sl;
+        return masach;
+    }
+    
+    public static void main(String[] args) {
+        SachService test = new SachService();
+        System.out.println(test.getMaSach());
+    }
 }
