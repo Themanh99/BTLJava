@@ -35,4 +35,24 @@ public class NCCService {
     public List<NCC> TimNCC(NCC ncc){
         return nccDao.TimNCC(ncc);
     }
+    
+    public String getMaNCC(){
+        String mapNCC="NCC";
+        int soluong = nccDao.getSoLuongNCC()+1;
+        String sl = String.valueOf(soluong);
+        for(int i=0;i<(3-sl.length());i++){
+            mapNCC=mapNCC+"0";
+        }
+        mapNCC=mapNCC+sl;
+        return mapNCC;
+    }
+    
+    
+    public void themNCC(NCC ncc){
+        nccDao.ThemNCC(ncc);
+    }
+    
+    public void CapNhatNCC(NCC ncc){
+        nccDao.CapNhatNCC(ncc);
+    }
 }
