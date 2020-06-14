@@ -22,7 +22,7 @@ public class PhieuMuonTraService {
     
     public String taoMaPhieuMuonTra(){
         String ma = "PM";
-        int sl = pmDao.getSlPhieuMuon()+1;
+        int sl = pmDao.LaySlPhieuMuon()+1;
         String soluong = String.valueOf(sl);
         for(int i=1; i<=4-soluong.length();i++){
             ma+="0";
@@ -30,15 +30,22 @@ public class PhieuMuonTraService {
         ma+=soluong;
         return ma;
     }
-    public int insertPhieuMuonTra(String mapm, String masv,float tongtien){
-        int sl = pmDao.themPhieuMuonTra(mapm,masv,tongtien);
+    public int ThemPhieuMuonTra(String mapm, String masv,float tongtien){
+        int sl = pmDao.ThemPhieuMuonTra(mapm,masv,tongtien);
         return sl;
     }
-    public ArrayList<PhieuMuonTra> getPhieuMuonTra(){
-        return pmDao.getPhieuMuonTra();
+    public ArrayList<PhieuMuonTra> LayPhieuMuonTra(){
+        return pmDao.LayPhieuMuonTra();
     }
-//    public static void main(String[] args) {
-//        PhieuMuonTraService a = new PhieuMuonTraService();
-//        System.out.println(a.getSlPhieuMuonTra());
-//    }
+    public ArrayList<PhieuMuonTra> TimPhieu(String maPMUON,String maSV){
+        return pmDao.TimPhieu(maPMUON, maSV);
+    }
+    public static void main(String[] args) {
+        PhieuMuonTraService a = new PhieuMuonTraService();
+        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
+        Tim = a.TimPhieu("02", "2017601707");
+        for(PhieuMuonTra item : Tim){
+            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
+        }
+    }
 }

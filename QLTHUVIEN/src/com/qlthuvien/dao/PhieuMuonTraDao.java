@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class PhieuMuonTraDao extends Dao {
 
-    public int getSlPhieuMuon() {
+    public int LaySlPhieuMuon() {
         try {
             conn = JDBCConnection.getJDBCConnection();
             int sl = 0;
@@ -45,7 +45,7 @@ public class PhieuMuonTraDao extends Dao {
         }
         return -1;
     }
-    public int themPhieuMuonTra(String mapm, String masv, float tongtien){
+    public int ThemPhieuMuonTra(String mapm, String masv, float tongtien){
         try {
             conn = JDBCConnection.getJDBCConnection();
             String sql = "insert into PHIEUMUONTRA(maPMUON,maSV,tongtien) values ('"+mapm+"','"+masv+"',"+tongtien+")";
@@ -59,7 +59,7 @@ public class PhieuMuonTraDao extends Dao {
         }
         return -1;
     }
-    public ArrayList<PhieuMuonTra> getPhieuMuonTra(){
+    public ArrayList<PhieuMuonTra> LayPhieuMuonTra(){
         ArrayList<PhieuMuonTra> listPhieu = new ArrayList<PhieuMuonTra>();
         
         try {
@@ -84,8 +84,38 @@ public class PhieuMuonTraDao extends Dao {
         }
         return null;
     }
+    public ArrayList<PhieuMuonTra> TimPhieu( String maPMUON , String maSV){
+        try {
+            ArrayList<PhieuMuonTra> listPhieu = new ArrayList<PhieuMuonTra>();
+            conn = JDBCConnection.getJDBCConnection();
+            String sql = "select * from PHIEUMUONTRA where maPMUON like '%"+maPMUON+"%' and maSV like '%"+maSV+"%'";
+            state = conn.createStatement();
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                PhieuMuonTra p = new PhieuMuonTra(
+                        rs.getString("maPMUON"), 
+                        rs.getString("ngayMuon"), 
+                        rs.getString("maSV"), 
+                        rs.getFloat("tongtien")
+                );
+                listPhieu.add(p);
+            }
+            return listPhieu;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            CloseAll();
+        }
+        return null;
+    }
     public static void main(String[] args) {
         PhieuMuonTraDao pm = new PhieuMuonTraDao();
-        System.out.println(pm.getSlPhieuMuon());
+//        System.out.println(pm.LaySlPhieuMuon());
+        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
+        Tim = pm.LayPhieuMuonTra();
+        for(PhieuMuonTra item : Tim){
+            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
+        }
     }
 }

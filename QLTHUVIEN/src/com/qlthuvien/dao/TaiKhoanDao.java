@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +27,8 @@ import java.util.logging.Logger;
 public class TaiKhoanDao extends Dao{
 
     public static boolean loaiTK;
+    public static String tklogin="", mklogin="";
     
-
     public TaiKhoanDao() {
         loaiTK = false;
     }
@@ -42,10 +43,12 @@ public class TaiKhoanDao extends Dao{
             pre.setString(1, tk);
             pre.setString(2, mk);
             rs = pre.executeQuery();
-
+  
             String pass = "";
             while (rs.next()) {
                 pass = rs.getString("mk");
+                tklogin = rs.getString("tk");
+                mklogin = rs.getString("mk");
                 if (rs.getInt("loaitk") == 0) {
                     loaiTK = false;
                 } else {
@@ -64,15 +67,7 @@ public class TaiKhoanDao extends Dao{
         return false;
     }
 
-//    public static void main(String[] args) {
-//        TaiKhoanDao tkd = new TaiKhoanDao();
-//        boolean kq = tkd.XacThucTaiKhoan("admin", "admin");
-//        if (kq == true) {
-//            System.out.println("Thanh cong");
-//        } else {
-//            System.out.println("That bai");
-//        }
-//    }
+
 
     public List<TaiKhoan> gettaikhoan() {
         conn = JDBCConnection.getJDBCConnection();
@@ -114,7 +109,6 @@ public class TaiKhoanDao extends Dao{
                 String Tk = rs.getString("tk");
                 String Mk = rs.getString("mk");
                 boolean loaiTK = rs.getBoolean("loaiTk");
-
                 TaiKhoan taikhoan = new TaiKhoan(Tk, Mk, loaiTK);
                 list.add(taikhoan);
             }
@@ -136,7 +130,7 @@ public class TaiKhoanDao extends Dao{
             pre = conn.prepareStatement(sql);
             pre.setString(1, tk);
             n = pre.executeUpdate(); 
-           System.out.println("n ="+n);
+           //System.out.println("n ="+n);
        }catch(SQLException ex){
            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -155,6 +149,32 @@ public class TaiKhoanDao extends Dao{
         }
         return n;
     }
+   public int DeleteTaiKhoan(String tk){
+       conn = JDBCConnection.getJDBCConnection();
+       int n = 0;
+        try {
+            String sql = "Delete from TAIKHOAN  where tk =?";
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tk);
+            n = pre.executeUpdate();                     
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return n;
+    }
+   public int SuaMK(String tk, String mk) {
+       int n = 0;
+       conn = JDBCConnection.getJDBCConnection();
+       try{
+        String sql = "UPDATE TAIKHOAN SET mk=? where tk=? ";
+        pre = conn.prepareStatement(sql);
+        pre.setString(1, mk);
+        pre.setString(2, tk);
+        n = pre.executeUpdate();
+       }catch(SQLException ex){
+           Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return n;
+    }
    
- 
 }
