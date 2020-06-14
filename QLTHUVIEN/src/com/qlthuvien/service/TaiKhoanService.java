@@ -42,4 +42,7 @@ public class TaiKhoanService {
     public int themTaikhoan(TaiKhoan taikhoan){
         return taiKhoanDao.themTaiKhoan(taikhoan);
     }
+    public int deleteTaikhoan(String tentaikhoan){
+        return taiKhoanDao.DeleteTaiKhoan(tentaikhoan);
+    }
 }

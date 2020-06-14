@@ -312,13 +312,13 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         txtTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 0)));
         passTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 1)));
         String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2));
-        System.out.println("loaitj"+loaitk);
+        //System.out.println("loaitk"+loaitk);
         if("Admin".equals(loaitk)){
-            radioadmin.isSelected();
+            radioadmin.setSelected(true);
             
         }
         else{
-            radiouser.isSelected();
+            radiouser.setSelected(true);
         }
         
     }//GEN-LAST:event_taikhoanTableMouseClicked
@@ -334,7 +334,13 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btTimkiemActionPerformed
 
     private void btXoatkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoatkActionPerformed
-        
+        int kq= JOptionPane.showConfirmDialog(QLTaiKhoanJPanel.this,"Ban co chac xoa tai khoan nay ?");
+        if(kq==JOptionPane.YES_OPTION){
+            String tk = txtTk.getText();
+            taikhoanService.deleteTaikhoan(tk);
+            DisplayTaiKhoan(taikhoanService.getTaikhoan());
+            ClearText1();
+        }
     }//GEN-LAST:event_btXoatkActionPerformed
 
     private void btXoatextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoatextActionPerformed
