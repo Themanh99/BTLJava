@@ -29,7 +29,7 @@ public class TaiKhoanDao extends Dao{
     public static boolean loaiTK;
     public static String tklogin="", mklogin="";
     public static boolean loaitklogin;
-    public static ArrayList<TaiKhoan> list = new ArrayList<TaiKhoan>();
+    public static ArrayList<TaiKhoan> list1 = new ArrayList<TaiKhoan>();
     
     public TaiKhoanDao() {
         loaiTK = false;
@@ -80,7 +80,7 @@ public class TaiKhoanDao extends Dao{
             state = conn.createStatement();
             String sql = "select * from TAIKHOAN";
             rs = state.executeQuery(sql);
-            //List<TaiKhoan> list = new ArrayList<TaiKhoan>();
+            List<TaiKhoan> list = new ArrayList<TaiKhoan>();
             while (rs.next()) {
                 String Tk = rs.getString("tk");
                 String Mk = rs.getString("mk");
@@ -88,6 +88,7 @@ public class TaiKhoanDao extends Dao{
 
                 TaiKhoan taikhoan = new TaiKhoan(Tk, Mk, Loaitk);
                 list.add(taikhoan);
+                list1.add(taikhoan);
             }
             return list;
         } catch (SQLException ex) {

@@ -5,7 +5,7 @@
  */
 package com.qlthuvien.view;
 
-import static com.qlthuvien.dao.TaiKhoanDao.list;
+import static com.qlthuvien.dao.TaiKhoanDao.list1;
 import com.qlthuvien.model.Sach;
 import com.qlthuvien.model.TaiKhoan;
 import com.qlthuvien.service.SachService;
@@ -310,8 +310,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
         txtTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 0)));
         passTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 1)));
-        String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2));
-        //System.out.println("loaitk"+loaitk);
+        String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2)); 
         if ("Admin".equals(loaitk)) {
             radioadmin.setSelected(true);
 
@@ -323,8 +322,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
     private void btLammoitkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLammoitkActionPerformed
         defaultTaiKhoanTable.setRowCount(0);
-        DisplayTaiKhoan(taikhoanService.TimTk(TOOL_TIP_TEXT_KEY));
-        DisplayTaiKhoan(list);
+        DisplayTaiKhoan(taikhoanService.getTaikhoan());
     }//GEN-LAST:event_btLammoitkActionPerformed
 
     private void btTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimkiemActionPerformed
@@ -347,6 +345,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btXoatextActionPerformed
 
     private void btresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btresetActionPerformed
+        
         String tk = txtTk.getText();
         if (taikhoanService.resetPass(tk) > 0) {
             JOptionPane.showMessageDialog(null,
@@ -378,10 +377,10 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
                     "Không được để trống mật khẩu!", "Thông Báo",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            String check = txtTk.getText();
+            //String check = txtTk.getText();
             int n = 0;
-            for (TaiKhoan taikhoanlist : list) {
-                if (check.trim().equals(taikhoanlist.getTk().trim())) {
+            for (TaiKhoan taikhoanlist : list1) {
+                if (tk.trim().equals(taikhoanlist.getTk().trim())) {
                     n++;
                     break;
                 }
