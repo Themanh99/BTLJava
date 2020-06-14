@@ -106,6 +106,26 @@ begin
 	update Sach set soluong=soluong-@slban where maSach=@masach
 end
 
+
+create trigger tg_themchitietphieunhap
+on CHITIETPN
+for insert
+as
+begin
+	declare @maPN char(6)
+	declare @maSach char(6)
+	declare @slnhap int
+	declare @slcon int
+	set @maPN =(	select @maPN
+						from inserted)
+	set @maSach=(	select maSach
+						from inserted)
+	set @slnhap = (	select soluongnhap
+						from inserted)
+	
+	update Sach set soluong=soluong+@slnhap where maSach=@masach
+end
+
 create trigger tg_chitietphieumuontra
 on CHITIETMUONTRA
 for insert
@@ -120,29 +140,18 @@ begin
 	update Sach set soluong=soluong-@slmuon where maSach=@maSach
 end
 
-create trigger tg_trasach
-on CHITIETMUONTRA
-for update
-as
-begin
-	declare @maSach char(6)
-	declare @slmuon int
-		set @maSach = (select maSach from deleted)
-		set @slmuon = (select soluong from deleted)
-	update Sach set soluong=soluong+@slmuon where maSach=@maSach
-end
 select * from CHITIETMUONTRA
 select * from CHITIETMUA where maPMUA='PM0006'
 select * from SACH where maSach='MS0001';
+select * from PHIEUNHAP
+select * from CHITIETPN
+select * from PHIEUMUA
 
-insert into PHIEUMUA(maPMUA,maSV,tongtien) values
-('PM0006','2017601707',23604)
+insert into PHIEUNHAP(maPN,maNCC,tongtien) values
+('PN0006','NCC001',23604)
 
-insert into CHITIETMUA values('PM0006','MS0001',10,30000)
-insert into CHITIETMUA values('PM0006','MS0002',10,30000)
-insert into CHITIETMUA values('PM0006','MS0003',10,30000)
+insert into CHITIETPN(maPN,maSach,soluongnhap,gia) values('PN0006','MS0001',2,200)
 
 
-insert into SACH (maSach,tenSach,tenTacGia,tenNXB,giaSach ,theLoai,trangthai ,soluong )
-values 
-('MS0012' ,'sql server'     ,'Nguyen Duc Nhat' ,'Nha xuat ban KHKT'      ,35000,'sach giao khoa'  ,'false',0),
+select * from sach where maSach like '%MS0020%' and tenSach like '%%' and tenTacGia like'%%' and tenNXB like '%%' and theLoai like '%%'
+
