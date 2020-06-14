@@ -37,7 +37,7 @@ public class ChiTietMuonTraDao extends Dao {
             }
             return sl;
         } catch (SQLException ex) {
-            Logger.getLogger(PhieuMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChiTietMuonTra.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             CloseAll();
         }
@@ -55,17 +55,45 @@ public class ChiTietMuonTraDao extends Dao {
                 String maPMuon = rs.getString("maPMuon");
                 String maSach = rs.getString("maSach");
                 int soluong  = rs.getInt("soluong");
-                String ngaytra = rs.getString("ngaytra");
+                String ngaytra = rs.getString("ngayTra");
                 float gia = rs.getFloat("gia");
                 ChiTietMuonTra ct = new ChiTietMuonTra(maPMuon, maSach, soluong, ngaytra, gia);
                 list.add(ct);
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(PhieuMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChiTietMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             CloseAll();
         }
         return null;
+    }
+    public int TraSach(String maP, ArrayList<String> sach){
+        try {
+            conn = JDBCConnection.getJDBCConnection();
+            String sql = "update CHITIETMUONTRA set ngayTra = getdate() where maPMUON =? and maSach=?";
+            pre = conn.prepareStatement(sql);
+            for(String s : sach){
+                pre.setString(1, maP);
+                pre.setString(2, s);
+            }
+            int sl = pre.executeUpdate();
+            return sl;
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiTietMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+        ChiTietMuonTraDao c = new ChiTietMuonTraDao();
+        ArrayList<ChiTietMuonTra> list = c.layChiTietMuonTra("PM0007");
+        if(list==null)
+            System.out.println("no");
+        for(ChiTietMuonTra item : list){
+            System.out.println(item.getNgaytra());
+        }
+        
     }
 }

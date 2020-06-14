@@ -31,6 +31,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
     private SinhVienService svService;
     private PhieuMuonTraService pmtService;
     private ChiTietMuonTraService ctmtService;
+    private static boolean ketqua = false;
     public XacNhanMuonJFrame() {
         initComponents();
         svService = new SinhVienService();
@@ -70,6 +71,14 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         return tong;
     }
 
+    public static boolean getKetqua() {
+        return ketqua;
+    }
+
+    public static void setKetqua(boolean ketqua1) {
+        ketqua = ketqua1;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +109,11 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         btXong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Phiếu Mượn");
@@ -286,13 +300,15 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
 
     private void btXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongActionPerformed
         // TODO add your handling code here:
-        int sl1 = pmtService.insertPhieuMuonTra(txtMaPhieuMuon.getText(),txtMasv.getText(), getTong());
+        int sl1 = pmtService.ThemPhieuMuonTra(txtMaPhieuMuon.getText(),txtMasv.getText(), getTong());
         int sl2 = ctmtService.themChiTietMuonTra(txtMaPhieuMuon.getText(),QLMuonSachJPanel.getGioHang());
         if(sl1==1&&sl2>0){
             JOptionPane.showMessageDialog(null,"Thành công");
+            setKetqua(true);
         }
         else{
             JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");
+            setKetqua(false);
         }
         this.dispose();
     }//GEN-LAST:event_btXongActionPerformed
@@ -301,6 +317,11 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         btXong.setEnabled(false);
     }//GEN-LAST:event_txtMasvKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        setKetqua(false);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

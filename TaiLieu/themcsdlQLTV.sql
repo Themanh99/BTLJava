@@ -120,6 +120,17 @@ begin
 	update Sach set soluong=soluong-@slmuon where maSach=@maSach
 end
 
+create trigger tg_trasach
+on CHITIETMUONTRA
+for update
+as
+begin
+	declare @maSach char(6)
+	declare @slmuon int
+		set @maSach = (select maSach from deleted)
+		set @slmuon = (select soluong from deleted)
+	update Sach set soluong=soluong+@slmuon where maSach=@maSach
+end
 select * from CHITIETMUONTRA
 select * from CHITIETMUA where maPMUA='PM0006'
 select * from SACH where maSach='MS0001';

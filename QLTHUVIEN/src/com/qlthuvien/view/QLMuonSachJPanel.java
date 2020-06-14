@@ -22,12 +22,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLMuonSachJPanel extends javax.swing.JPanel {
 
-    DefaultTableModel defaultSachTable, defaultGioTable;
-    SachService sachservice;
-    public static Hashtable<String, GioHang> dsGioHang;
-    int index = -1,//lay chi so hang trong bang sach
-     count = 0;// so luong hang co trong gio;
-    float tongtien = 0;
+    private DefaultTableModel defaultSachTable, defaultGioTable;
+    private SachService sachservice;
+    private static Hashtable<String, GioHang> dsGioHang;
+    private int index = -1,//lay chi so hang trong bang sach
+            count = 0;// so luong hang co trong gio;
+    private XacNhanMuonJFrame xn;
+
     public static Hashtable<String, GioHang> getGioHang() {
         return dsGioHang;
     }
@@ -41,7 +42,26 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         dsGioHang = new Hashtable<String, GioHang>();
         HienThiSachTable();
         KhoiTaoGioMuonTable();
+        Thread tudonglammoi = new Thread() {
+            @Override
+            public void run() {
+                do {
 
+                    if (XacNhanMuonJFrame.getKetqua()) {
+                        lammoi();
+                        XacNhanMuonJFrame.setKetqua(false);
+
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                } while (1 == 1);
+            }
+        };
+        tudonglammoi.start();
     }
 
     public void HienThiSachTable() {
@@ -89,31 +109,33 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         defaultGioTable.addColumn("Số Lượng");
         defaultGioTable.addColumn("Giá");
     }
-    private List<String> Check(Hashtable<String,GioHang> gh, List<Sach> sachmuon){
+
+    private List<String> Check(Hashtable<String, GioHang> gh, List<Sach> sachmuon) {
         Enumeration<String> enu = gh.keys();
         ArrayList<String> dsloi = new ArrayList<String>();
-        Hashtable<String,Sach> tg = new Hashtable<String,Sach>();
-        
+        Hashtable<String, Sach> tg = new Hashtable<String, Sach>();
+
         //Lay ds sach muon;
-        for(Sach s : sachmuon){
+        for (Sach s : sachmuon) {
             String ms = s.getMaSach();
             tg.put(ms, s);
         }
-        while(enu.hasMoreElements()){
+        while (enu.hasMoreElements()) {
             String key = enu.nextElement();
             //lay gia tri ma sach, so luong trong dsGioHang
             GioHang value = gh.get(key);
             String ms = value.getMasach();
             int somuon = value.getSoluong();
             int soco = tg.get(ms).getSoluong();
-            if(somuon>soco){
-            String tensach = tg.get(ms).getTenSach();
-            dsloi.add(tensach);
+            if (somuon > soco) {
+                String tensach = tg.get(ms).getTenSach();
+                dsloi.add(tensach);
+            }
         }
-        }   
-        
+
         return dsloi;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -416,7 +438,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         String tentacgia = txTacgia.getText();
         String theloai = txTheloai.getText();
         String tennxb = txNhaxuatban.getText();
-        
+
         List<Sach> listSach = sachservice.TimSachMuon(masach, tensach, tentacgia, tennxb, theloai);
         defaultSachTable.setRowCount(0);
         for (Sach sach : listSach) {
@@ -458,39 +480,44 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
 
     private void btMuon(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuon
         // TODO add your handling code here:
-        if(count > 0){
-        dsGioHang.clear();
-        
-        for(int i=0;i<count;i++){
-            String masach = String.valueOf(tbGio.getValueAt(i, 0));
-            String tensach = String.valueOf(tbGio.getValueAt(i, 1));
-            int soluong = Integer.parseInt(String.valueOf(tbGio.getValueAt(i, 2)));
-            float gia = Float.parseFloat(String.valueOf(tbGio.getValueAt(i, 3)));
-            
-            GioHang gh = new GioHang(masach,tensach,soluong,gia);
-            tongtien += soluong * gia;
-            dsGioHang.put(masach, gh);
-        }
-        
-        
-        List<String> dsloi = Check(dsGioHang, sachservice.getSachMuon());
-        if(dsloi.isEmpty()){
-            XacNhanMuonJFrame xn = new XacNhanMuonJFrame();
-            xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            xn.setVisible(true);         
-        }else{
-            String tb= "";
-            for(String t : dsloi){
-                tb+=t+" ";
-            }
-            tb+="Khong du so luong de cho muon";
-            JOptionPane.showMessageDialog(null,tb, "Thông báo",JOptionPane.ERROR_MESSAGE);
-        }
-        
-        }else
-            JOptionPane.showMessageDialog(null,"Chua chon sach","Thông báo",JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_btMuon
+        if (count > 0) {
+            dsGioHang.clear();
 
+            for (int i = 0; i < count; i++) {
+                String masach = String.valueOf(tbGio.getValueAt(i, 0));
+                String tensach = String.valueOf(tbGio.getValueAt(i, 1));
+                int soluong = Integer.parseInt(String.valueOf(tbGio.getValueAt(i, 2)));
+                float gia = Float.parseFloat(String.valueOf(tbGio.getValueAt(i, 3)));
+
+                GioHang gh = new GioHang(masach, tensach, soluong, gia);
+                
+                dsGioHang.put(masach, gh);
+            }
+
+            List<String> dsloi = Check(dsGioHang, sachservice.getSachMuon());
+            if (dsloi.isEmpty()) {
+                xn = new XacNhanMuonJFrame();
+                xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                xn.setVisible(true);
+            } else {
+                String tb = "";
+                for (String t : dsloi) {
+                    tb += t + " ";
+                }
+                tb += "Khong du so luong de cho muon";
+                JOptionPane.showMessageDialog(null, tb, "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else
+            JOptionPane.showMessageDialog(null, "Chua chon sach", "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btMuon
+    private void lammoi() {
+        HienThiSachTable();
+        KhoiTaoGioMuonTable();
+        index = -1;
+        count = 0;
+        dsGioHang.clear();
+    }
     private void btTaomoi(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaomoi
         // TODO add your handling code here:
         dsGioHang.clear();
