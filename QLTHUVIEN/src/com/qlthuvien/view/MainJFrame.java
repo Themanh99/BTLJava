@@ -5,7 +5,11 @@
  */
 package com.qlthuvien.view;
 
+import com.qlthuvien.dao.TaiKhoanDao;
+import static com.qlthuvien.dao.TaiKhoanDao.tklogin;
 import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -97,6 +101,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btDoimk = new javax.swing.JButton();
+        viewtklogin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -241,6 +246,9 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        viewtklogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        viewtklogin.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -248,21 +256,27 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
-                .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(49, 49, 49))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addComponent(viewtklogin))
+                .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2)
-                    .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(viewtklogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,7 +293,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 716, Short.MAX_VALUE))
+                .addGap(0, 715, Short.MAX_VALUE))
         );
 
         pack();
@@ -328,10 +342,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btQLTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTaiKhoanActionPerformed
         // TODO add your handling code here:
-        
-        XoaMauButton();
-        btQLTaiKhoan.setBackground(Color.CYAN);
-        HienThiPanel(qlTaiKhoanJPanel);
+        if(TaiKhoanDao.loaitklogin){
+            XoaMauButton();
+            btQLTaiKhoan.setBackground(Color.CYAN);
+            HienThiPanel(qlTaiKhoanJPanel);
+        }
+        else{
+            this.qlTaiKhoanJPanel.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Chức năng này không dành cho user","Thông báo",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btQLTaiKhoanActionPerformed
 
     private void btQLTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTraSachActionPerformed
@@ -420,5 +439,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField viewtklogin;
     // End of variables declaration//GEN-END:variables
 }
