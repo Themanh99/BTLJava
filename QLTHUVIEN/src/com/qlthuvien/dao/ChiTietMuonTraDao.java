@@ -73,11 +73,13 @@ public class ChiTietMuonTraDao extends Dao {
             conn = JDBCConnection.getJDBCConnection();
             String sql = "update CHITIETMUONTRA set ngayTra = getdate() where maPMUON =? and maSach=?";
             pre = conn.prepareStatement(sql);
+            int sl = 0;
             for(String s : sach){
                 pre.setString(1, maP);
                 pre.setString(2, s);
+                sl += pre.executeUpdate();
             }
-            int sl = pre.executeUpdate();
+            
             return sl;
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietMuonTraDao.class.getName()).log(Level.SEVERE, null, ex);
