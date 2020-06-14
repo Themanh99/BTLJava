@@ -5,11 +5,13 @@
  */
 package com.qlthuvien.view;
 
+import static com.qlthuvien.dao.TaiKhoanDao.list;
 import com.qlthuvien.model.Sach;
 import com.qlthuvien.model.TaiKhoan;
 import com.qlthuvien.service.SachService;
 import com.qlthuvien.service.TaiKhoanService;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,16 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
- 
+ *
  * @author Administrator
  */
 public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
     DefaultTableModel defaultTaiKhoanTable;
     TaiKhoanService taikhoanService;
-    int index=-1,count=0;
-    
-    
+    int index = -1, count = 0;
+
     public QLTaiKhoanJPanel() {
         initComponents();
         taikhoanService = new TaiKhoanService();
@@ -37,16 +38,16 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
     private void ClearText1() {
         txtTk.setText(null);
         radioadmin.isSelected();
-        passTk.setText(null);       
+        passTk.setText(null);
     }
-    
+
     private void DisplayTaiKhoan(List<TaiKhoan> list) {
         defaultTaiKhoanTable.setRowCount(0);
         for (TaiKhoan taikhoan : list) {
-            defaultTaiKhoanTable.addRow(new Object[]{taikhoan.getTk(), taikhoan.getMk(), (taikhoan.getLoaiTk() ? "Admin":"User")});
+            defaultTaiKhoanTable.addRow(new Object[]{taikhoan.getTk(), taikhoan.getMk(), (taikhoan.getLoaiTk() ? "Admin" : "User")});
         }
     }
-    
+
     public void HienThiTaiKhoanTable() {
         defaultTaiKhoanTable = new DefaultTableModel();
 
@@ -54,10 +55,11 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
         defaultTaiKhoanTable.addColumn("Tên Tài Khoản");
         defaultTaiKhoanTable.addColumn("Mật Khẩu");
-        defaultTaiKhoanTable.addColumn("Loại Tài Khoản");    
+        defaultTaiKhoanTable.addColumn("Loại Tài Khoản");
         taikhoanTable.setDefaultEditor(Object.class, null);
         DisplayTaiKhoan(taikhoanService.getTaikhoan());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -305,35 +307,34 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
     private void taikhoanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taikhoanTableMouseClicked
         int index = taikhoanTable.getSelectedRow();
-        
-        
+
         txtTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 0)));
         passTk.setText(String.valueOf(taikhoanTable.getValueAt(index, 1)));
         String loaitk = String.valueOf(taikhoanTable.getValueAt(index, 2));
         //System.out.println("loaitk"+loaitk);
-        if("Admin".equals(loaitk)){
+        if ("Admin".equals(loaitk)) {
             radioadmin.setSelected(true);
-            
-        }
-        else{
+
+        } else {
             radiouser.setSelected(true);
         }
-        
+
     }//GEN-LAST:event_taikhoanTableMouseClicked
 
     private void btLammoitkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLammoitkActionPerformed
         defaultTaiKhoanTable.setRowCount(0);
-        DisplayTaiKhoan(taikhoanService.getTaikhoan());
+        DisplayTaiKhoan(taikhoanService.TimTk(TOOL_TIP_TEXT_KEY));
+        DisplayTaiKhoan(list);
     }//GEN-LAST:event_btLammoitkActionPerformed
 
     private void btTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimkiemActionPerformed
         String tk = txtTimtk.getText();
-        DisplayTaiKhoan(taikhoanService.TimTk(tk)); 
+        DisplayTaiKhoan(taikhoanService.TimTk(tk));
     }//GEN-LAST:event_btTimkiemActionPerformed
 
     private void btXoatkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoatkActionPerformed
-        int kq= JOptionPane.showConfirmDialog(QLTaiKhoanJPanel.this,"Ban co chac xoa tai khoan nay ?");
-        if(kq==JOptionPane.YES_OPTION){
+        int kq = JOptionPane.showConfirmDialog(QLTaiKhoanJPanel.this, "Ban co chac xoa tai khoan nay ?");
+        if (kq == JOptionPane.YES_OPTION) {
             String tk = txtTk.getText();
             taikhoanService.deleteTaikhoan(tk);
             DisplayTaiKhoan(taikhoanService.getTaikhoan());
@@ -347,44 +348,66 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
     private void btresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btresetActionPerformed
         String tk = txtTk.getText();
-        if(taikhoanService.resetPass(tk)>0){
-        JOptionPane.showMessageDialog(null,
-                "Reset thành công! Mật khẩu mặc định là : 1", "Thông Báo",
-                JOptionPane.INFORMATION_MESSAGE);
-        DisplayTaiKhoan(taikhoanService.getTaikhoan());
-        ClearText1();}
-        else{
+        if (taikhoanService.resetPass(tk) > 0) {
             JOptionPane.showMessageDialog(null,
-                "Reset không thành công!", "Thông Báo",JOptionPane.ERROR_MESSAGE);
+                    "Reset thành công! Mật khẩu mặc định là : 1", "Thông Báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+            DisplayTaiKhoan(taikhoanService.getTaikhoan());
+            ClearText1();
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Reset không thành công!", "Thông Báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btresetActionPerformed
 
     private void btThemtkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemtkActionPerformed
-        
         String tk = txtTk.getText();
-        String mk= String.valueOf(passTk.getPassword());
-        
+        String mk = String.valueOf(passTk.getPassword());
         boolean s;
-        if(radioadmin.isSelected()){
-            s=true;
-        }else{
-            s=false;
+        if (radioadmin.isSelected()) {
+            s = true;
+        } else {
+            s = false;
         }
-        TaiKhoan taikhoan = new TaiKhoan(tk, mk, s);
-        if(taikhoanService.themTaikhoan(taikhoan)>0){
+        if ("".equals(tk)) {
             JOptionPane.showMessageDialog(null,
-                "Thêm thành công!", "Thông Báo",
-                JOptionPane.INFORMATION_MESSAGE);
-            DisplayTaiKhoan(taikhoanService.getTaikhoan());
-            ClearText1();
-        }else{
+                    "Không được để trống tài khoản!", "Thông Báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if ("".equals(mk)) {
             JOptionPane.showMessageDialog(null,
-                "Thêm Thât Bại", "Thông Báo",
-                JOptionPane.ERROR_MESSAGE);
+                    "Không được để trống mật khẩu!", "Thông Báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            String check = txtTk.getText();
+            int n = 0;
+            for (TaiKhoan taikhoanlist : list) {
+                if (check.trim().equals(taikhoanlist.getTk().trim())) {
+                    n++;
+                    break;
+                }
+            }
+            if (n != 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Tên tài khoản đã tồn tại!", "Thông Báo",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                TaiKhoan taikhoan = new TaiKhoan(tk, mk, s);
+                if (taikhoanService.themTaikhoan(taikhoan) > 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Thêm thành công!", "Thông Báo",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    DisplayTaiKhoan(taikhoanService.getTaikhoan());
+                    ClearText1();
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Thêm Thât Bại", "Thông Báo",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        
     }//GEN-LAST:event_btThemtkActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLammoitk;

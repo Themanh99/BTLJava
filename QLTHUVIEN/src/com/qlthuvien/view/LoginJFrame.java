@@ -5,6 +5,7 @@
  */
 package com.qlthuvien.view;
 
+import static com.qlthuvien.dao.TaiKhoanDao.loaitklogin;
 import static com.qlthuvien.dao.TaiKhoanDao.mklogin;
 import static com.qlthuvien.dao.TaiKhoanDao.tklogin;
 import com.qlthuvien.service.TaiKhoanService;
@@ -123,15 +124,22 @@ public class LoginJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String tk = txtTK.getText();
         String mk = new String(txtMK.getPassword());
-        
+        if ("".equals(tk)) {
+            JOptionPane.showMessageDialog(null,
+                    "Bạn chưa nhập tài khoản!", "Thông Báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if ("".equals(mk)) {
+            JOptionPane.showMessageDialog(null,
+                    "Bạn chưa nhập mật khẩu!", "Thông Báo",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
         if(taiKhoanService.XacThucTaiKhoan(tk,mk)){
             new MainJFrame().setVisible(true);
             this.dispose();
-            System.out.println("tk login" +tklogin);
-            System.out.println("mk login" +mklogin);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Sai Tai khoan hoặc mật khẩu","Thông báo",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sai tài khoản hoặc mật khẩu","Thông báo",JOptionPane.ERROR_MESSAGE);
+        }
         }
     }//GEN-LAST:event_btDangNhapActionPerformed
 
