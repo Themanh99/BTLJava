@@ -123,8 +123,6 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Loại Tài Khoản :");
 
-        passTk.setText("1234567890");
-
         btLammoitk.setText("Làm Mới");
         btLammoitk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +363,14 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
         
         String tk = txtTk.getText();
         String mk= String.valueOf(passTk.getPassword());
-        TaiKhoan taikhoan = new TaiKhoan(tk, mk, true);
+        
+        boolean s;
+        if(radioadmin.isSelected()){
+            s=true;
+        }else{
+            s=false;
+        }
+        TaiKhoan taikhoan = new TaiKhoan(tk, mk, s);
         if(taikhoanService.themTaikhoan(taikhoan)>0){
             JOptionPane.showMessageDialog(null,
                 "Thêm thành công!", "Thông Báo",
