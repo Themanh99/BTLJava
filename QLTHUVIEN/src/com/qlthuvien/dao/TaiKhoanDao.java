@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 public class TaiKhoanDao extends Dao{
 
     public static boolean loaiTK;
+    public static String tk, mk;
     
 
     public TaiKhoanDao() {
@@ -46,6 +47,8 @@ public class TaiKhoanDao extends Dao{
             String pass = "";
             while (rs.next()) {
                 pass = rs.getString("mk");
+                tk = rs.getString("tk");
+                mk = rs.getString("mk");
                 if (rs.getInt("loaitk") == 0) {
                     loaiTK = false;
                 } else {
@@ -64,15 +67,7 @@ public class TaiKhoanDao extends Dao{
         return false;
     }
 
-//    public static void main(String[] args) {
-//        TaiKhoanDao tkd = new TaiKhoanDao();
-//        boolean kq = tkd.XacThucTaiKhoan("admin", "admin");
-//        if (kq == true) {
-//            System.out.println("Thanh cong");
-//        } else {
-//            System.out.println("That bai");
-//        }
-//    }
+
 
     public List<TaiKhoan> gettaikhoan() {
         conn = JDBCConnection.getJDBCConnection();
@@ -168,5 +163,27 @@ public class TaiKhoanDao extends Dao{
         }    
         return n;
     }
- 
+   public int SuaMK(String tk, String mk) {
+       int n = 0;
+       conn = JDBCConnection.getJDBCConnection();
+       try{
+        String sql = "UPDATE TAIKHOAN SET mk=? where tk=? ";
+        pre = conn.prepareStatement(sql);
+        pre.setString(1, mk);
+        pre.setString(2, tk);
+        n = pre.executeUpdate();
+       }catch(SQLException ex){
+           Logger.getLogger(TaiKhoanDao.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       return n;
+    }
+//     public static void main(String[] args) {
+//        TaiKhoanDao tkd = new TaiKhoanDao();
+//        int kq = tkd.SuaMK("manh", "manh");
+//        if (kq == 1) {
+//            System.out.println("Thanh cong");
+//        } else {
+//            System.out.println("That bai");
+//        }
+//    }
 }

@@ -64,7 +64,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         txtMasach.setText(null);
         txtTensach.setText(null);
         txtTennxb.setText(null);
-        txtGiasach.setText(null);
+        txtTheloai.setText(null);
         txtTentacgia.setText(null);
         viewtxtGiasach.setText(null);
         viewtxtMasach.setText(null);
@@ -91,7 +91,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
         txtTensach = new javax.swing.JTextField();
         txtTentacgia = new javax.swing.JTextField();
         txtTennxb = new javax.swing.JTextField();
-        txtGiasach = new javax.swing.JTextField();
+        txtTheloai = new javax.swing.JTextField();
         btTimms = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -134,7 +134,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Tên NXB : ");
 
-        jLabel6.setText("Giá Sách :");
+        jLabel6.setText("Thể Loại  :");
 
         btTimms.setText("Tìm");
         btTimms.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(8, 8, 8)
-                        .addComponent(txtGiasach)))
+                        .addComponent(txtTheloai)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btTimms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -243,7 +243,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtGiasach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTheloai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -465,8 +465,9 @@ public class QLSachJPanel extends javax.swing.JPanel {
         String masach = txtMasach.getText();
         String tensach = txtTensach.getText();
         String tentacgia = txtTentacgia.getText();
-        String theloai = txtTennxb.getText();
-        String tennxb = txtGiasach.getText();
+        //String theloai = txtTennxb.getText();
+        String tennxb = txtTennxb.getText();
+        String theloai = txtTheloai.getText();
         boolean Trangthai = true;
         if (radioMuon.isSelected()) {
             Trangthai = false;
@@ -514,7 +515,8 @@ public class QLSachJPanel extends javax.swing.JPanel {
                 "Cập nhật thành công", "Thông Báo",
                 JOptionPane.INFORMATION_MESSAGE);
         Display(sachService.getSach());
-        ClearText();}
+        //ClearText();
+        }
         else{
             JOptionPane.showMessageDialog(null,
                 "Cập nhật thất bại", "Thông Báo",
@@ -564,11 +566,11 @@ public class QLSachJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton radioAll;
     private javax.swing.JRadioButton radioBan;
     private javax.swing.JRadioButton radioMuon;
-    private javax.swing.JTextField txtGiasach;
     private javax.swing.JTextField txtMasach;
     private javax.swing.JTextField txtTennxb;
     private javax.swing.JTextField txtTensach;
     private javax.swing.JTextField txtTentacgia;
+    private javax.swing.JTextField txtTheloai;
     private javax.swing.JTextField viewtxtGiasach;
     private javax.swing.JTextField viewtxtMasach;
     private javax.swing.JTextField viewtxtSoluong;

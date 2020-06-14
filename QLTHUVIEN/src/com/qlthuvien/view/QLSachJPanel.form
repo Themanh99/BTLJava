@@ -130,7 +130,7 @@
                               <Component id="jLabel4" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="txtGiasach" max="32767" attributes="0"/>
+                          <Component id="txtTheloai" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -178,7 +178,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtGiasach" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTheloai" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -215,7 +215,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gi&#xe1; S&#xe1;ch :"/>
+            <Property name="text" type="java.lang.String" value="Th&#x1ec3; Lo&#x1ea1;i  :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMasach">
@@ -226,7 +226,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTennxb">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGiasach">
+        <Component class="javax.swing.JTextField" name="txtTheloai">
         </Component>
         <Component class="javax.swing.JButton" name="btTimms">
           <Properties>

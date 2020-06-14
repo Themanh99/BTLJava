@@ -45,4 +45,7 @@ public class TaiKhoanService {
     public int deleteTaikhoan(String tentaikhoan){
         return taiKhoanDao.DeleteTaiKhoan(tentaikhoan);
     }
+    public int suaMk(String tk,String mk){
+        return taiKhoanDao.SuaMK(tk, mk);
+    }
 }

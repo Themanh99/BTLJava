@@ -96,6 +96,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btDoimk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,6 +224,22 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Đăng xuất");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btDoimk.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btDoimk.setText("Đổi mật khẩu");
+        btDoimk.setMaximumSize(new java.awt.Dimension(103, 27));
+        btDoimk.setMinimumSize(new java.awt.Dimension(103, 27));
+        btDoimk.setPreferredSize(new java.awt.Dimension(103, 27));
+        btDoimk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDoimkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,7 +248,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
+                .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addGap(49, 49, 49))
         );
@@ -241,7 +260,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -259,7 +279,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 728, Short.MAX_VALUE))
+                .addGap(0, 716, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,6 +356,20 @@ public class MainJFrame extends javax.swing.JFrame {
         HienThiPanel(qlNhaCungCapJPanel);
     }//GEN-LAST:event_btQLNCCActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        LoginJFrame loginfr = new LoginJFrame();
+        loginfr.setBounds(400, 200, 500,400);
+        loginfr.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btDoimkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoimkActionPerformed
+        DoiMk doimk = new DoiMk();
+        doimk.setBounds(400, 200, 500,400);
+        doimk.setVisible(true);
+    }//GEN-LAST:event_btDoimkActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +406,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDoimk;
     private javax.swing.JButton btQLBanSach;
     private javax.swing.JButton btQLDocGia;
     private javax.swing.JButton btQLMuonTraSach;
