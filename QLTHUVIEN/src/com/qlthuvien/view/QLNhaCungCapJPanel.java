@@ -8,6 +8,8 @@ package com.qlthuvien.view;
 import com.qlthuvien.model.NCC;
 import com.qlthuvien.service.NCCService;
 import java.util.List;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,13 +23,14 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
      */
     DefaultTableModel defaultNCCTable;
     NCCService nccService;
+
     public QLNhaCungCapJPanel() {
         initComponents();
         nccService = new NCCService();
         HienThiSachTable();
         jPanel2.setVisible(false);
     }
-    
+
     private void HienThiSachTable() {
         defaultNCCTable = new DefaultTableModel();
 
@@ -44,12 +47,13 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
 
     private void Display(List<NCC> list) {
         defaultNCCTable.setRowCount(0);
-        for (NCC ncc : list) {           
-                defaultNCCTable.addRow(new Object[]{ncc.getMaNCC(),ncc.getTenNCC(),ncc.getSdtNCC(),ncc.getDiaChiNCC()});
-            
+        for (NCC ncc : list) {
+            defaultNCCTable.addRow(new Object[]{ncc.getMaNCC(), ncc.getTenNCC(), ncc.getSdtNCC(), ncc.getDiaChiNCC()});
+
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -308,6 +312,7 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
@@ -325,9 +330,8 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCapNhat, btLamMoi, btThem, btTim});
@@ -337,7 +341,6 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -355,9 +358,9 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(282, 282, 282))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btCapNhat, btLamMoi, btThem, btTim});
@@ -368,7 +371,7 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String mancc = txtMaNCC.getText();
         String tenncc = txtTenNCC.getText();
-        String sdt = txtDienThoai.getText();     
+        String sdt = txtDienThoai.getText();
         String diachi = txtDiaChi.getText();
         NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
         Display(nccService.TimNCC(ncc));
@@ -385,13 +388,12 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
     private void dsNCCTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dsNCCTableMouseClicked
         // TODO add your handling code here:
         int index = dsNCCTable.getSelectedRow();
-        txtMaNCC.setText(String.valueOf(defaultNCCTable.getValueAt(index,0)));
-        txtTenNCC.setText(String.valueOf(defaultNCCTable.getValueAt(index,1)));
-        txtDienThoai.setText(String.valueOf(defaultNCCTable.getValueAt(index,2)));
-        txtDiaChi.setText(String.valueOf(defaultNCCTable.getValueAt(index,3)));
-        
-     
-        
+        txtMaNCC.setText(String.valueOf(defaultNCCTable.getValueAt(index, 0)));
+        txtTenNCC.setText(String.valueOf(defaultNCCTable.getValueAt(index, 1)));
+        txtDienThoai.setText(String.valueOf(defaultNCCTable.getValueAt(index, 2)));
+        txtDiaChi.setText(String.valueOf(defaultNCCTable.getValueAt(index, 3)));
+
+
     }//GEN-LAST:event_dsNCCTableMouseClicked
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
@@ -404,19 +406,39 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String mancc = txtMaNCC1.getText();
         String tenncc = txtTenNCC1.getText();
-        String sdt = txtDienThoai1.getText();     
+        String sdt = txtDienThoai1.getText();
         String diachi = txtDiaChi1.getText();
-        NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
-        nccService.themNCC(ncc);
-        Display(nccService.getNCC());
-        jPanel2.setVisible(false);
+
+        String loi = "";
+        boolean kiemtra = true;
+
+        if (!Pattern.matches(".+", tenncc)) {
+            loi += "Tên nhà cung cấp không dược để trống\n";
+            kiemtra = false;
+        }
+        if (!Pattern.matches(".+", sdt)) {
+            loi += "Số điện thoại không dược để trống\n";
+            kiemtra = false;
+        }
+        if (!Pattern.matches(".+", diachi)) {
+            loi += "Địa chỉ không dược để trống\n";
+            kiemtra = false;
+        }
+        if (kiemtra == true) {
+            NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
+            nccService.themNCC(ncc);
+            Display(nccService.getNCC());
+            jPanel2.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, loi, "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btThem1ActionPerformed
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
         // TODO add your handling code here:
         String mancc = txtMaNCC.getText();
         String tenncc = txtTenNCC.getText();
-        String sdt = txtDienThoai.getText();     
+        String sdt = txtDienThoai.getText();
         String diachi = txtDiaChi.getText();
         NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
         nccService.CapNhatNCC(ncc);

@@ -58,6 +58,12 @@ public class NCC {
         this.diaChiNCC = diaChiNCC;
     }
 
+    @Override
+    public String toString() {
+        
+        return tenNCC;
+    }
+
     
     
     

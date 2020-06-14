@@ -27,9 +27,7 @@ public class NCCService {
     }
     
     public List<NCC> getNCC(){
-        List<NCC> list = new ArrayList<NCC>();
-        list = nccDao.getNCC();
-        return list;
+        return nccDao.getNCC();
     }
     
     public List<NCC> TimNCC(NCC ncc){

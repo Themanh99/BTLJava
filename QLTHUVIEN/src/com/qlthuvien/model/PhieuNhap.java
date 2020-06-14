@@ -13,14 +13,16 @@ public class PhieuNhap {
     private String maPN;
     private String ngaynhap;
     private String maNCC;
+    private float tongtien;
 
     public PhieuNhap() {
     }
 
-    public PhieuNhap(String maPN, String ngaynhap, String maNCC) {
+    public PhieuNhap(String maPN, String ngaynhap, String maNCC, float tongtien) {
         this.maPN = maPN;
         this.ngaynhap = ngaynhap;
         this.maNCC = maNCC;
+        this.tongtien = tongtien;
     }
 
     public String getMaPN() {
@@ -46,6 +48,18 @@ public class PhieuNhap {
     public void setMaNCC(String maNCC) {
         this.maNCC = maNCC;
     }
+
+    public float getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(float tongtien) {
+        this.tongtien = tongtien;
+    }
+
+    
+
+    
     
 
     

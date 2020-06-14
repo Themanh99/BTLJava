@@ -32,6 +32,7 @@ public class QLSachJPanel extends javax.swing.JPanel {
     public QLSachJPanel() {
         initComponents();
         sachService = new SachService();
+        radioAll.setSelected(true);
         HienThiQlSachTable();
 
     }

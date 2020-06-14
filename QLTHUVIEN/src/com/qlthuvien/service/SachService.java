@@ -64,7 +64,7 @@ public class SachService {
         return sachDao.TimSachMuon( masach, tensach, tentacgia, tennxb, theloai);
     }
     
-    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){
+    public List<Sach> TimSach(String masach,String tensach,String tentacgia,String tennxb,String theloai){        
         return sachDao.TimSach( masach, tensach, tentacgia, tennxb, theloai);
         
         

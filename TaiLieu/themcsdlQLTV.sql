@@ -132,3 +132,6 @@ insert into CHITIETMUA values('PM0006','MS0002',10,30000)
 insert into CHITIETMUA values('PM0006','MS0003',10,30000)
 
 
+insert into SACH (maSach,tenSach,tenTacGia,tenNXB,giaSach ,theLoai,trangthai ,soluong )
+values 
+('MS0012' ,'sql server'     ,'Nguyen Duc Nhat' ,'Nha xuat ban KHKT'      ,35000,'sach giao khoa'  ,'false',0),

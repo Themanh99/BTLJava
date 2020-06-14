@@ -89,7 +89,7 @@ public class SachDao extends Dao {
         try {
             state = conn.createStatement();
             String sql = "select * from sach where trangthai='false' and maSach like '%" + masach + "%' and tenSach like '%" + tensach + "%' and tenTacGia like'%" + tentacgia + "%' and tenNXB like '%" + tennxb + "%' and theLoai like '%" + theloai + "%'";
-            System.out.println(sql);
+           
             rs = state.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
             while (rs.next()) {
@@ -119,8 +119,7 @@ public class SachDao extends Dao {
         conn = JDBCConnection.getJDBCConnection();
         try {
             state = conn.createStatement();
-            String sql = "select * from sach where maSach like '%" + masach + "%' and tenSach like '%" + tensach + "%' and tenTacGia like'%" + tentacgia + "%' and tenNXB like '%" + tennxb + "%' and theLoai like '%" + theloai + "%'";
-            System.out.println(sql);
+            String sql = "select * from sach where maSach like '%" + masach + "%' and tenSach like '%" + tensach + "%' and tenTacGia like'%" + tentacgia + "%' and tenNXB like '%" + tennxb + "%' and theLoai like '%" + theloai + "%'";         
             rs = state.executeQuery(sql);
             List<Sach> list = new ArrayList<Sach>();
             while (rs.next()) {
