@@ -5,8 +5,8 @@
  */
 package com.qlthuvien.view;
 
-import static com.qlthuvien.dao.TaiKhoanDao.mk;
-import static com.qlthuvien.dao.TaiKhoanDao.tk;
+import static com.qlthuvien.dao.TaiKhoanDao.mklogin;
+import static com.qlthuvien.dao.TaiKhoanDao.tklogin;
 import com.qlthuvien.model.TaiKhoan;
 import com.qlthuvien.service.TaiKhoanService;
 import javax.swing.JOptionPane;
@@ -18,9 +18,10 @@ import com.qlthuvien.view.QLTaiKhoanJPanel;
  */
 public class DoiMk extends javax.swing.JFrame {
 
-   TaiKhoanService taikhoanService;
+   TaiKhoanService taiKhoanService;
     public DoiMk() {
         initComponents();
+        taiKhoanService = new TaiKhoanService();
     }
 
     /**
@@ -132,20 +133,26 @@ public class DoiMk extends javax.swing.JFrame {
         String MKcu = String.valueOf(txtMkCu.getPassword());
         String MKmoi =  String.valueOf(txtMkMoi.getPassword());
         String nhaplai = String.valueOf(txtXacNhanMk.getPassword());
-        
-        if (!MKcu.equals(mk)) {
-            JOptionPane.showMessageDialog(new JOptionPane(),"Sai mat khau", "Thong Bao",JOptionPane.ERROR_MESSAGE);
+        if(KT_DoiMK(MKcu, MKmoi, nhaplai)){
+            taiKhoanService.suaMk(tklogin, MKmoi);
+            mklogin = MKmoi;
+            System.out.println("mk login  "+mklogin);
+            JOptionPane.showMessageDialog(new JOptionPane(),"Doi mat khau thanh cong!", "Thong Bao",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
-        else{
-            if (!MKmoi.equals(nhaplai)) {
-                JOptionPane.showMessageDialog(new JOptionPane(),"Nhap lai Mat khau moi", "Thong Bao",JOptionPane.ERROR_MESSAGE);
-            }else{
-                taikhoanService.suaMk(tk, MKmoi);
-                this.dispose();
-            }
-        }
-    }//GEN-LAST:event_btDoiMkActionPerformed
 
+    }//GEN-LAST:event_btDoiMkActionPerformed
+    public boolean KT_DoiMK(String mkcu,String mkmoi,String nhaplai){
+        if (!mkcu.equals(String.valueOf(mklogin))) {
+            JOptionPane.showMessageDialog(new JOptionPane(),"Sai mat khau", "Thong Bao",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!mkmoi.equals(nhaplai)) {
+            JOptionPane.showMessageDialog(new JOptionPane(),"Nhap lai Mat khau moi", "Thong Bao",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    return true;
+    }
     /**
      * @param args the command line arguments
      */
