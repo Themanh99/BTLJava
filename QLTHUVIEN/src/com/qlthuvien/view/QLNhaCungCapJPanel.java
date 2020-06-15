@@ -427,13 +427,19 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         if (kiemtra == true) {
             NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
             nccService.themNCC(ncc);
+            ClearTextThemNCC();
             Display(nccService.getNCC());
             jPanel2.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, loi, "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btThem1ActionPerformed
-
+    public void ClearTextThemNCC(){
+        txtMaNCC1.setText("");
+        txtTenNCC1.setText("");
+        txtDienThoai1.setText("");
+        txtDiaChi1.setText("");
+    }
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
         // TODO add your handling code here:
         String mancc = txtMaNCC.getText();
