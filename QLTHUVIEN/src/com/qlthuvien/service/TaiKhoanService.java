@@ -24,6 +24,10 @@ public class TaiKhoanService {
         
     }
     
+    public String getTK(){
+        return taiKhoanDao.getTK();
+    }
+    
     public boolean XacThucTaiKhoan(String tk,String mk){
         return taiKhoanDao.XacThucTaiKhoan(tk,mk);
     }

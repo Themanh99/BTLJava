@@ -226,5 +226,23 @@ public class SachDao extends Dao {
             
     }
     
-
+    public List<Integer> getNam(){
+        conn = JDBCConnection.getJDBCConnection();
+        List<Integer> list = new ArrayList<Integer>();
+        try {
+            state = conn.createStatement();
+            String sql ="select * from fn_layranam()";
+            rs = state.executeQuery(sql);
+            while(rs.next()){
+                int nam = rs.getInt(1);
+                list.add(nam);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SachDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseAll();
+        }
+        return list;
+    }
 }

@@ -21,17 +21,20 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    JPanel qlBanSachJPanel = new QLBanSachJPanel();
-    JPanel qlSachJPanel = new QLSachJPanel();
-    JPanel qlNhapSachJPanel = new QLNhapSachJPanel();
-    JPanel qlMuonTraSachJPanel = new QLMuonSachJPanel();
-    JPanel qlTraSachJPanel = new QLTraSachJPanel();
-    JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
-    JPanel qlDocGiaJPanel = new QLDocGiaJPanel();
-    JPanel qlNhaCungCapJPanel = new QLNhaCungCapJPanel();
-    JPanel thongKeJPanel = new ThongKeJPanel();
+    private JPanel qlBanSachJPanel = new QLBanSachJPanel();
+    private JPanel qlSachJPanel = new QLSachJPanel();
+    private JPanel qlNhapSachJPanel = new QLNhapSachJPanel();
+    private JPanel qlMuonTraSachJPanel = new QLMuonSachJPanel();
+    private JPanel qlTraSachJPanel = new QLTraSachJPanel();
+    private JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
+    private JPanel qlDocGiaJPanel = new QLDocGiaJPanel();
+    private JPanel qlNhaCungCapJPanel = new QLNhaCungCapJPanel();
+    private JPanel thongKeJPanel = new ThongKeJPanel();
+    private TaiKhoanDao  taiKhoanDao ;
     public MainJFrame() {
         initComponents();
+        taiKhoanDao = new TaiKhoanDao();
+        labelTenTK.setText(taiKhoanDao.getTK());
     }
     
     
@@ -57,9 +60,7 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLSach.setBackground(Color.white);
       
         btQLNhapSach.setBackground(Color.white);
-        
-        btQLDocGia.setBackground(Color.white);
-       
+             
         btQLTaiKhoan.setBackground(Color.white);
         
         btThongKe.setBackground(Color.white);
@@ -92,7 +93,6 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLBanSach = new javax.swing.JButton();
         btQLSach = new javax.swing.JButton();
         btQLNhapSach = new javax.swing.JButton();
-        btQLDocGia = new javax.swing.JButton();
         btQLTaiKhoan = new javax.swing.JButton();
         btQLTraSach = new javax.swing.JButton();
         btThongKe = new javax.swing.JButton();
@@ -101,10 +101,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btDoimk = new javax.swing.JButton();
-        viewtklogin = new javax.swing.JTextField();
+        labelTenTK = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btQLMuonTraSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLMuonTraSach.setText("Quản lý mượn sách");
         btQLMuonTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLMuonTraSach.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +114,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btQLBanSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLBanSach.setText("Quản lý bán sách");
         btQLBanSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLBanSach.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +123,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btQLSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLSach.setText("Quản lý sách");
         btQLSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLSach.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +132,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btQLNhapSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLNhapSach.setText("Quản lý nhập sách");
         btQLNhapSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLNhapSach.addActionListener(new java.awt.event.ActionListener() {
@@ -137,14 +141,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        btQLDocGia.setText("Quản lý độc giả");
-        btQLDocGia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btQLDocGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btQLDocGiaActionPerformed(evt);
-            }
-        });
-
+        btQLTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLTaiKhoan.setText("Quản lý tài khoản");
         btQLTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +150,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btQLTraSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLTraSach.setText("Quản lý trả sách");
         btQLTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLTraSach.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +159,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btThongKe.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btThongKe.setText("Thống kê");
         btThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btThongKe.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +168,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btQLNCC.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btQLNCC.setText("Quản lý Nhà cung cấp");
         btQLNCC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLNCC.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +190,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(btQLBanSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btQLSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btQLNhapSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btQLDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btQLTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btQLTraSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
@@ -214,15 +213,13 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLNhapSach, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btQLTaiKhoan)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLDocGia, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan, btQLTraSach});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btQLBanSach, btQLMuonTraSach, btQLNhapSach, btQLSach, btQLTaiKhoan, btQLTraSach});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Quản lý thư viện");
@@ -246,8 +243,8 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        viewtklogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        viewtklogin.setEnabled(false);
+        labelTenTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTenTK.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,7 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(btDoimk, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
-                    .addComponent(viewtklogin))
+                    .addComponent(labelTenTK))
                 .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
@@ -272,7 +269,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(viewtklogin)
+                .addComponent(labelTenTK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -331,14 +328,6 @@ public class MainJFrame extends javax.swing.JFrame {
         btQLNhapSach.setBackground(Color.CYAN);
         HienThiPanel(qlNhapSachJPanel);
     }//GEN-LAST:event_btQLNhapSachActionPerformed
-
-    private void btQLDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLDocGiaActionPerformed
-        // TODO add your handling code here:
-        
-        XoaMauButton();
-        btQLDocGia.setBackground(Color.CYAN);
-        HienThiPanel(qlDocGiaJPanel);
-    }//GEN-LAST:event_btQLDocGiaActionPerformed
 
     private void btQLTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLTaiKhoanActionPerformed
         // TODO add your handling code here:
@@ -427,7 +416,6 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDoimk;
     private javax.swing.JButton btQLBanSach;
-    private javax.swing.JButton btQLDocGia;
     private javax.swing.JButton btQLMuonTraSach;
     private javax.swing.JButton btQLNCC;
     private javax.swing.JButton btQLNhapSach;
@@ -439,6 +427,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField viewtklogin;
+    private javax.swing.JTextField labelTenTK;
     // End of variables declaration//GEN-END:variables
 }

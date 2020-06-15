@@ -24,7 +24,9 @@ public class SachService {
     public List<Sach> getSach(){
         return sachDao.getSach();
     }
-    
+    public List<Integer> getNam(){
+        return sachDao.getNam();
+    }
     public List<Sach> getSachBan(){
         List<Sach> sach = getSach();
         List<Sach> sachBan = new ArrayList<Sach>();

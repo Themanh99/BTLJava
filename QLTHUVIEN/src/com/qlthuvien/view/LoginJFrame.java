@@ -24,6 +24,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     TaiKhoanService taiKhoanService;
     public LoginJFrame() {
         initComponents();
+        this.setBounds(400, 200, 500,400);
         taiKhoanService = new TaiKhoanService();
     }
 

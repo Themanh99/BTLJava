@@ -34,6 +34,10 @@ public class TaiKhoanDao extends Dao{
     public TaiKhoanDao() {
         loaiTK = false;
     }
+    
+    public String getTK(){
+        return tklogin;
+    }
 
     public boolean XacThucTaiKhoan(String tk, String mk) {
         conn = JDBCConnection.getJDBCConnection();
