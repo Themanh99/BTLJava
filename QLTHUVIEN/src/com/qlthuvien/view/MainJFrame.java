@@ -106,7 +106,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btQLMuonTraSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLMuonTraSach.setText("Quản lý mượn sách");
+        btQLMuonTraSach.setText("Quản Lý Mượn Sách");
         btQLMuonTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLMuonTraSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +115,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLBanSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLBanSach.setText("Quản lý bán sách");
+        btQLBanSach.setText("Quản Lý Bán Sách");
         btQLBanSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLBanSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +124,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLSach.setText("Quản lý sách");
+        btQLSach.setText("Quản Lý Sách");
         btQLSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +133,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLNhapSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLNhapSach.setText("Quản lý nhập sách");
+        btQLNhapSach.setText("Quản Lý Nhập Sách");
         btQLNhapSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLNhapSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +142,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLTaiKhoan.setText("Quản lý tài khoản");
+        btQLTaiKhoan.setText("Quản Lý Tài Khoản");
         btQLTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +151,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLTraSach.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLTraSach.setText("Quản lý trả sách");
+        btQLTraSach.setText("Quản Lý Trả Sách");
         btQLTraSach.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLTraSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btThongKe.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btThongKe.setText("Thống kê");
+        btThongKe.setText("Thống Kê");
         btThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +169,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btQLNCC.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btQLNCC.setText("Quản lý Nhà cung cấp");
+        btQLNCC.setText("Quản Lý Nhà Cung Cấp");
         btQLNCC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btQLNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +243,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        labelTenTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTenTK.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelTenTK.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -300,7 +300,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         XoaMauButton();
-        btQLBanSach.setBackground(Color.CYAN);
+        btQLBanSach.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlBanSachJPanel);
      
     }//GEN-LAST:event_btQLBanSachActionPerformed
@@ -309,7 +309,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         XoaMauButton();
-        btQLMuonTraSach.setBackground(Color.CYAN);
+        btQLMuonTraSach.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlMuonTraSachJPanel);
     }//GEN-LAST:event_btQLMuonTraSachActionPerformed
 
@@ -317,7 +317,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         XoaMauButton();
-        btQLSach.setBackground(Color.CYAN);
+        btQLSach.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlSachJPanel);
     }//GEN-LAST:event_btQLSachActionPerformed
 
@@ -325,7 +325,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         XoaMauButton();
-        btQLNhapSach.setBackground(Color.CYAN);
+        btQLNhapSach.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlNhapSachJPanel);
     }//GEN-LAST:event_btQLNhapSachActionPerformed
 
@@ -333,7 +333,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(TaiKhoanDao.loaitklogin){
             XoaMauButton();
-            btQLTaiKhoan.setBackground(Color.CYAN);
+            btQLTaiKhoan.setBackground(Color.decode("#3578e5"));
             HienThiPanel(qlTaiKhoanJPanel);
         }
         else{
@@ -346,21 +346,21 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         XoaMauButton();
-        btQLTraSach.setBackground(Color.CYAN);
+        btQLTraSach.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlTraSachJPanel);
     }//GEN-LAST:event_btQLTraSachActionPerformed
 
     private void btThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThongKeActionPerformed
         // TODO add your handling code here:
         XoaMauButton();
-        btThongKe.setBackground(Color.CYAN);
+        btThongKe.setBackground(Color.decode("#3578e5"));
         HienThiPanel(thongKeJPanel);
     }//GEN-LAST:event_btThongKeActionPerformed
 
     private void btQLNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNCCActionPerformed
         // TODO add your handling code here:
         XoaMauButton();
-        btQLNCC.setBackground(Color.CYAN);
+        btQLNCC.setBackground(Color.decode("#3578e5"));
         HienThiPanel(qlNhaCungCapJPanel);
     }//GEN-LAST:event_btQLNCCActionPerformed
 

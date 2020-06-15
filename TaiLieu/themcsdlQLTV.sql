@@ -170,3 +170,63 @@ insert into CHITIETPN(maPN,maSach,soluongnhap,gia) values('PN0006','MS0001',2,20
 
 select * from sach where maSach like '%MS0020%' and tenSach like '%%' and tenTacGia like'%%' and tenNXB like '%%' and theLoai like '%%'
 
+-- thong ke
+create function fn_thongke(@thang int, @nam int)
+returns @bang table(
+	luotmuasach int, 
+	slsachban int,
+	luotmuonsach int,
+	slsachmuon int,
+	ttsachban float,
+	ttsachmuon float
+)
+as
+	begin
+		declare @luotmuasach int
+		declare @slsachban int
+		declare @luotmuonsach int
+		declare @slsachmuon int
+		declare @ttsachban float
+		declare @ttsachmuon float
+
+		select @luotmuasach = (select count(*) from PHIEUMUA where MONTH(ngayMua)=@thang and YEAR(ngayMua)=@nam)
+		select @slsachban = (select sum(soluong) from CHITIETMUA,PHIEUMUA where CHITIETMUA.maPMUA = PHIEUMUA.maPMUA and MONTH(ngayMua)=@thang and YEAR(ngayMua)=@nam )
+		select @luotmuonsach =(select count(*) from PHIEUMUONTRA where MONTH(ngayMuon)=@thang and YEAR(ngayMuon)=@nam)
+		select @slsachmuon =(select sum(soluong) from CHITIETMUONTRA, PHIEUMUONTRA where CHITIETMUONTRA.maPMUON = PHIEUMUONTRA.maPMUON and MONTH(ngayMuon)=@thang and YEAR(ngayMuon)=@nam )
+		select @ttsachban = (select sum(tongtien) from PHIEUMUA where MONTH(ngayMua)=@thang and YEAR(ngayMua)=@nam )
+		select @ttsachmuon = (select sum(tongtien) from PHIEUMUONTRA where MONTH(ngayMuon)=@thang and YEAR(ngayMuon)=@nam)
+
+		insert into @bang values (@luotmuasach, @slsachban, @luotmuonsach, @slsachmuon, @ttsachban, @ttsachmuon)
+		return
+	end
+
+create function fn_thongkenam(@nam int)
+returns @bang table(
+	luotmuasach int, 
+	slsachban int,
+	luotmuonsach int,
+	slsachmuon int,
+	ttsachban float,
+	ttsachmuon float
+)
+as
+	begin
+		declare @luotmuasach int
+		declare @slsachban int
+		declare @luotmuonsach int
+		declare @slsachmuon int
+		declare @ttsachban float
+		declare @ttsachmuon float
+
+		select @luotmuasach = (select count(*) from PHIEUMUA where YEAR(ngayMua)=@nam)
+		select @slsachban = (select sum(soluong) from CHITIETMUA,PHIEUMUA where CHITIETMUA.maPMUA = PHIEUMUA.maPMUA and YEAR(ngayMua)=@nam )
+		select @luotmuonsach =(select count(*) from PHIEUMUONTRA where YEAR(ngayMuon)=@nam)
+		select @slsachmuon =(select sum(soluong) from CHITIETMUONTRA, PHIEUMUONTRA where CHITIETMUONTRA.maPMUON = PHIEUMUONTRA.maPMUON and YEAR(ngayMuon)=@nam )
+		select @ttsachban = (select sum(tongtien) from PHIEUMUA where YEAR(ngayMua)=@nam )
+		select @ttsachmuon = (select sum(tongtien) from PHIEUMUONTRA where YEAR(ngayMuon)=@nam)
+
+		insert into @bang values (@luotmuasach, @slsachban, @luotmuonsach, @slsachmuon, @ttsachban, @ttsachmuon)
+		return
+	end
+	select * from fn_thongkenam(2016)
+	select * from fn_thongke(6,2016)

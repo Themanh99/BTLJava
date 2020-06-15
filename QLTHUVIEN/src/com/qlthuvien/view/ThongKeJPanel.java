@@ -7,6 +7,8 @@ package com.qlthuvien.view;
 
 import com.qlthuvien.model.NCC;
 import com.qlthuvien.service.SachService;
+import com.qlthuvien.service.ThongKeService;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +21,11 @@ public class ThongKeJPanel extends javax.swing.JPanel {
      * Creates new form ThongKeJPanel
      */
     SachService sachService;
+    ThongKeService tkService;
     public ThongKeJPanel() {
         initComponents();
         sachService = new SachService();
+        tkService = new ThongKeService();
         ThemNamVaoComBoBox(sachService.getNam());
     }
     private void ThemNamVaoComBoBox(List<Integer> list) {
@@ -49,12 +53,12 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtttban = new javax.swing.JTextField();
+        txtslmuas = new javax.swing.JTextField();
+        txtttmuon = new javax.swing.JTextField();
+        txtslscm = new javax.swing.JTextField();
+        txtslsbr = new javax.swing.JTextField();
+        txtluotmuon = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Tháng");
@@ -90,35 +94,29 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Tổng tiền");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
-        jTextField1.setEnabled(false);
+        txtttban.setEditable(false);
+        txtttban.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtttban.setEnabled(false);
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField2.setText("jTextField2");
-        jTextField2.setEnabled(false);
+        txtslmuas.setEditable(false);
+        txtslmuas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtslmuas.setEnabled(false);
 
-        jTextField3.setEditable(false);
-        jTextField3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField3.setText("jTextField3");
-        jTextField3.setEnabled(false);
+        txtttmuon.setEditable(false);
+        txtttmuon.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtttmuon.setEnabled(false);
 
-        jTextField4.setEditable(false);
-        jTextField4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField4.setText("jTextField4");
-        jTextField4.setEnabled(false);
+        txtslscm.setEditable(false);
+        txtslscm.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtslscm.setEnabled(false);
 
-        jTextField5.setEditable(false);
-        jTextField5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField5.setText("jTextField2");
-        jTextField5.setEnabled(false);
+        txtslsbr.setEditable(false);
+        txtslsbr.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtslsbr.setEnabled(false);
 
-        jTextField6.setEditable(false);
-        jTextField6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField6.setText("jTextField2");
-        jTextField6.setEnabled(false);
+        txtluotmuon.setEditable(false);
+        txtluotmuon.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtluotmuon.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,22 +140,22 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtslmuas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                        .addComponent(txtslsbr, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                                         .addGap(78, 78, 78)
                                         .addComponent(jLabel3))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtslscm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel13)))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtttmuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtttban, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtluotmuon, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(244, 244, 244)
                                 .addComponent(btTim, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -165,7 +163,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                 .addContainerGap(208, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtslmuas, txtslscm, txtttban, txtttmuon});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,29 +180,31 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(8, 8, 8))
-                    .addComponent(jTextField2))
+                    .addComponent(txtslmuas))
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtttban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtslsbr)))
                 .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jTextField6))
+                    .addComponent(txtluotmuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(txtslscm)
+                        .addComponent(txtttmuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(142, 142, 142))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -213,11 +213,23 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String thang =String.valueOf(jComboBoxThang.getSelectedItem());
         if(thang=="Tất cả"){
-            thang = "abc";
+            thang = "all";
         }
-        System.out.println(thang);
-        
         String nam = String.valueOf(jComboBoxNam.getSelectedItem());
+        ArrayList<String> list  = tkService.thongKe(thang, nam);
+//      luotmuasach int, 
+//	slsachban int,
+//	luotmuonsach int,
+//	slsachmuon int,
+//	ttsachban float,
+//	ttsachmuon float
+        txtslmuas.setText(list.get(0));
+        txtslsbr.setText(list.get(1));
+        txtluotmuon.setText(list.get(2));
+        txtslscm.setText(list.get(3));
+        txtttban.setText(list.get(4));
+        txtttmuon.setText(list.get(5));
+        
     }//GEN-LAST:event_btTimActionPerformed
 
 
@@ -233,11 +245,11 @@ public class ThongKeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txtluotmuon;
+    private javax.swing.JTextField txtslmuas;
+    private javax.swing.JTextField txtslsbr;
+    private javax.swing.JTextField txtslscm;
+    private javax.swing.JTextField txtttban;
+    private javax.swing.JTextField txtttmuon;
     // End of variables declaration//GEN-END:variables
 }
