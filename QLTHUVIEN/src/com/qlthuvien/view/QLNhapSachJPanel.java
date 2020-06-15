@@ -46,7 +46,6 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         initComponents();
         nccService = new NCCService();
         sachService = new SachService();
-        ThemNCCVaoComBoBox(nccService.getNCC());
         lammoi();
     }
 
@@ -57,6 +56,7 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         dsGioHang = new Hashtable<String, GioHang>();
         KhoitaoSachTable();
         KhoitaoGioHangTable();
+        ThemNCCVaoComBoBox(nccService.getNCC());
 
     }
 
@@ -96,6 +96,7 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
     }
 
     private void ThemNCCVaoComBoBox(List<NCC> list) {
+        jComboBoxNhaCungCap.removeAllItems();
         for (NCC ncc : list) {
             jComboBoxNhaCungCap.addItem(ncc);
         }
@@ -799,6 +800,7 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         dsGioHang.clear();
         count = 0;
         defaultGioHangTable.setRowCount(0);
+        ThemNCCVaoComBoBox(nccService.getNCC());
         HienThiGioHang(dsGioHang);
     }//GEN-LAST:event_jButton3ActionPerformed
 
