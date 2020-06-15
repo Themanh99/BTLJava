@@ -139,6 +139,21 @@ begin
 		set @slmuon = (select soluong from inserted)
 	update Sach set soluong=soluong-@slmuon where maSach=@maSach
 end
+create function fn_layranam ()
+Returns @bangtam table(nam int)
+as
+begin
+	insert into @bangtam	
+		select YEAR(ngayMua) from PHIEUMUA
+		union
+		select YEAR(ngayMuon)  from PHIEUMUONTRA
+		return
+end
+
+select * from fn_layranam()
+
+
+
 
 select * from CHITIETMUONTRA
 select * from CHITIETMUA where maPMUA='PM0006'
