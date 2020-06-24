@@ -35,8 +35,8 @@ public class ChiTietNhapDao extends Dao{
         
     }
     
-    public static void main(String[] args) {
-        ChiTietNhapDao test = new ChiTietNhapDao();
-        test.themChiTietNhap(new ChiTietPN("PN0007", "MS0002", 5, 2000));
-    }
+//    public static void main(String[] args) {
+//        ChiTietNhapDao test = new ChiTietNhapDao();
+//        test.themChiTietNhap(new ChiTietPN("PN0007", "MS0002", 5, 2000));
+//    }
 }

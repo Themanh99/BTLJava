@@ -65,19 +65,19 @@ public class ChiTietMuonTraService {
     public int TraSach(String maP, ArrayList<String> sach){
         return ctmtDao.TraSach(maP, sach);
     }
-    public static void main(String[] args) {
-        ChiTietMuonTraService n = new ChiTietMuonTraService();
-        ArrayList<ChiTietMuonTra> list = new ArrayList<ChiTietMuonTra>();
-        list = n.laySachDaTra("PM0007");
-        if (list == null) {
-            System.out.println("no");
-        }
-        for (ChiTietMuonTra item : list) {
-            if (item.getNgaytra()!= "" ){
-                System.out.println("yes" + item.getNgaytra());
-            }
-            
-        }
-        System.out.println("sdfaf");
-    }
+//    public static void main(String[] args) {
+//        ChiTietMuonTraService n = new ChiTietMuonTraService();
+//        ArrayList<ChiTietMuonTra> list = new ArrayList<ChiTietMuonTra>();
+//        list = n.laySachDaTra("PM0007");
+//        if (list == null) {
+//            System.out.println("no");
+//        }
+//        for (ChiTietMuonTra item : list) {
+//            if (item.getNgaytra()!= "" ){
+//                System.out.println("yes" + item.getNgaytra());
+//            }
+//            
+//        }
+//        System.out.println("sdfaf");
+//    }
 }

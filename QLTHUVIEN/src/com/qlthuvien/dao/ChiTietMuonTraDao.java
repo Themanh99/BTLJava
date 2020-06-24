@@ -88,14 +88,14 @@ public class ChiTietMuonTraDao extends Dao {
         }
         return -1;
     }
-    public static void main(String[] args) {
-        ChiTietMuonTraDao c = new ChiTietMuonTraDao();
-        ArrayList<ChiTietMuonTra> list = c.layChiTietMuonTra("PM0007");
-        if(list==null)
-            System.out.println("no");
-        for(ChiTietMuonTra item : list){
-            System.out.println(item.getNgaytra());
-        }
-        
-    }
+//    public static void main(String[] args) {
+//        ChiTietMuonTraDao c = new ChiTietMuonTraDao();
+//        ArrayList<ChiTietMuonTra> list = c.layChiTietMuonTra("PM0007");
+//        if(list==null)
+//            System.out.println("no");
+//        for(ChiTietMuonTra item : list){
+//            System.out.println(item.getNgaytra());
+//        }
+//        
+//    }
 }
