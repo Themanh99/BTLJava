@@ -40,12 +40,12 @@ public class PhieuMuonTraService {
     public ArrayList<PhieuMuonTra> TimPhieu(String maPMUON,String maSV){
         return pmDao.TimPhieu(maPMUON, maSV);
     }
-    public static void main(String[] args) {
-        PhieuMuonTraService a = new PhieuMuonTraService();
-        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
-        Tim = a.TimPhieu("02", "2017601707");
-        for(PhieuMuonTra item : Tim){
-            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
-        }
-    }
+//    public static void main(String[] args) {
+//        PhieuMuonTraService a = new PhieuMuonTraService();
+//        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
+//        Tim = a.TimPhieu("02", "2017601707");
+//        for(PhieuMuonTra item : Tim){
+//            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
+//        }
+//    }
 }

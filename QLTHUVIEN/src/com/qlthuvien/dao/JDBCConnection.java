@@ -34,14 +34,14 @@ public class JDBCConnection {
         return null;
     } 
     
-    public static void main(String[] args) {
-        Connection conn = JDBCConnection.getJDBCConnection();
-        if(conn != null){
-            System.out.println("Thanh cong");
-        }
-        else{
-            System.out.println("That bai");
-        }
-    }
+//    public static void main(String[] args) {
+//        Connection conn = JDBCConnection.getJDBCConnection();
+//        if(conn != null){
+//            System.out.println("Thanh cong");
+//        }
+//        else{
+//            System.out.println("That bai");
+//        }
+//    }
     
 }

@@ -94,8 +94,8 @@ public class SachService {
         return masach;
     }
     
-    public static void main(String[] args) {
-        SachService test = new SachService();
-        System.out.println(test.getMaSach());
-    }
+//    public static void main(String[] args) {
+//        SachService test = new SachService();
+//        System.out.println(test.getMaSach());
+//    }
 }

@@ -27,7 +27,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
      */
     private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index, count;
+    private int index, count,indexGioHang;
     private static Hashtable<String, GioHang> dsGioHang;
 
     public static Hashtable<String, GioHang> getGioHang() {
@@ -65,6 +65,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         sachService = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
         index = -1;
+        indexGioHang=-1;
         count = 0;
         HienThiSachTable();
         HienThiGioHangTable();
@@ -236,6 +237,11 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
             }
         });
         gioHangTable.getTableHeader().setReorderingAllowed(false);
+        gioHangTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gioHangTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(gioHangTable);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -417,7 +423,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
@@ -535,11 +541,13 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void btBoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBoRaActionPerformed
         // TODO add your handling code here:
-        int hang = gioHangTable.getSelectedRow();
-        String ms = String.valueOf(gioHangTable.getValueAt(hang, 0));
+        if(indexGioHang>=0){
+        String ms = String.valueOf(gioHangTable.getValueAt(indexGioHang, 0));
         dsGioHang.remove(ms);
         count--;
         HienThiGioHang(dsGioHang);
+        indexGioHang=-1;
+        }
 
     }//GEN-LAST:event_btBoRaActionPerformed
 
@@ -560,6 +568,11 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         txtTheLoai.setText("");
         Display(sachService.getSachBan());
     }//GEN-LAST:event_btLamMoiTextActionPerformed
+
+    private void gioHangTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gioHangTableMouseClicked
+        // TODO add your handling code here:
+        indexGioHang= gioHangTable.getSelectedRow();
+    }//GEN-LAST:event_gioHangTableMouseClicked
 
     private void HienThiGioHang(Hashtable<String, GioHang> list) {
         defaultGioHangTable.setRowCount(0);

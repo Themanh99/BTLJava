@@ -109,13 +109,13 @@ public class PhieuMuonTraDao extends Dao {
         }
         return null;
     }
-    public static void main(String[] args) {
-        PhieuMuonTraDao pm = new PhieuMuonTraDao();
-//        System.out.println(pm.LaySlPhieuMuon());
-        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
-        Tim = pm.LayPhieuMuonTra();
-        for(PhieuMuonTra item : Tim){
-            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
-        }
-    }
+//    public static void main(String[] args) {
+//        PhieuMuonTraDao pm = new PhieuMuonTraDao();
+////        System.out.println(pm.LaySlPhieuMuon());
+//        ArrayList<PhieuMuonTra> Tim = new ArrayList<PhieuMuonTra>();
+//        Tim = pm.LayPhieuMuonTra();
+//        for(PhieuMuonTra item : Tim){
+//            System.out.println(item.getMaPMuon()+item.getMaSV()+item.getNgayMuon()+item.getTongtien());
+//        }
+//    }
 }
