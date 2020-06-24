@@ -96,27 +96,27 @@ public class ThongKeJPanel extends javax.swing.JPanel {
 
         txtttban.setEditable(false);
         txtttban.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtttban.setEnabled(false);
+        txtttban.setFocusable(false);
 
         txtslmuas.setEditable(false);
         txtslmuas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtslmuas.setEnabled(false);
+        txtslmuas.setFocusable(false);
 
         txtttmuon.setEditable(false);
         txtttmuon.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtttmuon.setEnabled(false);
+        txtttmuon.setFocusable(false);
 
         txtslscm.setEditable(false);
         txtslscm.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtslscm.setEnabled(false);
+        txtslscm.setFocusable(false);
 
         txtslsbr.setEditable(false);
         txtslsbr.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtslsbr.setEnabled(false);
+        txtslsbr.setFocusable(false);
 
         txtluotmuon.setEditable(false);
         txtluotmuon.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtluotmuon.setEnabled(false);
+        txtluotmuon.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
