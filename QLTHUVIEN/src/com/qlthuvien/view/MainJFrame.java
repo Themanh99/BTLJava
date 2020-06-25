@@ -27,7 +27,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private JPanel qlMuonTraSachJPanel = new QLMuonSachJPanel();
     private JPanel qlTraSachJPanel = new QLTraSachJPanel();
     private JPanel qlTaiKhoanJPanel = new QLTaiKhoanJPanel();
-    private JPanel qlDocGiaJPanel = new QLDocGiaJPanel();
     private JPanel qlNhaCungCapJPanel = new QLNhaCungCapJPanel();
     private JPanel thongKeJPanel = new ThongKeJPanel();
     private TaiKhoanDao  taiKhoanDao ;
@@ -40,7 +39,6 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private void AnPanel(){
         this.qlBanSachJPanel.setVisible(false);
-        this.qlDocGiaJPanel.setVisible(false);
         this.qlMuonTraSachJPanel.setVisible(false);
         this.qlTraSachJPanel.setVisible(false);
         this.qlNhapSachJPanel.setVisible(false);
