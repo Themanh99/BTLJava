@@ -160,6 +160,7 @@ public class QLTaiKhoanJPanel extends javax.swing.JPanel {
                 "Tên Tài Khoản", "Mật Khẩu", "Loại Tài Khoản"
             }
         ));
+        taikhoanTable.getTableHeader().setReorderingAllowed(false);
         taikhoanTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 taikhoanTableMouseClicked(evt);

@@ -14,6 +14,8 @@ import java.util.Hashtable;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,8 +27,9 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
     private DefaultTableModel defaultSachTable, defaultGioTable;
     private SachService sachservice;
     private static Hashtable<String, GioHang> dsGioHang;
-    private int index = -1,//lay chi so hang trong bang sach
-            count = 0;// so luong hang co trong gio;
+    private int indexHang = -1,//lay chi so hang trong bang sach
+            count = 0,// so luong hang co trong gio;
+            indexGiohang = -1;//chi so hang trong bang gio hang
     private XacNhanMuonJFrame xn;
 
     public static Hashtable<String, GioHang> getGioHang() {
@@ -42,6 +45,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         dsGioHang = new Hashtable<String, GioHang>();
         HienThiSachTable();
         KhoiTaoGioMuonTable();
+       
         Thread tudonglammoi = new Thread() {
             @Override
             public void run() {
@@ -100,6 +104,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return columnIndex == 2;
             }
+
         };
         tbGio.setModel(defaultGioTable);
         //tbGio.setDefaultEditor(Object.class, null);
@@ -205,6 +210,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tbGio.getTableHeader().setReorderingAllowed(false);
         tbGio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGioMouseClicked(evt);
@@ -244,7 +250,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 32, Short.MAX_VALUE)
+                        .addGap(0, 24, Short.MAX_VALUE)
                         .addComponent(jButton7)
                         .addGap(26, 26, 26)
                         .addComponent(jButton9)
@@ -338,7 +344,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
                                 .addComponent(txNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6)))
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(90, Short.MAX_VALUE)))
+                    .addContainerGap(83, Short.MAX_VALUE)))
         );
 
         jButton6.setText("Thêm Vào Giỏ");
@@ -356,6 +362,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
                 "Mã sách", "Tên sách", "Tác giả", "Thể loại", "Nhà xuất bản", "Giá", "Số lượng"
             }
         ));
+        tbSach.getTableHeader().setReorderingAllowed(false);
         tbSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbSachMouseClicked(evt);
@@ -403,10 +410,10 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -415,11 +422,11 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
 
     private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
         // TODO add your handling code here:
-        index = tbSach.getSelectedRow();
+        indexHang = tbSach.getSelectedRow();
     }//GEN-LAST:event_tbSachMouseClicked
 
     private void tbGioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGioMouseClicked
-        // TODO add your handling code here:
+        indexGiohang = tbGio.getSelectedRow();
     }//GEN-LAST:event_tbGioMouseClicked
 
     private void btTimmasach(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimmasach
@@ -446,10 +453,10 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btTimmasach
 
     private void btThemvaogio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemvaogio
-        if (index >= 0) {
-            String masach = String.valueOf(tbSach.getValueAt(index, 0));
-            String tensach = String.valueOf(tbSach.getValueAt(index, 1));
-            float gia = Float.parseFloat(String.valueOf(tbSach.getValueAt(index, 5)));
+        if (indexHang >= 0) {
+            String masach = String.valueOf(tbSach.getValueAt(indexHang, 0));
+            String tensach = String.valueOf(tbSach.getValueAt(indexHang, 1));
+            float gia = Float.parseFloat(String.valueOf(tbSach.getValueAt(indexHang, 5)));
 
             GioHang gh = new GioHang(masach, tensach, 1, gia);
 
@@ -481,7 +488,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
                 float gia = Float.parseFloat(String.valueOf(tbGio.getValueAt(i, 3)));
 
                 GioHang gh = new GioHang(masach, tensach, soluong, gia);
-                
+
                 dsGioHang.put(masach, gh);
             }
 
@@ -505,7 +512,7 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
     private void lammoi() {
         HienThiSachTable();
         KhoiTaoGioMuonTable();
-        index = -1;
+        indexHang = -1;
         count = 0;
         dsGioHang.clear();
     }
@@ -514,16 +521,22 @@ public class QLMuonSachJPanel extends javax.swing.JPanel {
         dsGioHang.clear();
         defaultGioTable.setRowCount(0);
         count = 0;
+        indexGiohang = -1;
         HienThiGio(dsGioHang);
     }//GEN-LAST:event_btTaomoi
 
     private void btBorakhoigio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBorakhoigio
         // TODO add your handling code here:
-        int hang = tbGio.getSelectedRow();
-        String ms = String.valueOf(tbGio.getValueAt(hang, 0));
-        dsGioHang.remove(ms);
-        count--;
-        HienThiGio(dsGioHang);
+        if (indexGiohang != -1) {
+            String ms = String.valueOf(tbGio.getValueAt(indexGiohang, 0));
+            dsGioHang.remove(ms);
+            count--;
+            HienThiGio(dsGioHang);
+            indexGiohang = -1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn sách");
+        }
+
     }//GEN-LAST:event_btBorakhoigio
     private void HienThiGio(Hashtable<String, GioHang> gio1) {
         defaultGioTable.setRowCount(0);
