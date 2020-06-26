@@ -204,6 +204,7 @@ public class QLTraSachJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        PhieuJTable.getTableHeader().setReorderingAllowed(false);
         PhieuJTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PhieuJTableMouseClicked(evt);
@@ -284,6 +285,7 @@ public class QLTraSachJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        SachChuaTraJTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(SachChuaTraJTable);
         if (SachChuaTraJTable.getColumnModel().getColumnCount() > 0) {
             SachChuaTraJTable.getColumnModel().getColumn(4).setPreferredWidth(10);

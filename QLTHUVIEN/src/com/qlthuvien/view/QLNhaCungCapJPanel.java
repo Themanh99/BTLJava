@@ -205,6 +205,7 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        dsNCCTable.getTableHeader().setReorderingAllowed(false);
         dsNCCTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dsNCCTableMouseClicked(evt);

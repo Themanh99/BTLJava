@@ -166,6 +166,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        dsMuonTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(dsMuonTable);
 
         txtTongTien.setText("Tổng tiền :");
