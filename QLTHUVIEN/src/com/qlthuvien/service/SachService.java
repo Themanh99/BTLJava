@@ -28,18 +28,8 @@ public class SachService {
         return sachDao.getNam();
     }
     public List<Sach> getSachBan(){
-        List<Sach> sach = getSach();
-        List<Sach> sachBan = new ArrayList<Sach>();
-        int size = sach.size();
-        
-        for(int i=0;i<size;i++){
-            if(sach.get(i).isTrangthai()==true && sach.get(i).getSoluong() >0 ){
-                sachBan.add(sach.get(i));
-            }
-        }
-                
-        
-        return sachBan;
+        return sachDao.TimSachBan("","","","","");
+         
     }
     public List<Sach> getSachMuon(){
         List<Sach> sach = this.getSach();

@@ -205,6 +205,7 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        dsNCCTable.getTableHeader().setReorderingAllowed(false);
         dsNCCTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dsNCCTableMouseClicked(evt);
@@ -404,16 +405,17 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         String loi = "";
         boolean kiemtra = true;
 
-        if (!Pattern.matches(".+", tenncc)) {
-            loi += "Tên nhà cung cấp không dược để trống\n";
+        if (!Pattern.matches(".{1,30}", tenncc)) {
+            loi += "Tên nhà cung cấp không dược để trống và không vượt quá 20\n";
             kiemtra = false;
         }
-        if (!Pattern.matches(".+", sdt)) {
-            loi += "Số điện thoại không dược để trống\n";
+        
+        if (!Pattern.matches(".{1,60}", diachi)) {
+            loi += "Địa chỉ không dược để trống và không vượt quá 60 \n";
             kiemtra = false;
         }
-        if (!Pattern.matches(".+", diachi)) {
-            loi += "Địa chỉ không dược để trống\n";
+        if (!Pattern.matches("[0-9]{10}", sdt)) {
+            loi += "Số điện thoại phải có 10 số\n";
             kiemtra = false;
         }
         if (kiemtra == true) {
@@ -438,9 +440,31 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         String tenncc = txtTenNCC.getText();
         String sdt = txtDienThoai.getText();
         String diachi = txtDiaChi.getText();
+        
+        String loi = "";
+        boolean kiemtra = true;
+
+        if (!Pattern.matches(".{1,30}", tenncc)) {
+            loi += "Tên nhà cung cấp không dược để trống và không vượt quá 20\n";
+            kiemtra = false;
+        }
+        
+        if (!Pattern.matches(".{1,60}", diachi)) {
+            loi += "Địa chỉ không dược để trống và không vượt quá 60 \n";
+            kiemtra = false;
+        }
+        if (!Pattern.matches("[0-9]{10}", sdt)) {
+            loi += "Số điện thoại phải có 10 số\n";
+            kiemtra = false;
+        }
+        
+        if(kiemtra){
         NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
         nccService.CapNhatNCC(ncc);
-        Display(nccService.getNCC());
+        Display(nccService.getNCC());}
+        else{
+            JOptionPane.showMessageDialog(null, loi, "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btCapNhatActionPerformed
 
     private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed

@@ -17,14 +17,14 @@ create table TAIKHOAN(
 
 create table NCC(
 	maNCC char(6) primary key,
-	tenNCC nvarchar(20),
+	tenNCC nvarchar(40),
 	sdtNCC char(10),
-	diachiNCC nvarchar(40),
+	diachiNCC nvarchar(60),
 )
 
 create table SINHVIEN(
 	maSV char(10) primary key,
-	tenSV nvarchar(20),
+	tenSV nvarchar(30),
 	emailSV varchar(30),
 	sdtSV char(10),
 	CONSTRAINT UN_EMAIL unique (emailSV,sdtSV),
@@ -42,7 +42,7 @@ create table PHIEUMUA(
 
 create table SACH(
 	maSach char(6) PRIMARY KEY,
-	tenSach nvarchar(20),
+	tenSach nvarchar(30),
 	tenTacGia nvarchar(30),
 	tenNXB nvarchar(40),
 	giaSach float,

@@ -32,8 +32,8 @@ values
 
 insert into SINHVIEN values
 ('2017601707','Chu The Manh','themanh@gmail.com','0345574951'),
-('2017601708','Nguyen Khac Son','khacson@gmail.com','0345574952'),
-('2017601709','Nguyen Nhu Quang','nhuquang@gmail.com','0345574953'),
+('2017602342','Nguyen Khac Son','khacson@gmail.com','0345574952'),
+('2017602401','Nguyen Nhu Quang','nhuquang@gmail.com','0345574953'),
 ('2017601710','Do The Ky','theky@gmail.com','0345574954'),
 ('2017601711','Tran Tuan Anh','tuananh@gmail.com','0345574955')
 
@@ -139,6 +139,7 @@ begin
 		set @slmuon = (select soluong from inserted)
 	update Sach set soluong=soluong-@slmuon where maSach=@maSach
 end
+go
 create function fn_layranam ()
 Returns @bangtam table(nam int)
 as
@@ -199,7 +200,7 @@ as
 		insert into @bang values (@luotmuasach, @slsachban, @luotmuonsach, @slsachmuon, @ttsachban, @ttsachmuon)
 		return
 	end
-
+go
 create function fn_thongkenam(@nam int)
 returns @bang table(
 	luotmuasach int, 
@@ -228,5 +229,3 @@ as
 		insert into @bang values (@luotmuasach, @slsachban, @luotmuonsach, @slsachmuon, @ttsachban, @ttsachmuon)
 		return
 	end
-	select * from fn_thongkenam(2016)
-	select * from fn_thongke(6,2016)

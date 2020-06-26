@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import com.qlthuvien.model.GioHang;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
@@ -27,7 +28,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
      */
     private DefaultTableModel defaultSachTable, defaultGioHangTable;
     private SachService sachService;
-    private int index, count,indexGioHang;
+    private int index,//chi so hang trong Sachtable
+                count,//so luong hang trong gio
+                indexGioHang;//chi so cua hang trong GioHangtable
     private static Hashtable<String, GioHang> dsGioHang;
 
     public static Hashtable<String, GioHang> getGioHang() {
@@ -38,26 +41,27 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
         initComponents();
         lammoi();
+        
+        //Tao tien trinh tu dong lam moi jpanel sau khi click mua o ben xac nhan mua
         Thread tudonglammoi = new Thread() {
-        @Override
-        public void run() {
-            do {
-                
-                if(XacNhanMuaJFrame.getCheck()==true){
-                    lammoi();
-                    XacNhanMuaJFrame.setCheck();
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            @Override
+            public void run() {
+                do {
+
+                    if (XacNhanMuaJFrame.getCheck() == true) {
+                        lammoi();
+                        XacNhanMuaJFrame.setCheck();
+                    }
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                } while (1 == 1);
             }
-            while(1==1);
-        }
-    };
-    tudonglammoi.start();
+        };
+        tudonglammoi.start();
 
     }
 
@@ -65,7 +69,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         sachService = new SachService();
         dsGioHang = new Hashtable<String, GioHang>();
         index = -1;
-        indexGioHang=-1;
+        indexGioHang = -1;
         count = 0;
         HienThiSachTable();
         HienThiGioHangTable();
@@ -83,7 +87,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
         defaultSachTable.addColumn("Nhà xuất bản");
         defaultSachTable.addColumn("Giá");
         defaultSachTable.addColumn("Số lượng");
-        sachTable.setDefaultEditor(Object.class, null);
+        sachTable.setDefaultEditor(Object.class, null);//Khong cho chinh sua
         Display(sachService.getSachBan());
     }
 
@@ -458,68 +462,82 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sachTableChonSach
 
     private void btMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMuaActionPerformed
+        String tb = "";
+        boolean kiemtra = true;
         if (count != 0) {
             dsGioHang.clear();
             //Luu lai danh sach san pham cung so luong 
             for (int i = 0; i < count; i++) {
                 String masach = String.valueOf(gioHangTable.getValueAt(i, 0));
                 String tensach = String.valueOf(gioHangTable.getValueAt(i, 1));
-                int soluong = Integer.parseInt(String.valueOf(gioHangTable.getValueAt(i, 2)));
-                float gia = Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));
-                GioHang gh = new GioHang(masach, tensach, soluong, gia);
-                dsGioHang.put(masach, gh);
-            }
 
-            //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
-            List<String> danhsachloi = Check(dsGioHang, sachService.getSachBan());
-            if (danhsachloi.isEmpty()) {
-                XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
-                xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                xn.setVisible(true);              
-            } else {
-                String tb = "";
-                int size = danhsachloi.size();
-                for (int i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        tb += danhsachloi.get(i) + " : ";
-                    } else {
-                        tb += danhsachloi.get(i) + " , ";
-                    }
+                if (Pattern.matches("[^0-9]", String.valueOf(gioHangTable.getValueAt(i, 2)))) {
+                    tb += tensach + ", ";
+                    kiemtra = false;
+                } else {
+                    int soluong = Integer.parseInt(String.valueOf(gioHangTable.getValueAt(i, 2)));
+                    float gia = Float.parseFloat(String.valueOf(gioHangTable.getValueAt(i, 3)));
+                    GioHang gh = new GioHang(masach, tensach, soluong, gia);
+                    dsGioHang.put(masach, gh);
                 }
-                tb = tb + " Khong du so luong ban";
-                JOptionPane.showMessageDialog(null, tb, "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+            if (!kiemtra) {
+                JOptionPane.showMessageDialog(null, "Số lượng của " + tb + " phải là số nguyên", "Thông báo", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+                //Kiem tra xem so luong mua co lon hon so luong con trong kho khong
+                List<String> danhsachloi = Check(dsGioHang, sachService.getSachBan());
+                if (danhsachloi.isEmpty()) {
+                    XacNhanMuaJFrame xn = new XacNhanMuaJFrame();
+                    xn.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    xn.setVisible(true);
+                } else {
+                    tb = "";
+                    int size = danhsachloi.size();
+                    for (int i = 0; i < size; i++) {
+                        if (i == size - 1) {
+                            tb += danhsachloi.get(i) + " : ";
+                        } else {
+                            tb += danhsachloi.get(i) + " , ";
+                        }
+                    }
+                    tb = tb + " Khong du so luong ban";
+                    JOptionPane.showMessageDialog(null, tb, "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Chưa có gì trong giỏ hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
 
-
     }//GEN-LAST:event_btMuaActionPerformed
     //Ham tra ve danh sach cac san pham khong du so luong
     private List<String> Check(Hashtable<String, GioHang> gh, List<Sach> sachban) {
 
-        Enumeration<String> enu = gh.keys();
+        
         List<String> danhsachloi = new ArrayList<String>();
         danhsachloi.clear();
         int size = sachban.size();
 
-        Hashtable<String, Sach> tg = new Hashtable<String, Sach>();
+        Hashtable<String, Sach> dsSachBan = new Hashtable<String, Sach>();
 
         for (int i = 0; i < size; i++) {
             String ms = sachban.get(i).getMaSach();
-            tg.put(ms, sachban.get(i));
+            dsSachBan.put(ms, sachban.get(i));
         }
 
+        
+        Enumeration<String> enu = gh.keys();
         while (enu.hasMoreElements()) {
 
-            String key = enu.nextElement();
-
-            GioHang value = gh.get(key);
+            String key = enu.nextElement();//Lay ra key trong gio hang
+            GioHang value = gh.get(key);//Lay ra gia tri tuong ung voi key trong gio hang
+            
             String ms = value.getMasach();
-            int soban = value.getSoluong();
-            int soco = tg.get(ms).getSoluong();
+            int soban = value.getSoluong();//lay ra so luong muon mua
+            int soco = dsSachBan.get(ms).getSoluong();// lay ra so luong con trong kho
+            
             if (soban > soco) {
-                String tensach = tg.get(ms).getTenSach();
+                String tensach = dsSachBan.get(ms).getTenSach();
                 danhsachloi.add(tensach);
             }
 
@@ -541,12 +559,12 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void btBoRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBoRaActionPerformed
         // TODO add your handling code here:
-        if(indexGioHang>=0){
-        String ms = String.valueOf(gioHangTable.getValueAt(indexGioHang, 0));
-        dsGioHang.remove(ms);
-        count--;
-        HienThiGioHang(dsGioHang);
-        indexGioHang=-1;
+        if (indexGioHang >= 0) {
+            String ms = String.valueOf(gioHangTable.getValueAt(indexGioHang, 0));
+            dsGioHang.remove(ms);
+            count--;
+            HienThiGioHang(dsGioHang);
+            indexGioHang = -1;
         }
 
     }//GEN-LAST:event_btBoRaActionPerformed
@@ -571,7 +589,7 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
 
     private void gioHangTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gioHangTableMouseClicked
         // TODO add your handling code here:
-        indexGioHang= gioHangTable.getSelectedRow();
+        indexGioHang = gioHangTable.getSelectedRow();
     }//GEN-LAST:event_gioHangTableMouseClicked
 
     private void HienThiGioHang(Hashtable<String, GioHang> list) {
