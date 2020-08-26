@@ -87,7 +87,8 @@ public class NCCDao extends Dao{
     }
     
     
-    public void ThemNCC(NCC ncc){
+    public int ThemNCC(NCC ncc){
+        int kq=0;
         conn = JDBCConnection.getJDBCConnection();
         String sql = "insert into NCC(maNCC,tenNCC,sdtNCC,diachiNCC) values(?,?,?,?)";
         
@@ -97,12 +98,13 @@ public class NCCDao extends Dao{
             pre.setString(2, ncc.getTenNCC());
             pre.setString(3, ncc.getSdtNCC());
             pre.setString(4, ncc.getDiaChiNCC());
-            pre.executeUpdate();
+            kq=pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NCCDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             CloseAll();
         }
+        return kq;
             
        
     }

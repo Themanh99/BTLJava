@@ -46,8 +46,8 @@ public class NCCService {
     }
     
     
-    public void themNCC(NCC ncc){
-        nccDao.ThemNCC(ncc);
+    public int themNCC(NCC ncc){
+        return nccDao.ThemNCC(ncc);
     }
     
     public void CapNhatNCC(NCC ncc){

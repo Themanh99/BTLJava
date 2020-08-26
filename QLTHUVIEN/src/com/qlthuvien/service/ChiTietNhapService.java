@@ -22,8 +22,9 @@ public class ChiTietNhapService {
         chiTietNhapDao = new ChiTietNhapDao();
     }
     
-    public void themChiTietNhap(Hashtable<String, GioHang> listGioHang,String maphieunhap){
-        System.out.println(maphieunhap);
+    public int themChiTietNhap(Hashtable<String, GioHang> listGioHang,String maphieunhap){
+        //System.out.println(maphieunhap);
+        int kq=0;
         Enumeration<String> enu = listGioHang.keys();
         while (enu.hasMoreElements()) {
             String key = enu.nextElement();
@@ -33,8 +34,12 @@ public class ChiTietNhapService {
             ctn.setMaSach(key);
             ctn.setSoluongnhap(gioHang.getSoluong());
             ctn.setGia(gioHang.getGia());
-            chiTietNhapDao.themChiTietNhap(ctn);            
+            if(chiTietNhapDao.themChiTietNhap(ctn)==0){
+                return 0;
+            }            
+            else kq=1;
         }
+        return kq;
     }
     
     

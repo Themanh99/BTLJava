@@ -37,8 +37,9 @@ public class PhieuNhapDao extends Dao{
         return sl;
     }
     
-    public void themPhieuNhap(PhieuNhap pn){
+    public int themPhieuNhap(PhieuNhap pn){
         conn = JDBCConnection.getJDBCConnection();
+        int kq=0;
         String sql = "insert into PHIEUNHAP(maPN,maNCC,tongtien) values(?,?,?)";
         
         try {
@@ -46,13 +47,14 @@ public class PhieuNhapDao extends Dao{
             pre.setString(1,pn.getMaPN());
             pre.setString(2, pn.getMaNCC());
             pre.setFloat(3, pn.getTongtien());
-            System.out.println(sql);
-            pre.executeUpdate();
+            
+            kq=pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PhieuNhapDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             CloseAll();
         }
+        return kq;
         
     }
     

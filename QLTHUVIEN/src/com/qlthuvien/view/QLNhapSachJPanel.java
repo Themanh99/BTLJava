@@ -143,8 +143,8 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         gioHangTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btXongGioHang = new javax.swing.JButton();
+        btLamMoiGioHang = new javax.swing.JButton();
         btBoRaKhoiGio = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jPanelThemSach = new javax.swing.JPanel();
@@ -359,17 +359,17 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(gioHangTable);
 
-        jButton1.setText("Xong");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btXongGioHang.setText("Xong");
+        btXongGioHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btXongGioHangActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Làm mới");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btLamMoiGioHang.setText("Làm mới");
+        btLamMoiGioHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btLamMoiGioHangActionPerformed(evt);
             }
         });
 
@@ -402,16 +402,16 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GioHangJPanelLayout.createSequentialGroup()
                                 .addComponent(btBoRaKhoiGio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)
+                                .addComponent(btLamMoiGioHang)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(btXongGioHang))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GioHangJPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addGap(237, 237, 237)))))
                 .addContainerGap())
         );
 
-        GioHangJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btBoRaKhoiGio, jButton1, jButton3});
+        GioHangJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btBoRaKhoiGio, btLamMoiGioHang, btXongGioHang});
 
         GioHangJPanelLayout.setVerticalGroup(
             GioHangJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,13 +426,13 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GioHangJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btXongGioHang)
+                    .addComponent(btLamMoiGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBoRaKhoiGio))
                 .addContainerGap())
         );
 
-        GioHangJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBoRaKhoiGio, jButton1, jButton3});
+        GioHangJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBoRaKhoiGio, btLamMoiGioHang, btXongGioHang});
 
         jLabel14.setText("Trạng Thái");
 
@@ -822,16 +822,16 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btBoRaKhoiGioActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btLamMoiGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiGioHangActionPerformed
         // TODO add your handling code here:
         dsGioHang.clear();
         count = 0;
         defaultGioHangTable.setRowCount(0);
         ThemNCCVaoComBoBox(nccService.getNCC());
         HienThiGioHang(dsGioHang);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btLamMoiGioHangActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btXongGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXongGioHangActionPerformed
         // TODO add your handling code here:
         if (count > 0) {
             ncc = (NCC) jComboBoxNhaCungCap.getSelectedItem();
@@ -841,7 +841,7 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Giỏ hàng chưa có sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btXongGioHangActionPerformed
 
     private void KhoaTextField() {
         txtMasach.setEditable(false);
@@ -879,15 +879,15 @@ public class QLNhapSachJPanel extends javax.swing.JPanel {
     private javax.swing.JTable SachTable;
     private javax.swing.JButton btBoRaKhoiGio;
     private javax.swing.JButton btDongThemSach;
+    private javax.swing.JButton btLamMoiGioHang;
     private javax.swing.JButton btLamMoiText;
     private javax.swing.JButton btNhapMoiSach;
     private javax.swing.JButton btThemSachMoi;
     private javax.swing.JButton btThemSachVaoGio;
     private javax.swing.JButton btTim;
+    private javax.swing.JButton btXongGioHang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTable gioHangTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<NCC> jComboBoxNhaCungCap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +27,6 @@ public class XacNhanNhapSachJFrame extends javax.swing.JFrame {
      * Creates new form XacNhanNhapSachJFrame
      */
     private DefaultTableModel defaultGioHangTable;
-    private static boolean check = false;
     private float tong = 0;
     private PhieuNhapService phieuNhapService;
     private ChiTietNhapService chiTietNhapService;
@@ -72,8 +72,8 @@ public class XacNhanNhapSachJFrame extends javax.swing.JFrame {
             tong += gioHang.getSoluong() * gioHang.getGia();
 
         }
-
-        txtTongTien.setText("" + tong);
+        
+        txtTongTien.setText(""+ (long) tong);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,15 +231,21 @@ public class XacNhanNhapSachJFrame extends javax.swing.JFrame {
         float tongtien = Float.parseFloat(txtTongTien.getText());
 
         PhieuNhap pn = new PhieuNhap(mapn,"", maNCC, tongtien);
-        //Them phieu mua
-        phieuNhapService.themPhieuNhap(pn);
+        //Them phieu nhap
+        int check1 = phieuNhapService.themPhieuNhap(pn);
 
-        //Them chi tiet phieu mua
+        //Them chi tiet phieu nhap
         Hashtable<String, GioHang> listGioHang = QLNhapSachJPanel.getGioHang();
-        chiTietNhapService.themChiTietNhap(listGioHang, mapn);  
-        check = true;
+        int check2 = chiTietNhapService.themChiTietNhap(listGioHang, mapn);  
         
         
+        //Thong bao
+        if(check1>0&&check2>0){
+            JOptionPane.showMessageDialog(null,"Thành công");         
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");         
+        }
         //Dong JFrame nay  lai
         this.dispose();        
 

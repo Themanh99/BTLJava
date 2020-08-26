@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class ChiTietMuaDao extends Dao{
-    public void themChiTietMua(ChiTietMua chiTietMua){
+    public int themChiTietMua(ChiTietMua chiTietMua){
+        int kq=0;
         conn = JDBCConnection.getJDBCConnection();
         String sql = "insert into CHITIETMUA values(?,?,?,?)";
         try {
@@ -25,12 +26,13 @@ public class ChiTietMuaDao extends Dao{
             pre.setInt(3, chiTietMua.getSoluong());
             pre.setFloat(4, chiTietMua.getGia());
             
-            int kq = pre.executeUpdate();
+            kq = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietMuaDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             CloseAll();
         }
+        return kq;
         
     }
     

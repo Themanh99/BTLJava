@@ -23,8 +23,10 @@ public class ChiTietMuaService {
         chiTietMuaDao = new ChiTietMuaDao();
     }
     
-    public void themChiTietMua(Hashtable<String, GioHang> listGioHang,String maphieumua){
+    public int themChiTietMua(Hashtable<String, GioHang> listGioHang,String maphieumua){
+        int kq=0;
         Enumeration<String> enu = listGioHang.keys();
+        
         while (enu.hasMoreElements()) {
             String key = enu.nextElement();
             GioHang gioHang = listGioHang.get(key);
@@ -33,8 +35,14 @@ public class ChiTietMuaService {
             ctm.setMaSach(key);
             ctm.setSoluong(gioHang.getSoluong());
             ctm.setGia(gioHang.getGia());
-            chiTietMuaDao.themChiTietMua(ctm);            
+            if(chiTietMuaDao.themChiTietMua(ctm)==0){
+                return 0;
+            }            
+            else{
+                kq=1;
+            }
         }
+        return kq;
     }
     
     

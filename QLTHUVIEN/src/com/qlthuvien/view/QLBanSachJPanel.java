@@ -451,6 +451,9 @@ public class QLBanSachJPanel extends javax.swing.JPanel {
                 count++;
                 defaultGioHangTable.addRow(new Object[]{gh.getMasach(), gh.getTensach(), "1", gh.getGia()});
             }
+            else{
+                JOptionPane.showMessageDialog(null, "Sách này đã có trong giỏ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
         } else
             JOptionPane.showMessageDialog(null, "Chưa chọn sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btThemVaoGioActionPerformed

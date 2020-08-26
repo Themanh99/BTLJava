@@ -267,7 +267,7 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
         }
 
-        txtTongTien.setText("" + tong);
+        txtTongTien.setText("" +(long) tong);
     }
 
 
@@ -280,14 +280,21 @@ public class XacNhanMuaJFrame extends javax.swing.JFrame {
 
         PhieuMua pm = new PhieuMua(mapm, "", masv, tongtien);
         //Them phieu mua
-        phieuMuaService.themPhieuMua(pm);
+        int check1 = phieuMuaService.themPhieuMua(pm);
         
         
         //Them chi tiet phieu mua
         Hashtable<String, GioHang> listGioHang = QLBanSachJPanel.getGioHang();
-        chiTietMuaService.themChiTietMua(listGioHang, pm.getMaPMua());  
+        int check2 = chiTietMuaService.themChiTietMua(listGioHang, pm.getMaPMua());  
         check = true;
         
+        //Thong bao
+        if(check1>0&&check2>0){
+            JOptionPane.showMessageDialog(null,"Thành công");         
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Có lỗi xảy ra");         
+        }
         
         //Dong JFrame nay  lai
         this.dispose();

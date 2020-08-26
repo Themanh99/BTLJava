@@ -34,20 +34,22 @@ public class PhieuMuaDao extends Dao{
         return sl;
     }
     
-    public void themPhieuMua(PhieuMua pm){
+    public int themPhieuMua(PhieuMua pm){
         conn = JDBCConnection.getJDBCConnection();
+        int kq=0;
         String sql = "insert into PHIEUMUA(maPMUA,maSV,tongtien) values(?,?,?)";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1,pm.getMaPMua());
             pre.setString(2, pm.getMaSV());
             pre.setFloat(3, pm.getTongtien());
-            pre.executeUpdate();
+            kq=pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PhieuMuaDao.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             CloseAll();
         }
+        return kq;
         
     }
     

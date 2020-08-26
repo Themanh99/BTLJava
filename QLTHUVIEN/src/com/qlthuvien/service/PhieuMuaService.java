@@ -30,8 +30,8 @@ public class PhieuMuaService {
         return maphieumua;
     }
     
-    public void themPhieuMua(PhieuMua pm){
-        phieuMuaDao.themPhieuMua(pm);
+    public int themPhieuMua(PhieuMua pm){
+        return phieuMuaDao.themPhieuMua(pm);
     }
     
     

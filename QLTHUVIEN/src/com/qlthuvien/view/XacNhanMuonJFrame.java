@@ -65,7 +65,7 @@ public class XacNhanMuonJFrame extends javax.swing.JFrame {
             tong+=sach.getSoluong()*sach.getGia();   
             
         }
-        txtTongTien.setText("Tổng số tiền là :"+tong);
+        txtTongTien.setText("Tổng số tiền là :"+(long)tong);
     }
     public float getTong() {
         return tong;

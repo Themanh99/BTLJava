@@ -420,7 +420,13 @@ public class QLNhaCungCapJPanel extends javax.swing.JPanel {
         }
         if (kiemtra == true) {
             NCC ncc = new NCC(mancc, tenncc, sdt, diachi);
-            nccService.themNCC(ncc);
+            if(nccService.themNCC(ncc)==0){
+                JOptionPane.showMessageDialog(null, "Thêm thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+            }
+            
             ClearTextThemNCC();
             Display(nccService.getNCC());
             jPanel2.setVisible(false);
